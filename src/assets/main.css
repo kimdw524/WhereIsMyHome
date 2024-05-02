@@ -1,0 +1,16 @@
+@font-face {
+  font-family: 'Pretendard';
+  src: local('Pretendard'), url('./fonts/PretendardVariable.woff2') format('woff2');
+}
+
+body {
+  --bg: #fff;
+  --color: #000;
+
+  margin: 0;
+
+  background-color: #fff;
+
+  color: var(--color);
+  font-family: 'Pretendard';
+}
