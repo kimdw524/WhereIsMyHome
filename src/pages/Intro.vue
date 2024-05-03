@@ -5,8 +5,8 @@
     <div :class="$style.title">구해줘 홈즈</div>
     <div :class="$style.body">내용</div>
     <div>
-      <button :class="$style.go">test1</button>
-      <button :class="$style.go">test2</button>
+      <!-- <button :class="$style.go">test1</button>
+      <button :class="$style.go">test2</button> -->
     </div>
     <div :class="$style.downIcon">
       <font-awesome-icon :icon="['fas', 'chevron-down']" />
