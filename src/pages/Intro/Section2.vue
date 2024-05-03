@@ -9,25 +9,25 @@ const children = [
   {
     icon: ['fas', 'poo'],
     head: '양규현',
-    body: '양규현 찾기<br />양규현을 찾을 수 있습니다.<br />찾아 보세요.',
+    body: '양규현 즐겨찾기<br />양규현을 즐겨 찾을 수 있습니다.<br />즐겨 찾아 보세요.',
     image: './src/assets/images/intro/1.png',
   },
   {
     icon: ['fas', 'user'],
     head: '김다운',
-    body: '김다운 찾기<br />김다운을 찾을 수 있습니다.<br />찾아 보세요.',
+    body: '김다운 즐겨찾기<br />김다운을 즐겨 찾을 수 있습니다.<br />즐겨 찾아 보세요.',
     image: './src/assets/images/intro/2.png',
   },
   {
     icon: ['fas', 'user'],
     head: '손동희',
-    body: '손동희 찾기<br />손동희를 찾을 수 있습니다.<br />찾아 보세요.',
+    body: '손동희 즐겨찾기<br />손동희를 즐겨 찾을 수 있습니다.<br />즐겨 찾아 보세요.',
     image: './src/assets/images/intro/1.png',
   },
   {
     icon: ['fas', 'user'],
     head: '최요하',
-    body: '최요하 찾기<br />최요하를 찾을 수 있습니다.<br />찾아 보세요.',
+    body: '최요하 즐겨찾기<br />최요하를 즐겨 찾을 수 있습니다.<br />즐겨 찾아 보세요.',
     image: './src/assets/images/intro/2.png',
   },
 ];
@@ -61,7 +61,7 @@ const draw = (ratio) => {
             transform: translateY(${-value * mul}vh);
             opacity: ${1 - value};`,
             imageStyle: `
-            transform: translateX(${value * mul}vw);
+            transform: translateX(-${value * mul}vw);
             opacity: ${1 - value};
             `,
           },
@@ -107,11 +107,14 @@ onUnmounted(() => {
   <div :class="$style.wrapper" ref="wrapper">
     <div :class="$style.container" ref="container">
       <div :class="$style.header">
-        <div :class="$style.head">검색</div>
-        <div :class="$style.body">검색 기능이 있습니다.</div>
+        <div :class="$style.head">즐겨찾기</div>
+        <div :class="$style.body">즐겨찾기 기능이 있습니다.</div>
       </div>
 
       <div :class="$style.childContainer" v-for="item in items" :key="item.index">
+        <div :class="$style.imageWrapper">
+          <img :class="$style.image" :src="children[item.index].image" :style="item.imageStyle" />
+        </div>
         <div>
           <div :class="$style.head" :style="item.headStyle">
             <font-awesome-icon :icon="children[item.index].icon" />{{ children[item.index].head }}
@@ -121,9 +124,6 @@ onUnmounted(() => {
             :style="item.bodyStyle"
             v-html="children[item.index].body"
           ></div>
-        </div>
-        <div :class="$style.imageWrapper">
-          <img :class="$style.image" :src="children[item.index].image" :style="item.imageStyle" />
         </div>
       </div>
     </div>
@@ -136,8 +136,6 @@ onUnmounted(() => {
   top: 0;
 
   height: 3000px;
-
-  background-color: var(--intro-section-bg);
 }
 
 .container {
@@ -159,7 +157,9 @@ onUnmounted(() => {
 .header {
   position: absolute;
   top: 4rem;
-  left: 4rem;
+  right: 4rem;
+
+  text-align: right;
 
   @media (max-width: 576px) {
     top: 2rem;
@@ -229,6 +229,7 @@ onUnmounted(() => {
     font-size: 1.25rem;
     font-weight: 600;
     letter-spacing: 1px;
+    text-align: right;
 
     user-select: none;
 
@@ -248,6 +249,7 @@ onUnmounted(() => {
     font-size: 1.5rem;
     font-weight: 600;
     letter-spacing: 1px;
+    text-align: right;
 
     user-select: none;
 
