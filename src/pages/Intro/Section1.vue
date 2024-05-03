@@ -146,7 +146,7 @@ onUnmounted(() => {
   flex-direction: column;
   position: sticky;
   top: 0;
-  overflow-x: hidden;
+  overflow: hidden;
 
   height: 100vh;
   padding: 4rem;
