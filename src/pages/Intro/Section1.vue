@@ -4,27 +4,31 @@ const wrapper = ref(null);
 const container = ref(null);
 const items = ref([]);
 
-const duration = 0.1;
+const duration = 0.15;
 const children = [
   {
     icon: ['fas', 'poo'],
     head: '양규현',
-    body: '양규현 찾기',
+    body: '양규현 찾기<br />양규현을 찾을 수 있습니다.<br />찾아 보세요.',
+    image: './src/assets/images/intro/1.png',
   },
   {
     icon: ['fas', 'user'],
     head: '김다운',
-    body: '김다운 찾기',
+    body: '김다운 찾기<br />양규현을 찾을 수 있습니다.<br />찾아 보세요.',
+    image: './src/assets/images/intro/1.png',
   },
   {
     icon: ['fas', 'user'],
     head: '손동희',
-    body: '손동희 찾기',
+    body: '손동희 찾기<br />양규현을 찾을 수 있습니다.<br />찾아 보세요.',
+    image: './src/assets/images/intro/1.png',
   },
   {
     icon: ['fas', 'user'],
     head: '최요하',
-    body: '최요하 찾기',
+    body: '최요하 찾기<br />양규현을 찾을 수 있습니다.<br />찾아 보세요.',
+    image: './src/assets/images/intro/1.png',
   },
 ];
 
@@ -38,39 +42,52 @@ const handleScroll = (e) => {
 };
 
 const draw = (ratio) => {
-  items.value = [{ index: 0, headStyle: '', bodyStyle: '' }];
+  items.value = [{ index: 0, headStyle: '', bodyStyle: '', imageStyle: '' }];
 
   for (let i = 0; i < children.length; i++) {
     const cur = (i + 1) * (1 / children.length);
     if (ratio >= cur) {
       if (i + 1 < children.length && ratio <= cur + duration) {
         const value = (ratio - cur) / duration;
-        const mul = 16;
+        const mul = 50;
         items.value = [
           {
             index: i,
             headStyle: `
-            transform: translateY(${-value * mul}rem);
-            opacity: ${1 - value}
+            transform: translateY(${-value * mul}vh);
+            opacity: ${1 - value};
             `,
             bodyStyle: `
-            transform: translateY(${-value * mul}rem);
-            opacity: ${1 - value}`,
+            transform: translateY(${-value * mul}vh);
+            opacity: ${1 - value};`,
+            imageStyle: `
+            transform: translateX(${value * mul}vw);
+            opacity: ${1 - value};
+            `,
           },
           {
             index: i + 1,
             headStyle: `
-            transform: translateY(${(1 - value) * mul}rem);
-            opacity: ${value}
+            transform: translateY(${(1 - value) * mul}vh);
+            opacity: ${value};
             `,
             bodyStyle: `
-            transform: translateY(${(1 - value) * mul}rem);
-            opacity: ${value}`,
+            transform: translateY(${(1 - value) * mul}vh);
+            opacity: ${value};`,
+            imageStyle: `
+            transform: translateX(0);
+            opacity: ${value};
+            `,
           },
         ];
       } else {
         items.value = [
-          { index: Math.min(children.length - 1, i + 1), headStyle: '', bodyStyle: '' },
+          {
+            index: Math.min(children.length - 1, i + 1),
+            headStyle: '',
+            bodyStyle: '',
+            imageStyle: '',
+          },
         ];
       }
     }
@@ -78,7 +95,7 @@ const draw = (ratio) => {
 };
 
 onMounted(() => {
-  window.addEventListener('scroll', handleScroll, { passive: false });
+  window.addEventListener('scroll', handleScroll);
 });
 
 onUnmounted(() => {
@@ -99,10 +116,14 @@ onUnmounted(() => {
           <div :class="$style.head" :style="item.headStyle">
             <font-awesome-icon :icon="children[item.index].icon" />{{ children[item.index].head }}
           </div>
-          <div :class="$style.body" :style="item.bodyStyle">{{ children[item.index].body }}</div>
+          <div
+            :class="$style.body"
+            :style="item.bodyStyle"
+            v-html="children[item.index].body"
+          ></div>
         </div>
         <div :class="$style.imageWrapper">
-          <img :class="$style.image" src="../../assets/images/intro/1.png" />
+          <img :class="$style.image" :src="children[item.index].image" :style="item.imageStyle" />
         </div>
       </div>
     </div>
@@ -114,7 +135,7 @@ onUnmounted(() => {
   position: relative;
   top: 0;
 
-  height: 3500px;
+  height: 3000px;
 }
 
 .container {
@@ -159,7 +180,7 @@ onUnmounted(() => {
   font-weight: 600;
   letter-spacing: 1px;
 
-  transition: all 50ms linear;
+  transition: all 100ms linear;
 
   user-select: none;
 
@@ -174,8 +195,9 @@ onUnmounted(() => {
   font-size: 2rem;
   font-weight: 600;
   letter-spacing: 1px;
+  line-height: 150%;
 
-  transition: all 50ms linear;
+  transition: all 100ms linear;
 
   user-select: none;
 
@@ -246,5 +268,11 @@ onUnmounted(() => {
 .image {
   width: 100%;
   max-width: 50vw;
+
+  user-select: none;
+
+  @media (max-width: 576px) {
+    max-width: 100vw;
+  }
 }
 </style>
