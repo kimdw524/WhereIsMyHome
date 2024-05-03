@@ -2,14 +2,11 @@
 
 <template>
   <div :class="$style.container">
-    <div :class="$style.title">구해줘 홈즈</div>
+    <div :class="$style.title">뷰 연습</div>
     <div :class="$style.body">내용</div>
     <div>
       <!-- <button :class="$style.go">test1</button>
       <button :class="$style.go">test2</button> -->
-    </div>
-    <div :class="$style.downIcon">
-      <font-awesome-icon :icon="['fas', 'chevron-down']" />
     </div>
   </div>
 </template>
@@ -21,7 +18,7 @@
   flex-direction: column;
   position: relative;
 
-  height: 100vh;
+  height: 100%;
 }
 
 .title {
@@ -69,34 +66,5 @@
   cursor: pointer;
 
   user-select: none;
-}
-
-@keyframes down {
-  0% {
-    transform: translateY(0);
-
-    opacity: 1;
-  }
-
-  50% {
-    transform: translateY(1.5rem);
-
-    opacity: 0.2;
-  }
-
-  100% {
-    transform: translateY(0);
-
-    opacity: 1;
-  }
-}
-
-.downIcon {
-  position: absolute;
-  bottom: 2rem;
-
-  font-size: 2rem;
-
-  animation: 2s ease-in-out down infinite;
 }
 </style>

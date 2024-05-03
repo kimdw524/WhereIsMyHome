@@ -1,5 +1,5 @@
 <script setup>
-import Intro from './pages/Intro.vue';
+import Intro from './pages/Intro/Index.vue';
 </script>
 
 <template>

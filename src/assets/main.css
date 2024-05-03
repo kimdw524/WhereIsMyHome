@@ -2,6 +2,8 @@
 
 * {
   scroll-behavior: smooth;
+
+  transition: background-color 200ms ease, color 100ms ease;
 }
 
 body {
@@ -9,10 +11,21 @@ body {
   --color: #000;
 
   --section-head-color: #3182f6;
+  --section-child-body-color: #6b7684;
+}
 
+body.dark {
+  --bg: #000;
+  --color: #fff;
+
+  --section-head-color: #3182f6;
+  --section-child-body-color: #adbdd2;
+}
+
+body {
   margin: 0;
 
-  background-color: #fff;
+  background-color: var(--bg);
 
   color: var(--color);
   font-family: 'Pretendard';
