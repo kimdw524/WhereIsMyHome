@@ -136,6 +136,8 @@ onUnmounted(() => {
   top: 0;
 
   height: 3000px;
+
+  background-color: var(--intro-section-bg);
 }
 
 .container {
@@ -175,7 +177,7 @@ onUnmounted(() => {
 }
 
 .head {
-  color: var(--section-head-color);
+  color: var(--intro-section-head-color);
   font-size: 1.75rem;
   font-weight: 600;
   letter-spacing: 1px;
@@ -223,7 +225,7 @@ onUnmounted(() => {
   }
 
   .head {
-    color: var(--section-head-color);
+    color: var(--intro-section-head-color);
     font-size: 1.25rem;
     font-weight: 600;
     letter-spacing: 1px;
@@ -242,7 +244,7 @@ onUnmounted(() => {
   .body {
     margin: 0.75rem 0;
 
-    color: var(--section-child-body-color);
+    color: var(--intro-section-child-body-color);
     font-size: 1.5rem;
     font-weight: 600;
     letter-spacing: 1px;

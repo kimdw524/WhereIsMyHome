@@ -26,7 +26,7 @@
 }
 
 .downIcon {
-  position: fixed;
+  position: absolute;
   right: 0;
   bottom: 2rem;
   left: 0;

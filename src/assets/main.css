@@ -10,16 +10,18 @@ body {
   --bg: #fff;
   --color: #000;
 
-  --section-head-color: #3182f6;
-  --section-child-body-color: #6b7684;
+  --intro-section-head-color: #3182f6;
+  --intro-section-child-body-color: #6b7684;
+  --intro-section-bg: #f9fafb;
 }
 
 body.dark {
-  --bg: #000;
+  --bg: #111;
   --color: #fff;
 
-  --section-head-color: #3182f6;
-  --section-child-body-color: #adbdd2;
+  --intro-section-head-color: #3182f6;
+  --intro-section-child-body-color: #adbdd2;
+  --intro-section-bg: #222;
 }
 
 body {
