@@ -1,5 +1,6 @@
 <template>
   <div :class="$style.downIcon">
+    <div :class="$style.description"><slot /></div>
     <font-awesome-icon :icon="['fas', 'chevron-down']" />
   </div>
 </template>
@@ -35,5 +36,11 @@
   text-align: center;
 
   animation: 2s ease-in-out down infinite;
+}
+
+.description {
+  font-size: 1rem;
+
+  user-select: none;
 }
 </style>
