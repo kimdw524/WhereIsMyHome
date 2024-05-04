@@ -9,25 +9,25 @@ const children = [
   {
     icon: ['fas', 'poo'],
     head: '양규현',
-    body: '양규현 즐겨찾기<br />양규현을 즐겨 찾을 수 있습니다.<br />즐겨 찾아 보세요.',
+    body: '양규현 즐겨찾기<br />양규현을 즐겨 찾을 수 있습니다.<br />즐겨 찾아보세요.',
     image: './src/assets/images/intro/1.png',
   },
   {
     icon: ['fas', 'user'],
     head: '김다운',
-    body: '김다운 즐겨찾기<br />김다운을 즐겨 찾을 수 있습니다.<br />즐겨 찾아 보세요.',
+    body: '김다운 즐겨찾기<br />김다운을 즐겨 찾을 수 있습니다.<br />즐겨 찾아보세요.',
     image: './src/assets/images/intro/2.png',
   },
   {
     icon: ['fas', 'user'],
     head: '손동희',
-    body: '손동희 즐겨찾기<br />손동희를 즐겨 찾을 수 있습니다.<br />즐겨 찾아 보세요.',
+    body: '손동희 즐겨찾기<br />손동희를 즐겨 찾을 수 있습니다.<br />즐겨 찾아보세요.',
     image: './src/assets/images/intro/1.png',
   },
   {
     icon: ['fas', 'user'],
     head: '최요하',
-    body: '최요하 즐겨찾기<br />최요하를 즐겨 찾을 수 있습니다.<br />즐겨 찾아 보세요.',
+    body: '최요하 즐겨찾기<br />최요하를 즐겨 찾을 수 있습니다.<br />즐겨 찾아보세요.',
     image: './src/assets/images/intro/2.png',
   },
 ];
