@@ -222,7 +222,7 @@ onUnmounted(() => {
 
   @media (max-width: 576px) {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: flex-end;
   }
 
   .head {

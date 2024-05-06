@@ -1,12 +1,24 @@
-<script setup></script>
+<script setup>
+import { LottieAnimation } from 'lottie-web-vue';
+import lottieHouse from '@/assets/lotties/house.json';
+import CountUp from '@/components/Common/CountUp.vue';
+import EnterButton from '@/components/Intro/EnterButton.vue';
+</script>
 
 <template>
   <div :class="$style.container">
-    <div :class="$style.title">뷰 연습</div>
-    <div :class="$style.body">내용</div>
+    <div :class="$style.left">
+      <div :class="$style.title">구해줘! 홈즈</div>
+      <div :class="$style.body">
+        <CountUp to="1505408" duration="1000" />개의 부동산 거래 데이터를 바탕으로<br />어쩌구
+        저쩌구 어쩌구 저쩌구 시작하세요.
+      </div>
+      <div>
+        <EnterButton>시작하기</EnterButton>
+      </div>
+    </div>
     <div>
-      <!-- <button :class="$style.go">test1</button>
-      <button :class="$style.go">test2</button> -->
+      <LottieAnimation :animation-data="lottieHouse" :auto-play="true" :loop="false" :speed="1" />
     </div>
   </div>
 </template>
@@ -15,15 +27,15 @@
 .container {
   display: flex;
   align-items: center;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-around;
   position: relative;
 
+  width: 100%;
   height: 100%;
 }
 
 .title {
-  margin-top: 8rem;
-
   font-size: 3rem;
   font-weight: 600;
   letter-spacing: 1px;
@@ -42,6 +54,7 @@
 
   font-size: 1.5rem;
   font-weight: 400;
+  line-height: 175%;
   letter-spacing: 1px;
 
   user-select: none;
@@ -51,20 +64,25 @@
   }
 }
 
-.go {
-  padding: 0.75rem 1.25rem;
-  border: 0;
-  border-radius: 0.25rem;
+@keyframes fadeIn {
+  from {
+    transform: translateY(5rem);
 
-  background-color: rgb(45, 55, 71);
+    opacity: 0;
+  }
 
-  font-size: 1rem;
-  font-weight: 400;
-  letter-spacing: 1px;
-  color: #fff;
+  to {
+    transform: none;
 
-  cursor: pointer;
+    opacity: 1;
+  }
+}
 
-  user-select: none;
+.left {
+  z-index: 10;
+
+  animation-name: fadeIn;
+  animation-timing-function: ease;
+  animation-duration: 500ms;
 }
 </style>

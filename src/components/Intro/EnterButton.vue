@@ -4,23 +4,15 @@ import { ref } from 'vue';
 const button = ref(null);
 const click = ref(false);
 
-const handleClick = () => {
-  const { x, y, width, height } = button.value.getBoundingClientRect();
-
-  button.value.style.top = `${y}px`;
-  button.value.style.left = `${x}px`;
-  button.value.style.width = `${width}px`;
-  button.value.style.height = `${height}px`;
-  button.value.style.transform = `scale(40)`;
-
-  button.value.classList.add('click');
-};
+const handleClick = () => {};
 </script>
 
 <template>
-  <div class="button" @click="handleClick" ref="button">
-    <slot />
-  </div>
+  <RouterLink to="/home">
+    <div class="button" @click="handleClick" ref="button">
+      <slot />
+    </div>
+  </RouterLink>
 </template>
 
 <style scoped>

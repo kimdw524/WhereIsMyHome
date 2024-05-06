@@ -13,6 +13,8 @@ body {
   --intro-section-head-color: #3182f6;
   --intro-section-child-body-color: #6b7684;
   --intro-section-bg: #f9fafb;
+
+  --footer-bg: #373737;
 }
 
 body.dark {
@@ -21,7 +23,7 @@ body.dark {
 
   --intro-section-head-color: #3182f6;
   --intro-section-child-body-color: #adbdd2;
-  --intro-section-bg: #222;
+  --intro-section-bg: #484c55;
 }
 
 body {
