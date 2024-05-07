@@ -1,6 +1,7 @@
 <script setup>
 import { useRoute } from 'vue-router';
 import NavLink from './NavLink.vue';
+import NavMenu from './NavMenu.vue';
 
 const route = useRoute();
 
@@ -24,6 +25,9 @@ const navLinks = [
       >
         {{ link.name }}
       </NavLink>
+      <div :class="$style.menuContainer">
+        <NavMenu slug="/login">로그인</NavMenu>
+      </div>
     </div>
   </div>
 </template>
@@ -34,14 +38,19 @@ const navLinks = [
   align-items: center;
   justify-content: space-between;
 
-  height: 3.5rem;
+  height: 4rem;
   padding: 0.5rem 1rem;
-  border-bottom: 1px solid #ededed;
+  border-bottom: 1px solid var(--navbar-border);
 }
 
 .logo {
   font-size: 0.625rem;
   letter-spacing: 1px;
   text-transform: uppercase;
+}
+
+.menuContainer {
+  display: inline-block;
+  margin-left: 0.25rem;
 }
 </style>
