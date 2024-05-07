@@ -11,7 +11,7 @@ import './assets/main.css';
 const routes = [
   {
     path: '/',
-    component: () => import('./pages/Intro/Index.vue'),
+    component: () => import('./pages/Intro.vue'),
     meta: {
       hideNavBar: true,
     },

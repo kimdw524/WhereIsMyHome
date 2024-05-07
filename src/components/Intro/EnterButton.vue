@@ -2,14 +2,11 @@
 import { ref } from 'vue';
 
 const button = ref(null);
-const click = ref(false);
-
-const handleClick = () => {};
 </script>
 
 <template>
   <RouterLink to="/home">
-    <div class="button" @click="handleClick" ref="button">
+    <div class="button" ref="button">
       <slot />
     </div>
   </RouterLink>

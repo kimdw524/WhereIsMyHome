@@ -1,9 +1,8 @@
 <script setup>
-import Footer from '@/components/Footer.vue';
-import MainSection from './MainSection.vue';
-import Section1 from './Section1.vue';
-import Section2 from './Section2.vue';
 import Down from '@/components/Intro/Down.vue';
+import MainSection from '@/components/Intro/MainSection.vue';
+import Section1 from '@/components/Intro/Section1.vue';
+import Section2 from '@/components/Intro/Section2.vue';
 </script>
 
 <template>
