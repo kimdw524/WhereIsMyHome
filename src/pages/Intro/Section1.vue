@@ -162,18 +162,10 @@ onUnmounted(() => {
   top: 4rem;
   left: 4rem;
 
-  @media (max-width: 576px) {
+  @media (max-width: 576px) or (max-height: 576px) {
     top: 2rem;
     right: 2rem;
     left: 2rem;
-  }
-
-  @media (max-height: 768px) {
-    position: relative;
-    top: 0;
-    left: 0;
-
-    margin-bottom: 2rem;
   }
 }
 

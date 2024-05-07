@@ -13,13 +13,17 @@ import EnterButton from '@/components/Intro/EnterButton.vue';
         <CountUp to="1505408" duration="1000" />개의 부동산 거래 데이터를 바탕으로<br />어쩌구
         저쩌구 어쩌구 저쩌구 시작하세요.
       </div>
-      <div>
+      <div :class="$style.buttonWrapper">
         <EnterButton>시작하기</EnterButton>
       </div>
     </div>
-    <div :class="$style.right">
-      <LottieAnimation :animation-data="lottieHouse" :auto-play="true" :loop="false" :speed="1" />
-    </div>
+    <LottieAnimation
+      :animation-data="lottieHouse"
+      :auto-play="true"
+      :loop="false"
+      :speed="1"
+      :class="$style.right"
+    />
   </div>
 </template>
 
@@ -95,5 +99,14 @@ import EnterButton from '@/components/Intro/EnterButton.vue';
 }
 
 .right {
+  @media (max-width: 576px) {
+    height: 30vh;
+  }
+}
+
+.buttonWrapper {
+  @media (max-width: 576px) {
+    text-align: right;
+  }
 }
 </style>
