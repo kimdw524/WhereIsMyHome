@@ -17,7 +17,7 @@ import EnterButton from '@/components/Intro/EnterButton.vue';
         <EnterButton>시작하기</EnterButton>
       </div>
     </div>
-    <div>
+    <div :class="$style.right">
       <LottieAnimation :animation-data="lottieHouse" :auto-play="true" :loop="false" :speed="1" />
     </div>
   </div>
@@ -34,6 +34,12 @@ import EnterButton from '@/components/Intro/EnterButton.vue';
   width: 100%;
   height: 100%;
   padding: 0 2rem;
+  box-sizing: border-box;
+
+  @media (max-width: 576px) {
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+  }
 }
 
 .title {
@@ -57,6 +63,7 @@ import EnterButton from '@/components/Intro/EnterButton.vue';
   font-weight: 400;
   line-height: 175%;
   letter-spacing: 1px;
+  word-break: keep-all;
 
   user-select: none;
 
@@ -85,5 +92,8 @@ import EnterButton from '@/components/Intro/EnterButton.vue';
   animation-name: fadeIn;
   animation-timing-function: ease;
   animation-duration: 500ms;
+}
+
+.right {
 }
 </style>
