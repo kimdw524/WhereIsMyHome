@@ -12,6 +12,7 @@
 }
 .strong {
   color: #d6d8db;
+  font-size: 0.875rem;
   font-weight: 300;
 }
 </style>

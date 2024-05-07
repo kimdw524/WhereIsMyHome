@@ -11,7 +11,6 @@ import Down from '@/components/Intro/Down.vue';
     <MainSection />
     <Section1 />
     <Section2 />
-    <Footer />
     <Down>아래로 스크롤 하여 구해줘! 홈즈에 대해 알아보세요.</Down>
   </div>
 </template>

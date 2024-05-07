@@ -7,12 +7,23 @@ import { createApp } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import App from './App.vue';
 import './assets/main.css';
-import Intro from './pages/Intro/Index.vue';
-import Home from './pages/Home.vue';
 
 const routes = [
-  { path: '/', component: Intro },
-  { path: '/home', component: Home },
+  {
+    path: '/',
+    component: () => import('./pages/Intro/Index.vue'),
+    meta: {
+      hideNavBar: true,
+    },
+  },
+  {
+    path: '/home',
+    component: () => import('./pages/Home.vue'),
+  },
+  {
+    path: '/notice',
+    component: () => import('./pages/Notice.vue'),
+  },
 ];
 
 const router = createRouter({
