@@ -24,6 +24,10 @@ const routes = [
     path: '/notice',
     component: () => import('./pages/Notice.vue'),
   },
+  {
+    path: '/login',
+    component: () => import('./pages/Login.vue'),
+  },
 ];
 
 const router = createRouter({
