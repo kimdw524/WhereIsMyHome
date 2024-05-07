@@ -1,5 +1,5 @@
 <script setup></script>
 
-<template>Home</template>
+<template>Notice</template>
 
 <style module></style>
