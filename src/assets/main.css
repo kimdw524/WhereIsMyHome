@@ -13,6 +13,11 @@ body {
   --intro-section-head-color: #3182f6;
   --intro-section-child-body-color: #6b7684;
   --intro-section-bg: #f9fafb;
+  --intro-enter-bg: #225cff;
+
+  --navbar-navlink-bg: #225cff;
+  --navbar-navlink-color: #fff;
+  --navbar-border: #ededed;
 
   --footer-bg: #373737;
 }

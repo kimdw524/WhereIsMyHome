@@ -20,7 +20,7 @@ const button = ref(null);
   border-radius: 0.25rem;
   box-sizing: border-box;
 
-  background-color: #225cff;
+  background-color: var(--intro-enter-bg);
 
   color: #fff;
   letter-spacing: 1px;
