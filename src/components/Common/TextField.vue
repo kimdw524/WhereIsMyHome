@@ -1,7 +1,6 @@
 <script setup>
 import { ref } from 'vue';
 
-const emit = defineEmits(['input']);
 const model = defineModel();
 
 const props = defineProps({

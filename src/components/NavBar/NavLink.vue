@@ -22,7 +22,7 @@ const props = defineProps({
   border-radius: 0.5rem;
 
   color: var(--color);
-  font-weight: 500;
+  font-weight: 400;
   text-decoration: none;
 
   transition: all 200ms ease;

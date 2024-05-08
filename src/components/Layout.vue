@@ -5,8 +5,8 @@ import Footer from './Footer.vue';
 
 <template>
   <div :class="$style.container">
+    <NavBar />
     <div :class="$style.content">
-      <NavBar />
       <slot />
     </div>
     <div>
@@ -20,10 +20,10 @@ import Footer from './Footer.vue';
   display: flex;
   flex-direction: column;
 
-  max-height: 100vh;
+  min-height: 100vh;
 }
 
 .content {
-  flex-basis: 100vh;
+  flex: 1 1 auto;
 }
 </style>
