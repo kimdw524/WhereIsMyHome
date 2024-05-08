@@ -19,6 +19,17 @@ body {
   --navbar-navlink-color: #fff;
   --navbar-border: #ededed;
 
+  --button-primary-bg: #225cff;
+  --button-primary-bg-hover: #2a4fe5;
+  --button-primary-color: #fff;
+
+  --textfield-border: #bbb;
+  --textfield-border-focus: #222;
+  --textfield-bg: #fff;
+  --textfield-color: #000;
+  --textfield-label-color: #000;
+  --textfield-label-color-focus: #000;
+
   --footer-bg: #373737;
 }
 
