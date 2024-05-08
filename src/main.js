@@ -11,22 +11,22 @@ import './assets/main.css';
 const routes = [
   {
     path: '/',
-    component: () => import('./pages/Intro.vue'),
+    component: () => import('./views/Intro.vue'),
     meta: {
       hideNavBar: true,
     },
   },
   {
     path: '/home',
-    component: () => import('./pages/Home.vue'),
+    component: () => import('./views/Home.vue'),
   },
   {
     path: '/notice',
-    component: () => import('./pages/Notice.vue'),
+    component: () => import('./views/Notice.vue'),
   },
   {
     path: '/login',
-    component: () => import('./pages/Login.vue'),
+    component: () => import('./views/Login.vue'),
   },
 ];
 
