@@ -6,7 +6,7 @@ const props = defineProps({
 
 <template>
   <RouterLink :to="slug">
-    <div :class="[$style.button, outline && $style.outline]">
+    <div :class="[$style.button]">
       <slot />
     </div>
   </RouterLink>
