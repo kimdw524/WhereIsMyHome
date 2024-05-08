@@ -20,10 +20,10 @@ import Footer from './Footer.vue';
   display: flex;
   flex-direction: column;
 
-  min-height: 100vh;
+  height: 100vh;
 }
 
 .content {
-  flex: 1 1 auto;
+  flex-grow: 1;
 }
 </style>
