@@ -13,6 +13,10 @@ const props = defineProps({
 
 <style module>
 .button {
+  display: flex;
+  align-items: center;
+  position: relative;
+
   padding: 0.75rem 1.25rem;
 
   background-color: var(--bg);
@@ -29,6 +33,7 @@ const props = defineProps({
 
   cursor: pointer;
   outline: none;
+  user-select: none;
 }
 
 .button:hover {
@@ -39,5 +44,11 @@ const props = defineProps({
   --bg: var(--button-primary-bg);
   --bg-hover: var(--button-primary-bg-hover);
   --color: var(--button-primary-color);
+}
+
+.kakao {
+  --bg: var(--button-kakao-bg);
+  --bg-hover: var(--button-kakao-bg-hover);
+  --color: var(--button-kakao-color);
 }
 </style>

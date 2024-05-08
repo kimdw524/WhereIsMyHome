@@ -15,13 +15,16 @@ body {
   --intro-section-bg: #f9fafb;
   --intro-enter-bg: #225cff;
 
-  --navbar-navlink-bg: #225cff;
+  --navbar-navlink-bg: #343f5d;
   --navbar-navlink-color: #fff;
   --navbar-border: #ededed;
 
   --button-primary-bg: #225cff;
   --button-primary-bg-hover: #2a4fe5;
   --button-primary-color: #fff;
+  --button-kakao-bg: #ffe91c;
+  --button-kakao-bg-hover: #f3dd13;
+  --button-kakao-color: #000;
 
   --textfield-border: #bbb;
   --textfield-border-focus: #222;
