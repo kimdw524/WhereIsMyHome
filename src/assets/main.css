@@ -36,6 +36,8 @@ body {
   --textfield-label-color: #000;
   --textfield-label-color-focus: #000;
 
+  --login-link-color: #3354ff;
+
   --footer-bg: #373737;
 }
 
@@ -57,22 +59,4 @@ body {
 
   color: var(--color);
   font-family: 'Pretendard';
-}
-
-.list-move, /* 움직이는 엘리먼트에 트랜지션 적용 */
-.list-enter-active,
-.list-leave-active {
-  transition: all 0.5s ease;
-}
-
-.list-enter-from,
-.list-leave-to {
-  opacity: 0;
-  transform: translateX(30px);
-}
-
-/* 이동 애니메이션을 올바르게 계산할 수 있도록
-   레이아웃 흐름에서 나머지 항목을 꺼내기. */
-.list-leave-active {
-  position: absolute;
 }
