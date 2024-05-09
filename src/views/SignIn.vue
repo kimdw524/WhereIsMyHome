@@ -20,26 +20,28 @@ const handleKakao = () => {
 </script>
 
 <template>
-  <div :class="$style.container">
-    <div :class="$style.header">이메일로 로그인</div>
-    <div :class="$style.inputForm">
-      <TextField label="이메일 주소" v-model="email" />
-      <TextField type="password" label="비밀번호" />
-    </div>
-    <div :class="$style.autoLogin"><Checkbox v-model="autoLogin">자동 로그인</Checkbox></div>
-    <div :class="$style.submitForm">
-      <div>
-        아직 계정이 없으신가요?
-        <RouterLink to="signup" :class="$style.signup">회원가입</RouterLink>
+  <Transition name="fade" appear>
+    <div :class="$style.container">
+      <div :class="$style.header">이메일로 로그인</div>
+      <div :class="$style.inputForm">
+        <TextField label="이메일 주소" v-model="email" />
+        <TextField type="password" label="비밀번호" />
       </div>
-      <Button @click="handleLogin">로그인</Button>
+      <div :class="$style.autoLogin"><Checkbox v-model="autoLogin">자동 로그인</Checkbox></div>
+      <div :class="$style.submitForm">
+        <div>
+          아직 계정이 없으신가요?
+          <RouterLink to="signup" :class="$style.signup">회원가입</RouterLink>
+        </div>
+        <Button @click="handleLogin">로그인</Button>
+      </div>
+      <div :class="$style.oauthContainer">
+        <Button variant="kakao" :class="$style.oauth" @click="handleKakao">
+          <img src="@/assets/images/kakao.png" />카카오로 로그인
+        </Button>
+      </div>
     </div>
-    <div :class="$style.oauthContainer">
-      <Button variant="kakao" :class="$style.oauth" @click="handleKakao">
-        <img src="@/assets/images/kakao.png" />카카오로 로그인
-      </Button>
-    </div>
-  </div>
+  </Transition>
 </template>
 
 <style module>
