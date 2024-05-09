@@ -50,10 +50,10 @@ const handleKakao = () => {
   flex-direction: column;
   justify-content: center;
 
-  max-width: 360px;
+  max-width: 540px;
   height: 100%;
   margin: 0 auto;
-  padding: 1.5rem 0;
+  padding: 1.5rem 1rem;
   box-sizing: border-box;
 }
 
