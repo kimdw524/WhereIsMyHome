@@ -3,13 +3,20 @@
 import Button from '@/components/Common/Button.vue';
 import Checkbox from '@/components/Common/Checkbox.vue';
 import TextField from '@/components/Common/TextField.vue';
+import IconButton from '@/components/Common/IconButton.vue';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 const email = ref('');
 const agree = ref(false);
+const router = useRouter();
 
 const handleSignUp = () => {
   alert(email.value);
+};
+
+const goSignUp = () => {
+  router.push('/signin');
 };
 </script>
 
@@ -25,6 +32,11 @@ const handleSignUp = () => {
       </div>
       <div :class="$style.autoLogin"><Checkbox v-model="agree">약관에 동의합니다.</Checkbox></div>
       <div :class="$style.submitForm">
+        <div>
+          <IconButton text="뒤로가기" @click="goSignUp">
+            <font-awesome-icon :icon="['fas', 'angle-left']" />
+          </IconButton>
+        </div>
         <Button @click="handleSignUp">회원가입</Button>
       </div>
     </div>
@@ -64,7 +76,7 @@ const handleSignUp = () => {
 .submitForm {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
   margin-bottom: 1rem;
 }
 </style>
