@@ -26,7 +26,7 @@ const props = defineProps({
 
   color: var(--color);
   font-weight: 500;
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-family: inherit;
   text-decoration: none;
   letter-spacing: 1px;
