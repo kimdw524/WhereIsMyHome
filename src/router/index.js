@@ -16,13 +16,14 @@ const routes = [
     path: '/notice',
     component: () => import('@/views/Notice.vue'),
   },
+
   {
-    path: '/login',
-    component: () => import('@/views/Login.vue'),
+    path: '/signin',
+    component: () => import('@/views/SignIn.vue'),
   },
   {
     path: '/signup',
-    component: () => import('@/views/Signup.vue'),
+    component: () => import('@/views/SignUp.vue'),
   },
 ];
 

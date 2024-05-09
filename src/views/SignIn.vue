@@ -1,3 +1,4 @@
+@ -1,104 +0,0 @@
 <script setup>
 import Button from '@/components/Common/Button.vue';
 import Checkbox from '@/components/Common/Checkbox.vue';
@@ -50,11 +51,12 @@ const handleKakao = () => {
   max-width: 360px;
   height: 100%;
   margin: 0 auto;
-  padding: 1rem;
+  padding: 1.5rem 0;
+  box-sizing: border-box;
 }
 
 .header {
-  padding: 1.5rem 0;
+  margin-bottom: 1.5rem;
 
   font-size: 1.5rem;
   font-weight: 600;

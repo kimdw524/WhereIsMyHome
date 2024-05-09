@@ -26,7 +26,7 @@ const navLinks = [
         {{ link.name }}
       </NavLink>
       <div :class="$style.menuContainer">
-        <NavMenu slug="/login">로그인</NavMenu>
+        <NavMenu slug="/signin">로그인</NavMenu>
       </div>
     </div>
   </div>
