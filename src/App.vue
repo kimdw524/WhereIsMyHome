@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import Layout from './components/Layout.vue';
 const router = useRouter();
 const navBar = ref(false);
