@@ -4,7 +4,7 @@ const wrapper = ref(null);
 const container = ref(null);
 const items = ref([]);
 
-const duration = 0.1;
+const duration = 0.2;
 const children = [
   {
     icon: ['fas', 'poo'],
