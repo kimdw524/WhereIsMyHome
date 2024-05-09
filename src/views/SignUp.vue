@@ -4,11 +4,13 @@ import Button from '@/components/Common/Button.vue';
 import Checkbox from '@/components/Common/Checkbox.vue';
 import TextField from '@/components/Common/TextField.vue';
 import IconButton from '@/components/Common/IconButton.vue';
+import ProgressBar from '@/components/Common/ProgressBar.vue';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 const email = ref('');
 const agree = ref(false);
+const progress = ref(0);
 const router = useRouter();
 
 const handleSignUp = () => {
@@ -23,12 +25,14 @@ const goSignUp = () => {
 <template>
   <Transition name="fade" appear>
     <div :class="$style.container">
+      <ProgressBar :value="progress" :max="4" />
+
       <div :class="$style.header">회원가입</div>
       <div :class="$style.inputForm">
-        <TextField label="이메일 주소" v-model="email" />
-        <TextField type="password" label="비밀번호" />
-        <TextField type="password" label="비밀번호 확인" />
-        <TextField label="닉네임" />
+        <TextField label="이메일 주소" v-model="email" @focus="progress = 1" />
+        <TextField type="password" label="비밀번호" @focus="progress = 2" />
+        <TextField type="password" label="비밀번호 확인" @focus="progress = 3" />
+        <TextField label="닉네임" @focus="progress = 4" />
       </div>
       <div :class="$style.autoLogin"><Checkbox v-model="agree">약관에 동의합니다.</Checkbox></div>
       <div :class="$style.submitForm">
@@ -49,7 +53,7 @@ const goSignUp = () => {
   flex-direction: column;
   justify-content: center;
 
-  max-width: 360px;
+  max-width: 540px;
   height: 100%;
   margin: 0 auto;
   padding: 1.5rem 0;
