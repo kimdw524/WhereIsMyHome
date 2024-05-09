@@ -1,10 +1,11 @@
 <script setup>
 import Button from '@/components/Common/Button.vue';
+import Checkbox from '@/components/Common/Checkbox.vue';
 import TextField from '@/components/Common/TextField.vue';
-import CheckBox from '@/components/Common/CheckBox.vue';
 import { ref } from 'vue';
 
 const email = ref('');
+const autoLogin = ref(false);
 
 const handleLogin = () => {
   alert(email.value);
@@ -18,7 +19,7 @@ const handleLogin = () => {
       <TextField label="이메일 주소" v-model="email" />
       <TextField type="password" label="비밀번호" />
     </div>
-    <div :class="$style.autoLogin"><CheckBox>자동 로그인</CheckBox></div>
+    <div :class="$style.autoLogin"><Checkbox v-model="autoLogin">자동 로그인</Checkbox></div>
     <div :class="$style.submitForm">
       <div>아직 계정이 없으신가요? 회원가입</div>
       <Button @click="handleLogin">로그인</Button>

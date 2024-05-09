@@ -26,6 +26,9 @@ body {
   --button-kakao-bg-hover: #f3dd13;
   --button-kakao-color: #000;
 
+  --checkbox-bg: #ced8e9;
+  --checkbox-color: #000;
+
   --textfield-border: #bbb;
   --textfield-border-focus: #222;
   --textfield-bg: #fff;

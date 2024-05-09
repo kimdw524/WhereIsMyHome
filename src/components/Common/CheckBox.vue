@@ -1,15 +1,26 @@
 <script setup>
-import { ref, watch } from 'vue';
+import { watch } from 'vue';
 
-const checked = ref(false);
+const props = defineProps({
+  name: {
+    type: String,
+  },
+});
+const model = defineModel();
 </script>
 
 <template>
-  <div :class="$style.container" @click="checked = !checked">
-    <div :class="[$style.box, checked && $style.checked]"></div>
+  <div :class="$style.container" @click="model = !model">
+    <div :class="$style.box">
+      <font-awesome-icon
+        :class="[$style.check, model && $style.checked]"
+        :icon="['fas', 'check']"
+      />
+    </div>
     <div :class="$style.slot">
       <slot />
     </div>
+    <input type="checkbox" v-model="model" :name="name" v-show="false" />
   </div>
 </template>
 
@@ -22,18 +33,32 @@ const checked = ref(false);
 }
 
 .box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   width: 1.5rem;
   height: 1.5rem;
 
   border-radius: 50%;
 
-  background-color: #d3d3d3;
+  background-color: var(--checkbox-bg);
+
+  color: var(--checkbox-color);
 
   transition: all 150ms ease;
 }
 
+.check {
+  transition: all 200ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  transform: scale(0);
+  opacity: 0;
+}
+
 .checked {
-  background-color: red;
+  transform: scale(1);
+  opacity: 1;
 }
 
 .slot {
