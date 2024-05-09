@@ -16,6 +16,8 @@ const props = defineProps({
   },
 });
 
+const emit = defineEmits(['focus', 'blur']);
+
 const focus = ref(false);
 </script>
 
@@ -27,8 +29,8 @@ const focus = ref(false);
       :type="type"
       :class="$style.text"
       :placeholder="placeholder"
-      @focus="focus = true"
-      @blur="focus = false"
+      @focus="(focus = true), emit('focus')"
+      @blur="(focus = false), emit('blur')"
     />
   </div>
 </template>
