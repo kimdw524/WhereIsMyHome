@@ -16,7 +16,10 @@ const routes = [
     path: '/notice',
     component: () => import('@/views/Notice.vue'),
   },
-
+  {
+    path: '/qna',
+    component: () => import('@/views/QnA.vue'),
+  },
   {
     path: '/signin',
     component: () => import('@/views/SignIn.vue'),

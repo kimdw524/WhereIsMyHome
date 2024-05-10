@@ -8,6 +8,7 @@ const route = useRoute();
 const navLinks = [
   { name: 'Home', slug: '/home' },
   { name: '공지사항', slug: '/notice' },
+  { name: 'QnA', slug: '/qna' },
 ];
 </script>
 
