@@ -36,10 +36,10 @@ const navLinks = [
 <style module>
 .container {
   display: flex;
+  flex: 0 0 4rem;
   align-items: center;
   justify-content: space-between;
 
-  height: 4rem;
   padding: 0.5rem 1rem;
   border-bottom: 1px solid var(--navbar-border);
 }
