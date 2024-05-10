@@ -38,9 +38,9 @@ const dateFormat = (time) => {
 .container {
   margin: 0 1rem;
   padding: 1rem 0.5rem;
-  border-bottom: 1px solid #e7eaee;
+  border-bottom: 1px solid var(--post-separator);
 
-  background-color: rgb(255, 255, 255);
+  background-color: var(--bg);
 
   cursor: pointer;
 }
@@ -62,7 +62,7 @@ const dateFormat = (time) => {
 }
 
 .title {
-  color: #000;
+  color: var(--color);
   font-size: 1rem;
   font-weight: 500;
 }
@@ -70,22 +70,22 @@ const dateFormat = (time) => {
 .name {
   padding-right: 0.5rem;
 
-  color: #777f88;
+  color: var(--post-color-light);
   font-size: 0.875rem;
   font-weight: 500;
 }
 
 .date {
   padding-left: 0.5rem;
-  border-left: 1px solid rgb(212, 212, 212);
+  border-left: 1px solid var(--post-separator);
 
-  color: #777f88;
+  color: var(--post-color-light);
   font-size: 0.875rem;
   font-weight: 500;
 }
 
 .viewCount {
-  color: #777f88;
+  color: var(--post-color-light);
   font-size: 0.875rem;
   font-weight: 500;
 }

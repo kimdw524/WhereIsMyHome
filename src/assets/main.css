@@ -40,6 +40,11 @@ body {
 
   --progressbar-bg: #0093ff;
 
+  --post-title-bg: #437bf7;
+  --post-title-color: #fff;
+  --post-separator: #e7eaee;
+  --post-color-light: #777f88;
+
   --footer-bg: #373737;
 }
 
@@ -66,7 +71,7 @@ body {
 .fade-move,
 .fade-enter-active,
 .fade-leave-active {
-  transition: all 150ms ease-in-out;
+  transition: all 150ms ease;
 }
 
 .fade-enter-from,

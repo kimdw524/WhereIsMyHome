@@ -5,7 +5,7 @@ import PostList from '@/components/Post/PostList.vue';
 const posts = [
   {
     id: 1,
-    title: '양규현은 사브레를 받고 감사 인사를 했습니까?',
+    title: '양규현?',
     content: '안했습니다.',
     name: '양규현1',
     viewCount: 100,
@@ -13,7 +13,7 @@ const posts = [
   },
   {
     id: 2,
-    title: '양규현은 사브레를 받고 감사 인사를 했습니까?1111',
+    title: '양규현?1111',
     content: '안했습니다.',
     name: '양규현2',
     viewCount: 120,
@@ -21,7 +21,7 @@ const posts = [
   },
   {
     id: 3,
-    title: '양규현은 사브레를 받고 감사 인사를 했습니까?2222',
+    title: '양규현?2222',
     content: '안했습니다.',
     name: '양규현3',
     viewCount: 147,
@@ -29,7 +29,7 @@ const posts = [
   },
   {
     id: 4,
-    title: '양규현은 사브레를 받고 감사 인사를 했습니까?3333',
+    title: '양규현?3333',
     content: '안했습니다.',
     name: '양규현4',
     viewCount: 147,
@@ -37,7 +37,7 @@ const posts = [
   },
   {
     id: 5,
-    title: '양규현은 사브레를 받고 감사 인사를 했습니까?4444',
+    title: '양규현?4444',
     content: '안했습니다.',
     name: '양규현5',
     viewCount: 210,
@@ -47,20 +47,21 @@ const posts = [
 </script>
 
 <template>
-  <div :class="$style.container">
-    공지사항
-    <PostContainer>
-      <Transition
-        :key="post.id"
-        v-for="(post, index) in posts"
-        name="fade2"
-        :style="{ 'transition-duration': `${(index + 1) * 100}ms` }"
-        appear
-      >
-        <PostList :data="post" />
-      </Transition>
-    </PostContainer>
-  </div>
+  <Transition name="fade2" appear>
+    <div :class="$style.container">
+      <PostContainer title="질문과 답변">
+        <Transition
+          :key="post.id"
+          v-for="(post, index) in posts"
+          name="fade2"
+          :style="{ 'transition-duration': `${(index + 1) * 100}ms` }"
+          appear
+        >
+          <PostList :data="post" />
+        </Transition>
+      </PostContainer>
+    </div>
+  </Transition>
 </template>
 
 <style module>
