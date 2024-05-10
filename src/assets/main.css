@@ -74,3 +74,14 @@ body {
   opacity: 0;
   transform: scale(0.95);
 }
+
+.fade2-move,
+.fade2-enter-active,
+.fade2-leave-active {
+  transition: all 150ms ease-in-out;
+}
+
+.fade2-enter-from,
+.fade2-leave-to {
+  opacity: 0;
+}
