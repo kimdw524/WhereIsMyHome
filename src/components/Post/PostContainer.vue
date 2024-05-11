@@ -7,7 +7,7 @@ const props = defineProps({
 <template>
   <div :class="$style.container">
     <div :class="$style.title">{{ title }}</div>
-    <div :class="$style.postList">
+    <div>
       <slot />
     </div>
   </div>
@@ -15,20 +15,22 @@ const props = defineProps({
 
 <style module>
 .container {
-  box-shadow: 0 0.5rem 2rem -1rem rgba(0, 0, 0, 0.4);
+  position: relative;
+
+  max-width: 1024px;
+  margin: 0 auto;
 }
 
 .title {
-  padding: 1.5rem 1rem;
+  position: sticky;
+  top: 0;
 
-  background-color: var(--post-title-bg);
+  padding: 1.5rem 0 2rem 0;
 
-  color: var(--post-title-color);
-  font-size: 1.125rem;
-  font-weight: 500;
-}
+  background: linear-gradient(180deg, rgba(255, 255, 255, 1) 70%, rgba(255, 255, 255, 0) 100%);
 
-.postList {
-  background-color: var(--bg);
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 1px;
 }
 </style>

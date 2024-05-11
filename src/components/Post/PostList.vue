@@ -36,11 +36,8 @@ const dateFormat = (time) => {
 
 <style module>
 .container {
-  margin: 0 1rem;
-  padding: 1rem 0.5rem;
+  padding: 1.5rem 0;
   border-bottom: 1px solid var(--post-separator);
-
-  background-color: var(--bg);
 
   cursor: pointer;
 }
@@ -63,8 +60,8 @@ const dateFormat = (time) => {
 
 .title {
   color: var(--color);
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: 1.125rem;
+  font-weight: 300;
 }
 
 .name {
@@ -72,7 +69,7 @@ const dateFormat = (time) => {
 
   color: var(--post-color-light);
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .date {
@@ -81,13 +78,13 @@ const dateFormat = (time) => {
 
   color: var(--post-color-light);
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: 300;
 }
 
 .viewCount {
   color: var(--post-color-light);
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .viewCount svg {
