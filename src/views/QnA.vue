@@ -1,6 +1,7 @@
 <script setup>
 import PostContainer from '@/components/Post/PostContainer.vue';
 import PostList from '@/components/Post/PostList.vue';
+import Pagination from '@/components/Common/Pagination.vue';
 
 const posts = [
   {
@@ -43,6 +44,78 @@ const posts = [
     viewCount: 210,
     updatedAt: 1715908781,
   },
+  {
+    id: 6,
+    title: '양규현?4444',
+    content: '안했습니다.',
+    name: '양규현5',
+    viewCount: 210,
+    updatedAt: 1715908781,
+  },
+  {
+    id: 7,
+    title: '양규현?4444',
+    content: '안했습니다.',
+    name: '양규현5',
+    viewCount: 210,
+    updatedAt: 1715908781,
+  },
+  {
+    id: 8,
+    title: '양규현?4444',
+    content: '안했습니다.',
+    name: '양규현5',
+    viewCount: 210,
+    updatedAt: 1715908781,
+  },
+  {
+    id: 9,
+    title: '양규현?4444',
+    content: '안했습니다.',
+    name: '양규현5',
+    viewCount: 210,
+    updatedAt: 1715908781,
+  },
+  {
+    id: 10,
+    title: '양규현?4444',
+    content: '안했습니다.',
+    name: '양규현5',
+    viewCount: 210,
+    updatedAt: 1715908781,
+  },
+  {
+    id: 11,
+    title: '양규현?5555',
+    content: '안했습니다.',
+    name: '양규현5',
+    viewCount: 210,
+    updatedAt: 1715908781,
+  },
+  {
+    id: 12,
+    title: '양규현?6666',
+    content: '안했습니다.',
+    name: '양규현5',
+    viewCount: 210,
+    updatedAt: 1715908781,
+  },
+  {
+    id: 13,
+    title: '양규현?777',
+    content: '안했습니다.',
+    name: '양규현5',
+    viewCount: 210,
+    updatedAt: 1715908781,
+  },
+  {
+    id: 14,
+    title: '양규현?8888',
+    content: '안했습니다.',
+    name: '양규현5',
+    viewCount: 210,
+    updatedAt: 1715908781,
+  },
 ];
 </script>
 
@@ -60,12 +133,13 @@ const posts = [
           <PostList :data="post" />
         </Transition>
       </PostContainer>
+      <Pagination :current="1" :max="10" />
     </div>
   </Transition>
 </template>
 
 <style module>
 .container {
-  padding: 2rem;
+  padding: 1rem;
 }
 </style>
