@@ -2,6 +2,9 @@
 import PostContainer from '@/components/Post/PostContainer.vue';
 import PostList from '@/components/Post/PostList.vue';
 import Pagination from '@/components/Common/Pagination.vue';
+import { ref, watch } from 'vue';
+
+const searchType = ref(1);
 
 const props = defineProps({
   title: String,
@@ -9,10 +12,14 @@ const props = defineProps({
   currentPage: Number,
   maxPage: Number,
 });
+
+watch(searchType, () => {
+  alert(searchType.value);
+});
 </script>
 
 <template>
-  <PostContainer :title="props.title">
+  <PostContainer :title="props.title" @searchType="searchType">
     <Transition
       :key="post.id"
       v-for="(post, index) in props.posts"

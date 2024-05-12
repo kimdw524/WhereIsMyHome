@@ -28,6 +28,10 @@ const routes = [
     path: '/signup',
     component: () => import('@/views/SignUp.vue'),
   },
+  {
+    path: '/write',
+    component: () => import('@/views/WritePost.vue'),
+  },
 ];
 
 const router = createRouter({

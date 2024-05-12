@@ -10,6 +10,10 @@ const props = defineProps({
     type: String,
     default: '100%',
   },
+  height: {
+    type: String,
+  },
+
   type: {
     type: String,
     default: 'text',
@@ -27,6 +31,7 @@ const focus = ref(false);
       label
     }}</span>
     <input
+      v-if="type !== 'textarea'"
       v-model="model"
       :type="type"
       :class="[$style.text, !label && $style.hideLabel]"
@@ -34,6 +39,16 @@ const focus = ref(false);
       @focus="(focus = true), emit('focus')"
       @blur="(focus = false), emit('blur')"
     />
+    <textarea
+      v-else
+      v-model="model"
+      :type="type"
+      :class="[$style.text, !label && $style.hideLabel]"
+      :placeholder="placeholder"
+      :style="{ height: props.height }"
+      @focus="(focus = true), emit('focus')"
+      @blur="(focus = false), emit('blur')"
+    ></textarea>
   </div>
 </template>
 

@@ -6,6 +6,8 @@ import Select from '@/components/Common/Select.vue';
 const props = defineProps({
   title: String,
 });
+
+const emit = defineEmits({ searchType: Number });
 </script>
 
 <template>
@@ -14,7 +16,7 @@ const props = defineProps({
       <div :class="$style.title">{{ title }}</div>
 
       <div :class="$style.searchContainer">
-        <Select style="width: 12rem">
+        <Select style="width: 12rem" @value="emit.searchType">
           <option value="1">전체</option>
           <option value="2">제목</option>
           <option value="3">내용</option>
