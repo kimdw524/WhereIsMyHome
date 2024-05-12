@@ -25,9 +25,8 @@ const props = defineProps({
   border-radius: 0.25rem;
 
   color: var(--color);
-  font-weight: 500;
+  font-weight: 400;
   font-size: 1rem;
-  font-family: inherit;
   text-decoration: none;
   letter-spacing: 1px;
 

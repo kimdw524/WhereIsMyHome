@@ -23,11 +23,13 @@ const focus = ref(false);
 
 <template>
   <div :class="$style.container" :style="{ width: width }">
-    <span :class="[focus || model ? $style.floatLabel : $style.label]">{{ label }}</span>
+    <span v-if="label" :class="[focus || model ? $style.floatLabel : $style.label]">{{
+      label
+    }}</span>
     <input
       v-model="model"
       :type="type"
-      :class="$style.text"
+      :class="[$style.text, !label && $style.hideLabel]"
       :placeholder="placeholder"
       @focus="(focus = true), emit('focus')"
       @blur="(focus = false), emit('blur')"
@@ -44,7 +46,6 @@ const focus = ref(false);
   width: 100%;
   padding: 1.75rem 0.625rem 0.5rem 0.625rem;
   box-sizing: border-box;
-  border: 0;
   border-radius: 0.175rem;
   border: 1px solid var(--textfield-border);
 
@@ -56,6 +57,11 @@ const focus = ref(false);
   transition: all 100ms ease;
 
   outline: none;
+}
+
+.hideLabel {
+  height: 3rem;
+  padding: 0 0.625rem;
 }
 
 .text:focus {

@@ -1,6 +1,8 @@
 @import url('Pretendard.css');
 
 * {
+  font-family: 'Pretendard';
+
   scroll-behavior: smooth;
 }
 
@@ -62,7 +64,6 @@ body {
   background-color: var(--bg);
 
   color: var(--color);
-  font-family: 'Pretendard';
 }
 
 .fade-move,
