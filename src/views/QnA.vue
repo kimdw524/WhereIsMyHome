@@ -2,6 +2,7 @@
 import PostContainer from '@/components/Post/PostContainer.vue';
 import PostList from '@/components/Post/PostList.vue';
 import Pagination from '@/components/Common/Pagination.vue';
+import Board from '@/components/Board.vue';
 
 const posts = [
   {
@@ -122,18 +123,7 @@ const posts = [
 <template>
   <Transition name="fade2" appear>
     <div :class="$style.container">
-      <PostContainer title="질문과 답변">
-        <Transition
-          :key="post.id"
-          v-for="(post, index) in posts"
-          name="fade2"
-          :style="{ 'transition-duration': `${(index + 1) * 100}ms` }"
-          appear
-        >
-          <PostList :data="post" />
-        </Transition>
-      </PostContainer>
-      <Pagination :current="1" :max="10" />
+      <Board title="질문과 답변" :currentPage="1" :maxPage="5" :posts="posts" />
     </div>
   </Transition>
 </template>
