@@ -32,30 +32,36 @@ const handleBlur = () => {
 </script>
 
 <template>
-  <div :class="[$style.textContainer, collapsed && $style.collapsed]">
-    <div :class="$style.icon">
-      <LottieAnimation
-        :animation-data="lottieSearch"
-        :auto-play="false"
-        :loop="false"
-        :speed="1"
-        :class="$style.right"
-        @enter-frame="handleFrame"
-        ref="searchIcon"
+  <div :class="$style.container">
+    <div :class="[$style.textContainer, collapsed && $style.collapsed]">
+      <div :class="$style.icon">
+        <LottieAnimation
+          :animation-data="lottieSearch"
+          :auto-play="false"
+          :loop="false"
+          :speed="1"
+          :class="$style.right"
+          @enter-frame="handleFrame"
+          ref="searchIcon"
+        />
+      </div>
+      <input
+        type="text"
+        :class="$style.text"
+        placeholder="지역 또는 단지명을 입력해 주세요."
+        @focus="handleFocus"
+        @blur="handleBlur"
       />
     </div>
-    <input
-      type="text"
-      :class="$style.text"
-      placeholder="지역 또는 단지명을 입력해 주세요."
-      @focus="handleFocus"
-      @blur="handleBlur"
-    />
+    <SearchCollapse :show="collapsed" />
   </div>
-  <SearchCollapse :show="collapsed" />
 </template>
 
 <style module>
+.container {
+  position: relative;
+}
+
 .textContainer {
   display: flex;
   align-items: center;

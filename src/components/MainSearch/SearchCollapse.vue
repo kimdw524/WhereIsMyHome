@@ -45,13 +45,19 @@ onUpdated(() => {
 .container {
   display: flex;
   align-items: center;
-  position: relative;
+  position: absolute;
+  z-index: 100;
+
+  width: 100%;
+  box-sizing: border-box;
 
   border: 1px solid #ddd;
   border-top: 0;
   border-bottom-left-radius: 0.25rem;
   border-bottom-right-radius: 0.25rem;
-  box-shadow: 0px 0.375rem 0.25rem 0px #f1f1f1;
+  box-shadow: 0 0.375rem 0.25rem 0 #f1f1f1;
+
+  background-color: var(--bg);
 }
 
 .wrapper {
