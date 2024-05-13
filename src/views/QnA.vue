@@ -1,8 +1,5 @@
 <script setup>
-import PostContainer from '@/components/Post/PostContainer.vue';
-import PostList from '@/components/Post/PostList.vue';
-import Pagination from '@/components/Common/Pagination.vue';
-import Board from '@/components/Board.vue';
+import Board from '@/components/Board/Board.vue';
 
 const posts = [
   {
