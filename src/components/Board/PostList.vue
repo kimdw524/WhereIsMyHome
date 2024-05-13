@@ -26,9 +26,9 @@ const dateFormat = (time) => {
         <span :class="$style.date">{{ dateFormat(data.updatedAt) }}</span>
       </div>
       <div>
-        <span :class="$style.viewCount"
-          ><font-awesome-icon :icon="['far', 'eye']" />{{ data.viewCount }}</span
-        >
+        <span :class="$style.viewCount">
+          <font-awesome-icon :icon="['far', 'eye']" />{{ data.viewCount }}
+        </span>
       </div>
     </div>
   </div>
