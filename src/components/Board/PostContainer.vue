@@ -21,7 +21,7 @@ const handleSearch = () => {
     <div :class="$style.header">
       <div :class="$style.title">{{ title }}</div>
 
-      <form>
+      <form @submit.prevent="handleSearch">
         <div :class="$style.searchContainer">
           <Select style="width: 12rem" v-model.number="searchType">
             <option value="1">전체</option>
@@ -29,7 +29,7 @@ const handleSearch = () => {
             <option value="3">내용</option>
           </Select>
           <TextField v-model="query" placeholder="검색어를 입력해 주세요." />
-          <Button type="submit" style="flex-shrink: 0" @click.prevent="handleSearch">검색</Button>
+          <Button type="submit" style="flex-shrink: 0">검색</Button>
         </div>
       </form>
     </div>
