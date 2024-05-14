@@ -7,6 +7,8 @@
 <style module>
 .container {
   display: inline-block;
+  position: relative;
+  overflow: hidden;
 
   width: 20rem;
   height: 10rem;
@@ -15,5 +17,7 @@
   border-radius: 0.25rem;
 
   cursor: pointer;
+  user-select: none;
+  transition: all 100ms ease;
 }
 </style>
