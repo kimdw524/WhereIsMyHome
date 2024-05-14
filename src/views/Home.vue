@@ -93,7 +93,7 @@ const news = [
       <div :class="$style.newsContainer">
         <Section>📰 부동산 <span>뉴스</span></Section>
         <SectionDescription>최신 부동산 뉴스를 한눈에 보세요.</SectionDescription>
-        <NewsList :news="news" style="margin-top: 1.5rem" />
+        <NewsList :news="news" style="margin-top: 1rem" />
       </div>
     </div>
   </Transition>

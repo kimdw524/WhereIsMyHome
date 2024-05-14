@@ -57,6 +57,7 @@ onMounted(() => {
 .wrapper {
   overflow-x: scroll;
 
+  padding-top: 0.5rem;
   max-width: 100%;
   padding-bottom: 0.5rem;
 
@@ -96,6 +97,12 @@ onMounted(() => {
   box-sizing: border-box;
 
   cursor: pointer;
+
+  transition: all 150ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card:hover {
+  transform: translateY(-0.5rem);
 }
 
 .thumbnail {
