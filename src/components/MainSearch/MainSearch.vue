@@ -3,9 +3,12 @@ import { LottieAnimation } from 'lottie-web-vue';
 import lottieSearch from '@/assets/lotties/search.json';
 import { ref } from 'vue';
 import SearchCollapse from './SearchCollapse.vue';
+import SearchHistory from './SearchHistory.vue';
+import SearchResult from './SearchResult.vue';
 
 const collapsed = ref(false);
 const searchIcon = ref(null);
+const query = ref('');
 let searchIconFrame = 0;
 
 const handleFrame = () => {
@@ -51,9 +54,13 @@ const handleBlur = () => {
         placeholder="지역 또는 단지명을 입력해 주세요."
         @focus="handleFocus"
         @blur="handleBlur"
+        v-model="query"
       />
     </div>
-    <SearchCollapse :show="collapsed" />
+    <SearchCollapse :show="collapsed">
+      <SearchHistory v-if="query === ''" />
+      <SearchResult v-else :query="query" />
+    </SearchCollapse>
   </div>
 </template>
 

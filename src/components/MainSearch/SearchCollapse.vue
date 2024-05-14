@@ -1,11 +1,12 @@
 <script setup>
 import { onMounted, onUpdated, ref } from 'vue';
-import SearchHistory from './SearchHistory.vue';
 
 const props = defineProps({ show: Boolean });
 
 const container = ref(null);
 const wrapper = ref(null);
+
+let prevVisible = false;
 
 onMounted(() => {
   container.value.style.display = 'none';
@@ -19,6 +20,8 @@ onMounted(() => {
 
 onUpdated(() => {
   const show = props.show;
+  if (show === prevVisible) return;
+  prevVisible = show;
   if (show) {
     container.value.style.display = 'block';
     wrapper.value.style.height = 'auto';
@@ -36,7 +39,7 @@ onUpdated(() => {
 <template>
   <div :class="$style.container" ref="container">
     <div :class="$style.wrapper" ref="wrapper">
-      <SearchHistory :show="props.show" />
+      <slot />
     </div>
   </div>
 </template>
