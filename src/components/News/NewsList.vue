@@ -5,11 +5,20 @@ const ellipsis = (text) => {
   if (text.length > 30) return text.substr(0, 30) + '...';
   return text;
 };
+
+const forwardNews = (link) => {
+  window.open(link);
+};
 </script>
 
 <template>
   <div :class="$style.container">
-    <div :class="$style.card" v-for="item in props.news" :key="item.link">
+    <div
+      :class="$style.card"
+      v-for="item in props.news"
+      :key="item.link"
+      @click="forwardNews(item.link)"
+    >
       <img :src="item.thumbnail" :class="$style.thumbnail" alt="thumbnail" />
       <div :class="$style.title">{{ ellipsis(item.title) }}</div>
       <div :class="$style.source">
