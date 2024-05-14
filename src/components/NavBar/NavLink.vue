@@ -16,25 +16,25 @@ const props = defineProps({
   display: inline-block;
 
   padding: 0.75rem 1rem;
+  box-sizing: content-box;
 
   background-color: transparent;
 
-  border-radius: 0.5rem;
-
   color: var(--color);
   font-weight: 400;
+  letter-spacing: 1px;
   text-decoration: none;
 
-  transition: all 200ms ease;
+  transition: all 100ms ease;
 
   user-select: none;
 }
 
 .container.active {
-  color: #4260ff;
+  color: var(--navbar-navlink-color-hover);
 }
 
 .container:hover {
-  background-color: #f5f5f5;
+  color: var(--navbar-navlink-color-hover);
 }
 </style>

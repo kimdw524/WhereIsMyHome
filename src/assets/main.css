@@ -16,8 +16,9 @@ body {
   --intro-section-bg: #f9fafb;
   --intro-enter-bg: #225cff;
 
-  --navbar-navlink-bg: #343f5d;
+  --navbar-navlink-bg: #3b5cff;
   --navbar-navlink-color: #fff;
+  --navbar-navlink-color-hover: #3384ff;
   --navbar-border: #ededed;
 
   --button-primary-bg: #225cff;

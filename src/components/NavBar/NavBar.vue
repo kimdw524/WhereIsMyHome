@@ -14,8 +14,13 @@ const navLinks = [
 
 <template>
   <div :class="$style.container">
-    <div :class="$style.logo">
-      <RouterLink to="/">WhereIsMyHome</RouterLink>
+    <div>
+      <RouterLink to="/">
+        <div :class="$style.logoContainer">
+          <img src="@/assets/images/logo.png" :class="$style.logo" alt="logo" />
+          <img src="@/assets/images/textlogo.png" :class="$style.textLogo" alt="text logo" />
+        </div>
+      </RouterLink>
     </div>
     <div>
       <NavLink
@@ -36,22 +41,37 @@ const navLinks = [
 <style module>
 .container {
   display: flex;
-  flex: 0 0 4rem;
+  flex: 0 0 6rem;
   align-items: center;
   justify-content: space-between;
 
-  padding: 0.5rem 1rem;
-  border-bottom: 1px solid var(--navbar-border);
+  padding: 0.5rem 2.5rem;
+  /* border-bottom: 1px solid var(--navbar-border); */
+
+  @media (max-width: 768px) {
+    flex: 0 0 5rem;
+    padding: 0.5rem 1.5rem;
+  }
+}
+
+.logoContainer {
+  display: inline-flex;
+  align-items: center;
+
+  width: 6rem;
 }
 
 .logo {
-  font-size: 0.625rem;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  height: 2.25rem;
+}
+
+.textLogo {
+  height: 1rem;
+  margin: 0 0.75rem;
 }
 
 .menuContainer {
   display: inline-block;
-  margin-left: 0.25rem;
+  margin-left: 0.5rem;
 }
 </style>

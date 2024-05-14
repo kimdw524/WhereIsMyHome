@@ -23,6 +23,7 @@ const props = defineProps({
   border-radius: 0.25rem;
 
   color: var(--navbar-navlink-color);
+  font-size: 1rem;
   font-weight: 400;
   text-decoration: none;
   letter-spacing: 1px;
