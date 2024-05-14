@@ -1,5 +1,11 @@
 <script setup>
+import { onMounted, onUnmounted, ref } from 'vue';
+
 const props = defineProps({ news: Array });
+const wrapper = ref(null);
+
+const cardWidth = 16 * 17;
+let current = 0;
 
 const ellipsis = (text) => {
   if (text.length > 30) return text.substr(0, 30) + '...';
@@ -9,10 +15,26 @@ const ellipsis = (text) => {
 const forwardNews = (link) => {
   window.open(link);
 };
+
+const handleWheel = (event) => {
+  const direction = event.deltaX || event.deltaY > 0;
+
+  current += direction ? 1 : -1;
+  current = Math.min(
+    props.news.length - Math.ceil(wrapper.value.offsetWidth / cardWidth) + 1,
+    Math.max(current, 0),
+  );
+
+  wrapper.value.scrollLeft = current * cardWidth;
+};
+
+onMounted(() => {
+  wrapper.value.addEventListener('wheel', handleWheel);
+});
 </script>
 
 <template>
-  <div :class="$style.wrapper">
+  <div :class="$style.wrapper" ref="wrapper">
     <div :class="$style.container">
       <div
         :class="$style.card"
@@ -37,6 +59,9 @@ const forwardNews = (link) => {
 
   max-width: 100%;
   padding-bottom: 0.5rem;
+
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
 }
 
 .wrapper::-webkit-scrollbar {
