@@ -48,6 +48,9 @@ body {
 
   --card-border-color: #d7dbdf;
 
+  --news-scrollbar-bg: #ccd4e1;
+  --news-scrollbar-thumb-bg: #6a7897;
+
   --footer-bg: #373737;
 }
 

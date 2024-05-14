@@ -32,6 +32,29 @@ const news = [
     press: '이데일리',
     thumbnail: 'https://mimgnews.pstatic.net/image/origin/011/2024/05/14/4340652.jpg',
   },
+  {
+    title: '[머니S포토] 박상우 장관 "자재 수급 불안 없도록 최선의 노력 할 것"',
+    link: 'https://n.news.naver.com/mnews/article/374/0000383525',
+    journalist: '임한별 기자',
+    press: '머니S',
+    thumbnail: 'https://mimgnews.pstatic.net/image/origin/417/2024/05/14/1002437.jpg',
+  },
+  {
+    title: '입주 지연에 분양가 상승···3기 신도시 이어 ‘뉴홈’ 공공분양도 우려',
+    link: 'https://n.news.naver.com/mnews/article/032/0003296161',
+    journalist: '유희곤 기자',
+    press: '경향신문',
+    thumbnail:
+      'https://imgnews.pstatic.net/image/032/2024/05/14/0003296161_001_20240514154601099.jpg',
+  },
+  {
+    title: 'KT그룹 임대주택 운영관리회사 KD리빙, ‘KT리빙’으로 사명 변경',
+    link: 'https://n.news.naver.com/mnews/article/366/0000992555',
+    journalist: '백윤미 기자',
+    press: '조선비즈',
+    thumbnail:
+      'https://imgnews.pstatic.net/image/366/2024/05/14/0000992555_001_20240514152911668.jpg',
+  },
 ];
 </script>
 

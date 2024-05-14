@@ -12,27 +12,52 @@ const forwardNews = (link) => {
 </script>
 
 <template>
-  <div :class="$style.container">
-    <div
-      :class="$style.card"
-      v-for="item in props.news"
-      :key="item.link"
-      @click="forwardNews(item.link)"
-    >
-      <img :src="item.thumbnail" :class="$style.thumbnail" alt="thumbnail" />
-      <div :class="$style.title">{{ ellipsis(item.title) }}</div>
-      <div :class="$style.source">
-        <div :class="$style.journalist">{{ item.journalist }}</div>
-        <div :class="$style.press">{{ item.press }}</div>
+  <div :class="$style.wrapper">
+    <div :class="$style.container">
+      <div
+        :class="$style.card"
+        v-for="item in props.news"
+        :key="item.link"
+        @click="forwardNews(item.link)"
+      >
+        <img :src="item.thumbnail" :class="$style.thumbnail" alt="thumbnail" />
+        <div :class="$style.title">{{ ellipsis(item.title) }}</div>
+        <div :class="$style.source">
+          <div :class="$style.journalist">{{ item.journalist }}</div>
+          <div :class="$style.press">{{ item.press }}</div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <style module>
+.wrapper {
+  overflow-x: scroll;
+
+  max-width: 100%;
+  padding-bottom: 0.5rem;
+}
+
+.wrapper::-webkit-scrollbar {
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 0.125rem;
+
+  background-color: var(--news-scrollbar-bg);
+}
+
+.wrapper::-webkit-scrollbar-thumb {
+  border-radius: 0.125rem;
+
+  background-color: var(--news-scrollbar-thumb-bg);
+}
+
 .container {
   display: flex;
   gap: 1rem;
+
+  width: fit-content;
 }
 
 .card {
