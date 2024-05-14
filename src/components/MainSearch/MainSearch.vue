@@ -9,16 +9,8 @@ import SearchResult from './SearchResult.vue';
 const collapsed = ref(false);
 const searchIcon = ref(null);
 const query = ref('');
-let searchIconFrame = 0;
-
-const handleFrame = () => {
-  if (++searchIconFrame >= 45) {
-    searchIcon.value.pause();
-  }
-};
 
 const handleFocus = () => {
-  searchIconFrame = 0;
   searchIcon.value.setDirection(1);
   searchIcon.value.play();
 
@@ -26,7 +18,6 @@ const handleFocus = () => {
 };
 
 const handleBlur = () => {
-  searchIconFrame = 0;
   searchIcon.value.setDirection(-1);
   searchIcon.value.play();
 
@@ -43,7 +34,6 @@ const handleBlur = () => {
           :auto-play="false"
           :loop="false"
           :speed="1"
-          :class="$style.right"
           @enter-frame="handleFrame"
           ref="searchIcon"
         />
@@ -87,6 +77,9 @@ const handleBlur = () => {
 }
 
 .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex: 0 0 2rem;
   position: relative;
 
@@ -96,12 +89,8 @@ const handleBlur = () => {
 }
 
 .icon svg {
-  position: absolute;
-  top: -2rem;
-  left: -2rem;
-
-  width: 6rem !important;
-  height: 6rem !important;
+  width: 1.5rem !important;
+  height: 1.5rem !important;
 }
 
 .text {
