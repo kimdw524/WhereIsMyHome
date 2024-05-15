@@ -11,16 +11,11 @@ const searchIcon = ref(null);
 const query = ref('');
 
 const handleFocus = () => {
-  searchIcon.value.setDirection(1);
-  searchIcon.value.play();
-
+  searchIcon.value.goToAndPlay(0);
   collapsed.value = true;
 };
 
 const handleBlur = () => {
-  searchIcon.value.setDirection(-1);
-  searchIcon.value.play();
-
   collapsed.value = false;
 };
 </script>
