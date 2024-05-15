@@ -1,36 +1,43 @@
+import Home from '@/views/Home.vue';
+import Intro from '@/views/Intro.vue';
+import Notice from '@/views/Notice.vue';
+import QnA from '@/views/QnA.vue';
+import SignIn from '@/views/SignIn.vue';
+import SignUp from '@/views/SignUp.vue';
+import WritePost from '@/views/WritePost.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 
 const routes = [
   {
     path: '/',
-    component: () => import('@/views/Intro.vue'),
+    component: Intro,
     meta: {
       hideNavBar: true,
     },
   },
   {
     path: '/home',
-    component: () => import('@/views/Home.vue'),
+    component: Home,
   },
   {
     path: '/notice',
-    component: () => import('@/views/Notice.vue'),
+    component: Notice,
   },
   {
     path: '/qna',
-    component: () => import('@/views/QnA.vue'),
+    component: () => QnA,
   },
   {
     path: '/signin',
-    component: () => import('@/views/SignIn.vue'),
+    component: SignIn,
   },
   {
     path: '/signup',
-    component: () => import('@/views/SignUp.vue'),
+    component: SignUp,
   },
   {
     path: '/write',
-    component: () => import('@/views/WritePost.vue'),
+    component: WritePost,
   },
 ];
 
