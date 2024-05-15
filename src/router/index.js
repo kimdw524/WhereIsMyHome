@@ -13,7 +13,7 @@ const routes = [
     path: '/',
     component: Intro,
     meta: {
-      hideNavBar: false,
+      navBar: false,
     },
   },
   {
