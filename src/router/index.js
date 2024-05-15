@@ -1,5 +1,6 @@
 import Home from '@/views/Home.vue';
 import Intro from '@/views/Intro.vue';
+import Map from '@/views/Map.vue';
 import Notice from '@/views/Notice.vue';
 import QnA from '@/views/QnA.vue';
 import SignIn from '@/views/SignIn.vue';
@@ -12,7 +13,7 @@ const routes = [
     path: '/',
     component: Intro,
     meta: {
-      hideNavBar: true,
+      hideNavBar: false,
     },
   },
   {
@@ -38,6 +39,13 @@ const routes = [
   {
     path: '/write',
     component: WritePost,
+  },
+  {
+    path: '/map',
+    component: Map,
+    meta: {
+      footer: false,
+    },
   },
 ];
 

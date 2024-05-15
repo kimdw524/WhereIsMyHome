@@ -1,19 +1,22 @@
 <script setup>
 import { ref } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { useRouter } from 'vue-router';
 import Layout from './components/Layout.vue';
+
 const router = useRouter();
 const navBar = ref(false);
+const footer = ref(false);
 
 router.beforeEach((to, from, next) => {
-  navBar.value = !to.meta.hideNavBar;
+  navBar.value = !(to.meta.navBar === false);
+  footer.value = !(to.meta.footer === false);
   next();
 });
 </script>
 
 <template>
   <template v-if="navBar">
-    <Layout>
+    <Layout :footer="footer">
       <RouterView />
     </Layout>
   </template>

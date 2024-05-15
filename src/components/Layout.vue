@@ -1,4 +1,6 @@
 <script setup>
+const props = defineProps({ footer: Boolean });
+
 import NavBar from './NavBar/NavBar.vue';
 import Footer from './Footer.vue';
 </script>
@@ -9,7 +11,7 @@ import Footer from './Footer.vue';
     <div :class="$style.content">
       <slot />
     </div>
-    <div>
+    <div v-if="props.footer">
       <Footer />
     </div>
   </div>
