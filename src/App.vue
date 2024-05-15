@@ -10,6 +10,7 @@ const footer = ref(false);
 router.beforeEach((to, from, next) => {
   navBar.value = !(to.meta.navBar === false);
   footer.value = !(to.meta.footer === false);
+
   next();
 });
 </script>
