@@ -6,7 +6,21 @@
   scroll-behavior: smooth;
 }
 
+*::-webkit-scrollbar {
+  width: 0.375rem;
+  height: 0.375rem;
+
+  background-color: var(--scrollbar-bg);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb-bg);
+}
+
 body {
+  --scrollbar-bg: #ccd4e1;
+  --scrollbar-thumb-bg: #6a7897;
+
   --bg: #fff;
   --color: #000;
   --color-light: #888;
@@ -47,9 +61,6 @@ body {
   --post-color-light: #777f88;
 
   --card-border-color: #d7dbdf;
-
-  --news-scrollbar-bg: #ccd4e1;
-  --news-scrollbar-thumb-bg: #6a7897;
 
   --filter-border: #ced1d9;
   --filter-bg: #fff;

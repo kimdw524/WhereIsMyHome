@@ -70,13 +70,13 @@ onMounted(() => {
   height: 0.375rem;
   border-radius: 0.125rem;
 
-  background-color: var(--news-scrollbar-bg);
+  background-color: var(--scrollbar-bg);
 }
 
 .wrapper::-webkit-scrollbar-thumb {
   border-radius: 0.125rem;
 
-  background-color: var(--news-scrollbar-thumb-bg);
+  background-color: var(--scrollbar-thumb-bg);
 }
 
 .container {
