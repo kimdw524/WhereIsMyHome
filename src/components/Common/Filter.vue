@@ -6,6 +6,7 @@ const props = defineProps({ text: String });
 const toggle = ref(false);
 const container = ref(null);
 const popup = ref(null);
+const left = ref(0);
 let init = false;
 
 const handleClick = (e) => {
@@ -29,9 +30,9 @@ watch(toggle, (value) => {
       popupWidth = parseInt(popup.value.children[0].style.width) + 36;
 
     if (containerLeft + popupWidth > bodyWidth) {
-      popup.value.style.left = `${-(containerLeft + popupWidth - bodyWidth)}px`;
+      left.value = bodyWidth - containerLeft - popupWidth;
     } else {
-      popup.value.style.left = 0;
+      left.value = 0;
     }
 
     init = true;
@@ -56,7 +57,13 @@ watch(toggle, (value) => {
       />
     </div>
     <TransitionGroup name="popup" tag="div">
-      <div v-show="toggle" :key="toggle" :class="$style.popup" ref="popup">
+      <div
+        v-show="toggle"
+        :key="toggle"
+        :class="$style.popup"
+        ref="popup"
+        :style="{ left: `${left}px` }"
+      >
         <slot />
       </div>
     </TransitionGroup>
