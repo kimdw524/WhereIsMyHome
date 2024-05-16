@@ -107,10 +107,10 @@ watch(toggle, (value) => {
   left: 0;
   z-index: 20;
 
-  padding: 0.625rem;
+  padding: 1rem;
   border: 1px solid var(--filter-popup-border);
   border-radius: 0.125rem;
-  box-shadow: rgba(0, 0, 0, 0.25) 0 1rem 1rem -0.875rem;
+  box-shadow: #00000040 0 0.5rem 1rem 0;
 
   background-color: var(--bg);
 
