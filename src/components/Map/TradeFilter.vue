@@ -44,6 +44,6 @@ import Checkbox from '../Common/Checkbox.vue';
   flex-direction: column;
   gap: 1rem;
 
-  height: 8rem;
+  margin: 2rem 0 1rem 0;
 }
 </style>
