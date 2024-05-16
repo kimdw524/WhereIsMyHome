@@ -51,6 +51,11 @@ body {
   --news-scrollbar-bg: #ccd4e1;
   --news-scrollbar-thumb-bg: #6a7897;
 
+  --filter-border: #ced1d9;
+  --filter-bg: #fff;
+  --filter-bg-hover: #f3f5f7;
+  --filter-popup-border: #969cab;
+
   --footer-bg: #373737;
 }
 
