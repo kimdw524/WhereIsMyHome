@@ -1,6 +1,4 @@
 <script setup>
-import { ref } from 'vue';
-
 const model = defineModel();
 </script>
 
@@ -29,6 +27,7 @@ const model = defineModel();
   outline: none;
   cursor: pointer;
 }
+
 .select:focus {
   border: 1px solid var(--textfield-border-focus);
 }
