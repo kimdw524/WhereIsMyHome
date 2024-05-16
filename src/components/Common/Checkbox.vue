@@ -1,6 +1,4 @@
 <script setup>
-import { watch } from 'vue';
-
 const props = defineProps({
   name: {
     type: String,
@@ -11,7 +9,7 @@ const model = defineModel();
 
 <template>
   <div :class="$style.container" @click="model = !model">
-    <div :class="$style.box">
+    <div :class="[$style.box, model && $style.checked]">
       <font-awesome-icon
         :class="[$style.check, model && $style.checked]"
         :icon="['fas', 'check']"
@@ -40,23 +38,30 @@ const model = defineModel();
   width: 1.5rem;
   height: 1.5rem;
 
-  border-radius: 50%;
+  border: 1px solid var(--checkbox-border);
+  border-radius: 0.125rem;
 
   background-color: var(--checkbox-bg);
 
-  color: var(--checkbox-color);
+  transition: all 100ms ease;
+}
 
-  transition: all 150ms ease;
+.box.checked {
+  border: 1px solid transparent;
+
+  background-color: var(--checkbox-bg-checked);
 }
 
 .check {
-  transition: all 200ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  color: var(--checkbox-color);
+
+  transition: all 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
   transform: scale(0);
   opacity: 0;
 }
 
-.checked {
+.check.checked {
   transform: scale(1);
   opacity: 1;
 }

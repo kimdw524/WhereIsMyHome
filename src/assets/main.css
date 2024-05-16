@@ -43,8 +43,10 @@ body {
   --button-kakao-bg-hover: #f3dd13;
   --button-kakao-color: #000;
 
-  --checkbox-bg: #ced8e9;
-  --checkbox-color: #000;
+  --checkbox-border: #a7a7a7;
+  --checkbox-bg: #fff;
+  --checkbox-bg-checked: #1e6dff;
+  --checkbox-color: #fff;
 
   --textfield-border: #bbb;
   --textfield-border-focus: #222;
