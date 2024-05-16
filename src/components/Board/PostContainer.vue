@@ -43,9 +43,6 @@ const handleSearch = () => {
 <style module>
 .container {
   position: relative;
-
-  max-width: 1024px;
-  margin: 0 auto;
 }
 
 .header {

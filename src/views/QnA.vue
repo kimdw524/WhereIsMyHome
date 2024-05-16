@@ -120,7 +120,7 @@ const posts = [
 <template>
   <Transition name="fade2" appear>
     <div :class="$style.container">
-      <Board title="질문과 답변" :currentPage="1" :maxPage="5" :posts="posts" />
+      <Board slug="qna" :currentPage="1" :maxPage="5" :posts="posts" />
     </div>
   </Transition>
 </template>
