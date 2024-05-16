@@ -1,6 +1,7 @@
 <script setup>
 import Filter from '@/components/Common/Filter.vue';
 import BuildYearFilter from '@/components/Map/BuildYearFilter.vue';
+import PriceFilter from '@/components/Map/PriceFilter.vue';
 import TradeFilter from '@/components/Map/TradeFilter.vue';
 import TypeFilter from '@/components/Map/TypeFilter.vue';
 import { onMounted } from 'vue';
@@ -25,7 +26,9 @@ onMounted(() => {
         <Filter text="월세,전세,매매">
           <TradeFilter />
         </Filter>
-        <Filter text="가격"> </Filter>
+        <Filter text="가격">
+          <PriceFilter />
+        </Filter>
         <Filter text="건축년도">
           <BuildYearFilter />
         </Filter>
