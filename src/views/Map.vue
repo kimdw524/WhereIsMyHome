@@ -1,4 +1,8 @@
 <script setup>
+import Filter from '@/components/Common/Filter.vue';
+import BuildYearFilter from '@/components/Map/BuildYearFilter.vue';
+import TradeFilter from '@/components/Map/TradeFilter.vue';
+import TypeFilter from '@/components/Map/TypeFilter.vue';
 import { onMounted } from 'vue';
 let map;
 onMounted(() => {
@@ -12,13 +16,26 @@ onMounted(() => {
 </script>
 
 <template>
-  <div :class="$style.container">
-    <div :class="$style.header">header</div>
-    <div :class="$style.body">
-      <div :class="$style.side">side menu</div>
-      <div id="map" :class="$style.map"></div>
+  <Transition name="fade2" appear>
+    <div :class="$style.container">
+      <div :class="$style.header">
+        <Filter text="아파트">
+          <TypeFilter />
+        </Filter>
+        <Filter text="월세,전세,매매">
+          <TradeFilter />
+        </Filter>
+        <Filter text="가격"> </Filter>
+        <Filter text="건축년도">
+          <BuildYearFilter />
+        </Filter>
+      </div>
+      <div :class="$style.body">
+        <div :class="$style.side">side menu</div>
+        <div id="map" :class="$style.map"></div>
+      </div>
     </div>
-  </div>
+  </Transition>
 </template>
 
 <style module>
@@ -30,7 +47,13 @@ onMounted(() => {
 }
 
 .header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   flex: 0 0 4rem;
+
+  padding: 0.5rem 1rem;
+  box-sizing: border-box;
 }
 
 .body {
