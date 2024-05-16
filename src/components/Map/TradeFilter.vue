@@ -3,7 +3,7 @@ import Checkbox from '../Common/Checkbox.vue';
 </script>
 
 <template>
-  <div :class="$style.container" :style="{ width: '220px' }">
+  <div :class="$style.container" :style="{ width: '250px' }">
     <div>
       <div :class="$style.header">거래 유형</div>
       <div :class="$style.description">중복 선택 가능합니다.</div>
