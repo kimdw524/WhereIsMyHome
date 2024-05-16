@@ -7,18 +7,12 @@ const toggle = ref(false);
 const container = ref(null);
 const popup = ref(null);
 const left = ref(0);
-let init = false;
 
-const handleClick = (e) => {
-  if (init) return;
+const handleMouseDown = (e) => {
   e.stopPropagation();
 };
 
-const handleWindowClick = (e) => {
-  if (init) {
-    init = false;
-    return;
-  }
+const handleWindowMouseDown = (e) => {
   if (!toggle.value) return;
   toggle.value = false;
 };
@@ -35,13 +29,11 @@ watch(toggle, (value) => {
       left.value = 0;
     }
 
-    init = true;
-
-    container.value.addEventListener('click', handleClick);
-    window.addEventListener('click', handleWindowClick);
+    container.value.addEventListener('mousedown', handleMouseDown);
+    window.addEventListener('mousedown', handleWindowMouseDown);
   } else {
-    container.value.removeEventListener('click', handleClick);
-    window.removeEventListener('click', handleWindowClick);
+    container.value.removeEventListener('mousedown', handleMouseDown);
+    window.removeEventListener('mousedown', handleWindowMouseDown);
   }
 });
 </script>
