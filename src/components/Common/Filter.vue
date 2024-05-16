@@ -55,7 +55,7 @@ watch(toggle, (value) => {
         :class="[$style.icon, toggle && $style.reverse]"
       />
     </div>
-    <TransitionGroup name="fade" tag="div">
+    <TransitionGroup name="popup" tag="div">
       <div v-show="toggle" :key="toggle" :class="$style.popup" ref="popup">
         <slot />
       </div>
@@ -114,5 +114,7 @@ watch(toggle, (value) => {
   box-shadow: rgba(0, 0, 0, 0.25) 0 1rem 1rem -0.875rem;
 
   background-color: var(--bg);
+
+  transform-origin: 0 0;
 }
 </style>

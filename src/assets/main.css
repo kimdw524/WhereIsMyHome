@@ -100,3 +100,20 @@ body {
 .fade2-leave-to {
   opacity: 0;
 }
+
+.popup-move,
+.popup-enter-active,
+.popup-leave-active {
+  transition: all 200ms ease-in-out;
+
+  transform: scale(1);
+}
+
+.popup-enter-from {
+  transform: scale(0.9);
+  opacity: 0;
+}
+
+.popup-leave-to {
+  opacity: 0;
+}
