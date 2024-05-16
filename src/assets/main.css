@@ -69,6 +69,9 @@ body {
 
   --range-mark: #bbb;
 
+  --map-header-border-top: #ededed;
+  --map-header-border-bottom: #cdcdcd;
+
   --footer-bg: #373737;
 }
 

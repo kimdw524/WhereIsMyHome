@@ -56,6 +56,8 @@ onMounted(() => {
   flex: 0 0 4rem;
 
   padding: 0.5rem 1rem;
+  border-top: 1px solid var(--map-header-border-top);
+  border-bottom: 1px solid var(--map-header-border-bottom);
   box-sizing: border-box;
 }
 
