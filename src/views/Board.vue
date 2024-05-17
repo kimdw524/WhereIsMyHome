@@ -156,28 +156,30 @@ const posts = [
 </script>
 
 <template>
-  <div v-if="current" :class="$style.container">
-    <div :class="$style.header">
-      <Category :menu="menu" :current="current.slug" />
-      <div :class="$style.subHeader">
-        <div :class="$style.title">{{ current.name }}</div>
-        <form @submit.prevent="handleSearch">
-          <div :class="$style.searchContainer">
-            <Select style="width: 12rem" v-model.number="searchType">
-              <option value="1">전체</option>
-              <option value="2">제목</option>
-              <option value="3">내용</option>
-            </Select>
-            <TextField v-model="query" placeholder="검색어를 입력해 주세요." />
-            <Button type="submit" style="flex-shrink: 0">검색</Button>
-          </div>
-        </form>
+  <Transition v-if="current" name="fade2" appear>
+    <div :class="$style.container">
+      <div :class="$style.header">
+        <Category :menu="menu" :current="current.slug" />
+        <div :class="$style.subHeader">
+          <div :class="$style.title">{{ current.name }}</div>
+          <form @submit.prevent="handleSearch">
+            <div :class="$style.searchContainer">
+              <Select style="width: 12rem" v-model.number="searchType">
+                <option value="1">전체</option>
+                <option value="2">제목</option>
+                <option value="3">내용</option>
+              </Select>
+              <TextField v-model="query" placeholder="검색어를 입력해 주세요." />
+              <Button type="submit" style="flex-shrink: 0">검색</Button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div :class="$style.boardContainer">
+        <Board :slug="current.slug" :currentPage="1" :maxPage="10" :posts="posts" />
       </div>
     </div>
-    <div :class="$style.boardContainer">
-      <Board :slug="current.slug" :currentPage="1" :maxPage="10" :posts="posts" />
-    </div>
-  </div>
+  </Transition>
 </template>
 
 <style module>
