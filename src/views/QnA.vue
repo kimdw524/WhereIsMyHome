@@ -118,11 +118,9 @@ const posts = [
 </script>
 
 <template>
-  <Transition name="fade2" appear>
-    <div :class="$style.container">
-      <Board slug="qna" :currentPage="1" :maxPage="5" :posts="posts" />
-    </div>
-  </Transition>
+  <div :class="$style.container">
+    <Board slug="qna" :currentPage="1" :maxPage="5" :posts="posts" />
+  </div>
 </template>
 
 <style module>
