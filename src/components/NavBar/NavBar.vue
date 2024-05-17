@@ -2,8 +2,10 @@
 import { useRoute } from 'vue-router';
 import NavLink from './NavLink.vue';
 import NavMenu from './NavMenu.vue';
+import { ref, watch } from 'vue';
 
 const route = useRoute();
+const toggle = ref(false);
 
 const navLinks = [
   { name: 'Home', slug: '/home' },
@@ -24,16 +26,37 @@ const navLinks = [
       </RouterLink>
     </div>
     <div>
-      <NavLink
-        v-for="link in navLinks"
-        :key="link.slug"
-        :slug="link.slug"
-        :active="link.slug == route.path"
-      >
-        {{ link.name }}
-      </NavLink>
-      <div :class="$style.menuContainer">
-        <NavMenu slug="/signin">로그인</NavMenu>
+      <div :class="$style.hamburger" @click="toggle = !toggle">
+        <svg
+          stroke="currentColor"
+          fill="none"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          height="24"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </div>
+      <div :class="[toggle && $style.shadow]" @click="toggle = false">
+        <div :class="[$style.navItem, toggle && $style.active]">
+          <NavLink
+            v-for="link in navLinks"
+            :key="link.slug"
+            :slug="link.slug"
+            :active="link.slug == route.path"
+          >
+            {{ link.name }}
+          </NavLink>
+          <div :class="$style.menuContainer">
+            <NavMenu slug="/signin">로그인</NavMenu>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -73,6 +96,73 @@ const navLinks = [
 
 .menuContainer {
   display: inline-block;
-  margin-left: 0.5rem;
+
+  margin-left: 1rem;
+}
+
+.menuContainer * {
+  @media (max-width: 576px) {
+    text-align: center !important;
+  }
+}
+
+.navItem * {
+  @media (max-width: 576px) {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: right;
+  }
+}
+
+.navItem {
+  @media (max-width: 576px) {
+    display: none;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1rem;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 100;
+
+    width: 20rem;
+    max-width: calc(100% - 4rem);
+    height: 100%;
+    padding: 1rem;
+    box-shadow: -1px 0 6px #888888;
+    box-sizing: border-box;
+
+    background-color: var(--bg);
+
+    transition: all 300ms ease;
+    transition-property: transform, opacity;
+  }
+}
+
+.navItem.active {
+  @media (max-width: 576px) {
+    display: flex;
+  }
+}
+
+.hamburger {
+  display: none;
+  @media (max-width: 576px) {
+    display: block;
+
+    cursor: pointer;
+  }
+}
+
+.shadow {
+  @media (max-width: 576px) {
+    position: fixed;
+    inset: 0 0 0 0;
+    z-index: 90;
+
+    background-color: rgba(0, 0, 0, 0.3);
+
+    transition: background-color 200ms ease;
+  }
 }
 </style>
