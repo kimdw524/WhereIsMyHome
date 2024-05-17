@@ -1,5 +1,8 @@
 <script setup>
+import { useRouter } from 'vue-router';
+
 const props = defineProps({ menu: Array, current: String });
+const router = useRouter();
 </script>
 
 <template>
@@ -8,6 +11,7 @@ const props = defineProps({ menu: Array, current: String });
       v-for="item in menu"
       :key="item.slug"
       :class="[$style.item, current === item.slug && $style.selected]"
+      @click="() => router.push(item.slug)"
     >
       {{ item.name }}
     </div>
