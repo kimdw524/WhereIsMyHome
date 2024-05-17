@@ -18,7 +18,7 @@ const handleFocus = () => {
 };
 
 const handleBlur = () => {
-  collapsed.value = false;
+  collapsed.value = true;
 };
 
 watch(query, (value) => {

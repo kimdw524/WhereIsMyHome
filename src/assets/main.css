@@ -78,6 +78,9 @@ body {
   --map-header-border-top: #ededed;
   --map-header-border-bottom: #cdcdcd;
 
+  --typelabel-apart: #0c67c3;
+  --typelabel-house: #007724;
+
   --footer-bg: #373737;
 }
 

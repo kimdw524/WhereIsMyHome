@@ -1,4 +1,6 @@
 <script setup>
+import TypeLabel from './TypeLabel.vue';
+
 const props = defineProps({ query: String, item: Object });
 
 const highlight = (text) => {
@@ -10,11 +12,16 @@ const highlight = (text) => {
   <div :class="$style.container">
     <div :class="$style.houseName" v-html="highlight(item.houseName)"></div>
     <div :class="$style.roadName" v-html="highlight(item.roadName)"></div>
+    <div :class="$style.labelWrapper">
+      <TypeLabel :type="item.houseType" />
+    </div>
   </div>
 </template>
 
 <style module>
 .container {
+  position: relative;
+
   padding: 0.625rem 0.75rem;
   border-radius: 0.25rem;
 
@@ -41,5 +48,11 @@ const highlight = (text) => {
   color: var(--color-light);
   font-size: 0.875rem;
   font-weight: 300;
+}
+
+.labelWrapper {
+  position: absolute;
+  top: calc(50% - 0.75rem);
+  right: 0.75rem;
 }
 </style>
