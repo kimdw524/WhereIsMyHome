@@ -24,12 +24,13 @@ onUpdated(() => {
   if (show) {
     container.value.style.display = 'block';
     wrapper.value.style.height = 'auto';
+    const height = wrapper.value.offsetHeight;
     if (show !== prevVisible) {
-      const height = wrapper.value.offsetHeight;
       wrapper.value.style.height = '0';
       wrapper.value.offsetHeight;
-      wrapper.value.style.height = `${height}px`;
     }
+
+    wrapper.value.style.height = `${height}px`;
   } else {
     wrapper.value.style.height = '0';
   }
