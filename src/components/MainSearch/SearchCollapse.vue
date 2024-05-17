@@ -60,7 +60,7 @@ onUpdated(() => {
   border-top: 0;
   border-bottom-left-radius: 0.25rem;
   border-bottom-right-radius: 0.25rem;
-  box-shadow: 0 0.375rem 0.25rem 0 #f1f1f1;
+  box-shadow: 0 0.625rem 0.875rem 0 #0000001a;
 
   background-color: var(--bg);
 }
