@@ -21,10 +21,14 @@ const handleBlur = () => {
   collapsed.value = false;
 };
 
-watch(query, (query) => {
-  searchAll(query)
+watch(query, (value) => {
+  if (value.length < 2) {
+    searchResult.value = null;
+    return;
+  }
+  searchAll(value)
     .then((result) => {
-      searchResult.value = result.data;
+      if (query.value === value) searchResult.value = result.data;
     })
     .catch((err) => {
       searchResult.value = null;

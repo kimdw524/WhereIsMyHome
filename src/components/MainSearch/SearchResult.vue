@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue';
+import { computed, onUpdated, watch } from 'vue';
 import HouseList from './HouseList.vue';
 import RegionList from './RegionList.vue';
 
