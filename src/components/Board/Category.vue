@@ -29,8 +29,11 @@ const router = useRouter();
 
   padding: 1rem;
   box-sizing: border-box;
+  border-bottom: 3px solid transparent;
 
   text-align: center;
+
+  transition: all 150ms ease;
 
   cursor: pointer;
 }

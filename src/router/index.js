@@ -1,8 +1,7 @@
 import Home from '@/views/Home.vue';
 import Intro from '@/views/Intro.vue';
 import Map from '@/views/Map.vue';
-import Notice from '@/views/Notice.vue';
-import QnA from '@/views/QnA.vue';
+import Board from '@/views/Board.vue';
 import SignIn from '@/views/SignIn.vue';
 import SignUp from '@/views/SignUp.vue';
 import WritePost from '@/views/WritePost.vue';
@@ -21,12 +20,8 @@ const routes = [
     component: Home,
   },
   {
-    path: '/notice',
-    component: Notice,
-  },
-  {
-    path: '/qna',
-    component: QnA,
+    path: '/board/:name',
+    component: Board,
   },
   {
     path: '/signin',
