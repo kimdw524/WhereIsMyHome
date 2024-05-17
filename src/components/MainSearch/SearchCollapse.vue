@@ -20,19 +20,20 @@ onMounted(() => {
 
 onUpdated(() => {
   const show = props.show;
-  if (show === prevVisible) return;
-  prevVisible = show;
+
   if (show) {
     container.value.style.display = 'block';
     wrapper.value.style.height = 'auto';
-
-    const height = wrapper.value.offsetHeight;
-    wrapper.value.style.height = '0';
-    wrapper.value.offsetHeight;
-    wrapper.value.style.height = `${height}px`;
+    if (show !== prevVisible) {
+      const height = wrapper.value.offsetHeight;
+      wrapper.value.style.height = '0';
+      wrapper.value.offsetHeight;
+      wrapper.value.style.height = `${height}px`;
+    }
   } else {
     wrapper.value.style.height = '0';
   }
+  prevVisible = show;
 });
 </script>
 
@@ -49,7 +50,7 @@ onUpdated(() => {
   display: flex;
   align-items: center;
   position: absolute;
-  z-index: 100;
+  z-index: 30;
 
   width: 100%;
   box-sizing: border-box;

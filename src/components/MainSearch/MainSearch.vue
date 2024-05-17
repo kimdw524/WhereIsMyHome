@@ -1,14 +1,16 @@
 <script setup>
 import { LottieAnimation } from 'lottie-web-vue';
 import lottieSearch from '@/assets/lotties/search.json';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import SearchCollapse from './SearchCollapse.vue';
 import SearchHistory from './SearchHistory.vue';
 import SearchResult from './SearchResult.vue';
+import { searchAll } from '@/apis/Home';
 
 const collapsed = ref(false);
 const searchIcon = ref(null);
 const query = ref('');
+const searchResult = ref(null);
 
 const handleFocus = () => {
   searchIcon.value.goToAndPlay(0);
@@ -18,6 +20,17 @@ const handleFocus = () => {
 const handleBlur = () => {
   collapsed.value = false;
 };
+
+watch(query, (query) => {
+  searchAll(query)
+    .then((result) => {
+      searchResult.value = result.data;
+    })
+    .catch((err) => {
+      searchResult.value = null;
+      console.error(err);
+    });
+});
 </script>
 
 <template>
@@ -38,12 +51,12 @@ const handleBlur = () => {
         placeholder="지역 또는 단지명을 입력해 주세요."
         @focus="handleFocus"
         @blur="handleBlur"
-        v-model="query"
+        @input="query = $event.target.value"
       />
     </div>
     <SearchCollapse :show="collapsed">
       <SearchHistory v-if="query === ''" />
-      <SearchResult v-else :query="query" />
+      <SearchResult v-else :query="query" :result="searchResult" />
     </SearchCollapse>
   </div>
 </template>
