@@ -26,7 +26,7 @@ const routes = [
   },
   {
     path: '/qna',
-    component: () => QnA,
+    component: QnA,
   },
   {
     path: '/signin',

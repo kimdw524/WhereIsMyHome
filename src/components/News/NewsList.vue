@@ -29,7 +29,7 @@ const handleWheel = (event) => {
 };
 
 onMounted(() => {
-  wrapper.value.addEventListener('wheel', handleWheel);
+  wrapper.value.addEventListener('wheel', handleWheel, { passive: true });
 });
 </script>
 

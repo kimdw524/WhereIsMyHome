@@ -29,7 +29,6 @@ const handleBlur = () => {
           :auto-play="false"
           :loop="false"
           :speed="1"
-          @enter-frame="handleFrame"
           ref="searchIcon"
         />
       </div>
