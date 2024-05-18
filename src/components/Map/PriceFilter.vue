@@ -81,18 +81,18 @@ const rentRange = ref([
 ]);
 
 watch(dealRange, (value) => {
-  model.value.startDealAmount = highPrice[value[0]].value;
-  model.value.endDealAmount = highPrice[value[1]].value;
+  model.value.startDealAmount = highPrice[Math.min(...value)].value;
+  model.value.endDealAmount = highPrice[Math.max(...value)].value;
 });
 
 watch(depositRange, (value) => {
-  model.value.startDeposit = highPrice[value[0]].value;
-  model.value.endDeposit = highPrice[value[1]].value;
+  model.value.startDeposit = highPrice[Math.min(...value)].value;
+  model.value.endDeposit = highPrice[Math.max(...value)].value;
 });
 
 watch(rentRange, (value) => {
-  model.value.startRentCost = lowPrice[value[0]].value;
-  model.value.endRentCost = lowPrice[value[1]].value;
+  model.value.startRentCost = lowPrice[Math.min(...value)].value;
+  model.value.endRentCost = lowPrice[Math.min(...value)].value;
 });
 </script>
 

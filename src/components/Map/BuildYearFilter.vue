@@ -14,7 +14,10 @@ const range = ref([
 ]);
 
 watch(range, (value) => {
-  model.value = { startBuildYear: items[value[0]].value, endBuildYear: items[value[1]].value };
+  model.value = {
+    startBuildYear: items[Math.min(...value)].value,
+    endBuildYear: items[Math.max(...value)].value,
+  };
 });
 </script>
 
