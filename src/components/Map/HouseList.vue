@@ -10,21 +10,23 @@ const props = defineProps({ items: Array });
       <TypeLabel :type="item.houseType" />
       <div :class="$style.houseName">{{ item.houseName }}</div>
     </div>
-    <div v-if="item.averageDealAmount" :class="$style.tradeAverage">
-      매매 평균가 <span>{{ Formatter.dealNumberFormat(item.averageDealAmount) }}</span>
-    </div>
-    <div v-if="item.averageDepositByFullRent" :class="$style.tradeAverage">
-      전세 평균가 <span>{{ Formatter.dealNumberFormat(item.averageDepositByFullRent) }}</span>
-    </div>
-    <div v-if="item.averageDepositByMonthlyRent" :class="$style.tradeAverage">
-      월세 평균가
-      <span>
-        {{
-          `${Formatter.dealNumberFormat(
-            item.averageDepositByMonthlyRent,
-          )} / ${Formatter.dealNumberFormat(item.averageRentCost)}`
-        }}
-      </span>
+    <div :class="$style.tradeContainer">
+      <div v-if="item.averageDealAmount" :class="$style.tradeAverage">
+        매매 평균가 <span>{{ Formatter.dealNumberFormat(item.averageDealAmount) }}</span>
+      </div>
+      <div v-if="item.averageDepositByFullRent" :class="$style.tradeAverage">
+        전세 평균가 <span>{{ Formatter.dealNumberFormat(item.averageDepositByFullRent) }}</span>
+      </div>
+      <div v-if="item.averageDepositByMonthlyRent" :class="$style.tradeAverage">
+        월세 평균가
+        <span>
+          {{
+            `${Formatter.dealNumberFormat(
+              item.averageDepositByMonthlyRent,
+            )} / ${Formatter.dealNumberFormat(item.averageRentCost)}`
+          }}
+        </span>
+      </div>
     </div>
     <div :class="$style.detail">
       <span>{{ item.roadName }}</span>
@@ -42,7 +44,7 @@ const props = defineProps({ items: Array });
   gap: 1rem;
 
   padding: 1rem;
-  border-bottom: 1px solid #ececec;
+  border-bottom: 1px solid var(--map-houselist-border);
 
   transition: all 100ms ease;
 
@@ -51,7 +53,7 @@ const props = defineProps({ items: Array });
 }
 
 .container:hover {
-  background-color: #f0f4fa;
+  background-color: var(--map-houselist-bg-hover);
 }
 
 .header {
@@ -82,5 +84,9 @@ const props = defineProps({ items: Array });
 .tradeAverage span {
   color: var(--color);
   font-weight: 500;
+}
+
+.tradeContainer {
+  line-height: 162.5%;
 }
 </style>

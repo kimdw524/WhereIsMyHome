@@ -77,6 +77,9 @@ body {
 
   --map-header-border-top: #ededed;
   --map-header-border-bottom: #cdcdcd;
+  --map-list-header-border: #dfdfdf;
+  --map-houselist-border: #ececec;
+  --map-houselist-bg-hover: #f0f4fa;
 
   --typelabel-apart: #0c67c3;
   --typelabel-house: #007724;

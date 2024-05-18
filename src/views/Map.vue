@@ -2,6 +2,7 @@
 import { getMatchHome } from '@/apis/Home';
 import Filter from '@/components/Common/Filter.vue';
 import HouseList from '@/components/Map/HouseList.vue';
+import ListHeader from '@/components/Map/ListHeader.vue';
 import BuildYearFilter from '@/components/Map/BuildYearFilter.vue';
 import PriceFilter from '@/components/Map/PriceFilter.vue';
 import TradeFilter from '@/components/Map/TradeFilter.vue';
@@ -199,6 +200,7 @@ onMounted(() => {
       </div>
       <div :class="$style.body">
         <div :class="$style.side">
+          <ListHeader :count="data.length" />
           <HouseList :items="data" />
         </div>
         <div id="map" :class="$style.map"></div>
@@ -238,6 +240,8 @@ onMounted(() => {
 .side {
   flex: 0 0 400px;
   overflow-y: auto;
+
+  border-right: 1px solid var(--map-list-header-border);
 }
 
 .map {
