@@ -66,11 +66,16 @@ watch(
 );
 
 let markers = [];
+let isLoading = false,
+  call = false;
 
 let map;
 
 const update = () => {
-  if (map.getLevel() > 6) return;
+  call = true;
+  if (map.getLevel() > 6 || isLoading) return;
+  isLoading = true;
+  call = false;
   getMatchHome(condition)
     .then((result) => {
       console.log(result.data);
@@ -85,6 +90,12 @@ const update = () => {
     })
     .catch((err) => {
       console.log(err);
+    })
+    .finally(() => {
+      isLoading = false;
+      if (call) {
+        update();
+      }
     });
 };
 
