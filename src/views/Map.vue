@@ -24,6 +24,7 @@ const buildYear = ref({
   endBuildYear: 2024,
 });
 const data = ref([]);
+const sort = ref({ type: 1, asc: true });
 
 let lat = 36.9836404099608,
   lng = 126.922317622367;
@@ -200,7 +201,7 @@ onMounted(() => {
       </div>
       <div :class="$style.body">
         <div :class="$style.side">
-          <ListHeader :count="data.length" />
+          <ListHeader :count="data.length" v-model="sort" />
           <HouseList :items="data" />
         </div>
         <div id="map" :class="$style.map"></div>
