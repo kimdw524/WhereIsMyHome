@@ -1,5 +1,7 @@
 <script setup>
 import Checkbox from '../Common/Checkbox.vue';
+
+const model = defineModel();
 </script>
 
 <template>
@@ -7,8 +9,8 @@ import Checkbox from '../Common/Checkbox.vue';
     <div :class="$style.header">부동산 종류</div>
     <div :class="$style.description">중복 선택 가능합니다.</div>
     <div :class="$style.listContainer">
-      <Checkbox>아파트</Checkbox>
-      <Checkbox>연립다세대</Checkbox>
+      <Checkbox v-model="model.apart">아파트</Checkbox>
+      <Checkbox v-model="model.house">연립다세대</Checkbox>
     </div>
   </div>
 </template>
