@@ -1,6 +1,7 @@
 <script setup>
 import { getMatchHome } from '@/apis/Home';
 import Filter from '@/components/Common/Filter.vue';
+import HouseList from '@/components/Map/HouseList.vue';
 import BuildYearFilter from '@/components/Map/BuildYearFilter.vue';
 import PriceFilter from '@/components/Map/PriceFilter.vue';
 import TradeFilter from '@/components/Map/TradeFilter.vue';
@@ -21,6 +22,7 @@ const buildYear = ref({
   startBuildYear: 1950,
   endBuildYear: 2024,
 });
+const data = ref([]);
 
 let lat = 36.9836404099608,
   lng = 126.922317622367;
@@ -59,6 +61,8 @@ watch(
     condition.endDeposit = price.value.endDeposit;
     condition.startRentCost = price.value.startRentCost;
     condition.endRentCost = price.value.endRentCost;
+    condition.startBuildYear = buildYear.value.startBuildYear;
+    condition.endBuildYear = buildYear.value.endBuildYear;
 
     update();
   },
@@ -69,16 +73,16 @@ let markers = [];
 let isLoading = false,
   call = false;
 
-let map;
+let map, clusterer;
 
 const update = () => {
   call = true;
-  if (map.getLevel() > 6 || isLoading) return;
+  if (map.getLevel() > 7 || isLoading) return;
   isLoading = true;
   call = false;
   getMatchHome(condition)
     .then((result) => {
-      console.log(result.data);
+      data.value = result.data;
       markers.forEach((marker) => marker.setMap(null));
       markers = result.data.map(
         (item) =>
@@ -86,7 +90,9 @@ const update = () => {
             position: new kakao.maps.LatLng(item.lat, item.lng),
           }),
       );
-      markers.forEach((marker) => marker.setMap(map));
+
+      clusterer.clear();
+      clusterer.addMarkers(markers);
     })
     .catch((err) => {
       console.log(err);
@@ -107,6 +113,55 @@ onMounted(() => {
   };
 
   map = new kakao.maps.Map(container, options);
+
+  clusterer = new kakao.maps.MarkerClusterer({
+    map: map,
+    averageCenter: true,
+    minLevel: 5,
+    calculator: [10, 30, 50],
+    styles: [
+      {
+        width: '30px',
+        height: '30px',
+        background: 'rgba(51, 88, 255, .8)',
+        borderRadius: '15px',
+        color: '#fff',
+        textAlign: 'center',
+        fontWeight: 'bold',
+        lineHeight: '31px',
+      },
+      {
+        width: '40px',
+        height: '40px',
+        background: 'rgba(51, 88, 255, .8)',
+        borderRadius: '20px',
+        color: '#fff',
+        textAlign: 'center',
+        fontWeight: 'bold',
+        lineHeight: '41px',
+      },
+      {
+        width: '50px',
+        height: '50px',
+        background: 'rgba(235, 80, 2, .8)',
+        borderRadius: '25px',
+        color: '#fff',
+        textAlign: 'center',
+        fontWeight: 'bold',
+        lineHeight: '51px',
+      },
+      {
+        width: '60px',
+        height: '60px',
+        background: 'rgba(235, 80, 2, .8)',
+        borderRadius: '30px',
+        color: '#fff',
+        textAlign: 'center',
+        fontWeight: 'bold',
+        lineHeight: '61px',
+      },
+    ],
+  });
 
   kakao.maps.event.addListener(map, 'dragend', () => {
     const { ha, oa, pa, qa } = map.getBounds();
@@ -143,7 +198,9 @@ onMounted(() => {
         </Filter>
       </div>
       <div :class="$style.body">
-        <div :class="$style.side">side menu</div>
+        <div :class="$style.side">
+          <HouseList :items="data" />
+        </div>
         <div id="map" :class="$style.map"></div>
       </div>
     </div>
@@ -174,12 +231,13 @@ onMounted(() => {
   display: flex;
   flex-direction: row;
   flex: 1 1 auto;
+
+  height: calc(100vh - 11rem);
 }
 
 .side {
   flex: 0 0 400px;
-
-  height: 100%;
+  overflow-y: auto;
 }
 
 .map {

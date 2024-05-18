@@ -86,13 +86,13 @@ watch(dealRange, (value) => {
 });
 
 watch(depositRange, (value) => {
-  model.value.startDepositAmount = highPrice[value[0]].value;
-  model.value.endDepositAmount = highPrice[value[1]].value;
+  model.value.startDeposit = highPrice[value[0]].value;
+  model.value.endDeposit = highPrice[value[1]].value;
 });
 
 watch(rentRange, (value) => {
-  model.value.startRentAmount = lowPrice[value[0]].value;
-  model.value.endRentAmount = lowPrice[value[1]].value;
+  model.value.startRentCost = lowPrice[value[0]].value;
+  model.value.endRentCost = lowPrice[value[1]].value;
 });
 </script>
 

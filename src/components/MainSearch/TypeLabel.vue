@@ -1,6 +1,5 @@
 <script setup>
 const props = defineProps({ type: Number });
-console.log(props);
 </script>
 
 <template>
