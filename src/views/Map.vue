@@ -8,7 +8,7 @@ import PriceFilter from '@/components/Map/PriceFilter.vue';
 import TradeFilter from '@/components/Map/TradeFilter.vue';
 import TypeFilter from '@/components/Map/TypeFilter.vue';
 import { onMounted, ref, watch } from 'vue';
-
+import Formatter from '@/utils/formatter';
 const type = ref({ apart: true, house: true });
 const trade = ref({ deal: true, fullRent: true, rent: true });
 const price = ref({
@@ -212,6 +212,7 @@ onMounted(() => {
     condition.endLng = oa;
     condition.startLat = qa;
     condition.endLat = pa;
+    console.log(map.getBounds());
     update();
   });
 
@@ -227,10 +228,19 @@ onMounted(() => {
   <Transition name="fade2" appear>
     <div :class="$style.container">
       <div :class="$style.header">
-        <Filter text="아파트">
+        <Filter
+          :text="
+            Formatter.joinText({ 아파트: type.apart, 연립다세대: type.house }) || '부동산 종류'
+          "
+        >
           <TypeFilter v-model="type" />
         </Filter>
-        <Filter text="월세,전세,매매">
+        <Filter
+          :text="
+            Formatter.joinText({ 매매: trade.deal, 전세: trade.fullRent, 월세: trade.rent }) ||
+            '거래 유형'
+          "
+        >
           <TradeFilter v-model="trade" />
         </Filter>
         <Filter text="가격">

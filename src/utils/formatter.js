@@ -37,7 +37,21 @@ const dealNumberFormat = (number) => {
   return result.trim();
 };
 
+const joinText = (object) => {
+  let result = '';
+  for (const [key, value] of Object.entries(object)) {
+    if (value) {
+      result += `${key},`;
+    }
+  }
+  if (result.length > 0) {
+    result = result.substring(0, result.length - 1);
+  }
+  return result;
+};
+
 export default {
   moneyFormat,
   dealNumberFormat,
+  joinText,
 };
