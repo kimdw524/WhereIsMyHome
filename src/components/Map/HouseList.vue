@@ -31,8 +31,13 @@ const props = defineProps({ items: Array });
     <div :class="$style.detail">
       <span>{{ item.roadName }}</span>
     </div>
-    <div :class="$style.detail">
-      건축년도 <span>{{ item.buildYear }}년</span>
+    <div :class="$style.footer">
+      <div :class="$style.detail">
+        건축년도 <span>{{ item.buildYear }}년</span>
+      </div>
+      <div :class="$style.detail">
+        거래량 <span>{{ item.dealNum }}건</span>
+      </div>
     </div>
   </div>
 </template>
@@ -88,5 +93,10 @@ const props = defineProps({ items: Array });
 
 .tradeContainer {
   line-height: 162.5%;
+}
+
+.footer {
+  display: flex;
+  gap: 0.5rem;
 }
 </style>
