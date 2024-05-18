@@ -145,7 +145,9 @@ const update = () => {
   condition.startLat = qa;
   condition.endLat = pa;
 
-  router.replace(
+  window.history.replaceState(
+    null,
+    '',
     `?La=${La}&Ma=${Ma}&level=${map.getLevel()}&ap=${type.value.apart}&ho=${type.value.house}&td=${
       trade.value.deal
     }&tf=${trade.value.fullRent}&tr=${trade.value.rent}&sd=${price.value.startDealAmount}&ed=${
