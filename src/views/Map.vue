@@ -117,18 +117,32 @@ let isLoading = false,
 let map, clusterer;
 
 const update = () => {
+  const { ha, oa, pa, qa } = map.getBounds();
+  condition.startLng = ha;
+  condition.endLng = oa;
+  condition.startLat = qa;
+  condition.endLat = pa;
+
   call = true;
   if (map.getLevel() > 7 || isLoading) return;
   isLoading = true;
   call = false;
   getMatchHome(condition)
     .then((result) => {
-      data.value = result.data;
+      data.value = result.data.slice(0, 500);
+
       markers.forEach((marker) => marker.setMap(null));
-      markers = result.data.map(
+      markers = data.value.map(
         (item) =>
           new kakao.maps.Marker({
             position: new kakao.maps.LatLng(item.lat, item.lng),
+            image: new kakao.maps.MarkerImage(
+              `/src/assets/images/marker${item.houseType}.png`,
+              new kakao.maps.Size(29, 42),
+              {
+                offset: new kakao.maps.Point(15, 42),
+              },
+            ),
           }),
       );
 
@@ -160,7 +174,7 @@ onMounted(() => {
   clusterer = new kakao.maps.MarkerClusterer({
     map: map,
     averageCenter: true,
-    minLevel: 5,
+    minLevel: 2,
     calculator: [10, 30, 50],
     styles: [
       {
@@ -207,12 +221,6 @@ onMounted(() => {
   });
 
   kakao.maps.event.addListener(map, 'dragend', () => {
-    const { ha, oa, pa, qa } = map.getBounds();
-    condition.startLng = ha;
-    condition.endLng = oa;
-    condition.startLat = qa;
-    condition.endLat = pa;
-    console.log(map.getBounds());
     update();
   });
 
