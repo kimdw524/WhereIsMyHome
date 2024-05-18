@@ -20,6 +20,24 @@ const moneyFormat = (number) => {
   return result;
 };
 
+const dealNumberFormat = (number) => {
+  let num = parseFloat(number),
+    result = '';
+
+  if (num >= 10_000) {
+    let n = Math.floor(num / 10_000);
+    result += `${n}억 `;
+    num -= n * 10_000;
+  }
+
+  if (num >= 0) {
+    result += Math.round(num);
+  }
+
+  return result.trim();
+};
+
 export default {
   moneyFormat,
+  dealNumberFormat,
 };

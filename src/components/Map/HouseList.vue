@@ -1,10 +1,7 @@
 <script setup>
-import { onUpdated } from 'vue';
+import Formatter from '@/utils/formatter';
 import TypeLabel from '../MainSearch/TypeLabel.vue';
-
 const props = defineProps({ items: Array });
-
-onUpdated(() => {});
 </script>
 
 <template>
@@ -13,13 +10,28 @@ onUpdated(() => {});
       <TypeLabel :type="item.houseType" />
       <div :class="$style.houseName">{{ item.houseName }}</div>
     </div>
+    <div v-if="item.averageDealAmount" :class="$style.tradeAverage">
+      매매 평균가 <span>{{ Formatter.dealNumberFormat(item.averageDealAmount) }}</span>
+    </div>
+    <div v-if="item.averageDepositByFullRent" :class="$style.tradeAverage">
+      전세 평균가 <span>{{ Formatter.dealNumberFormat(item.averageDepositByFullRent) }}</span>
+    </div>
+    <div v-if="item.averageDepositByMonthlyRent" :class="$style.tradeAverage">
+      월세 평균가
+      <span>
+        {{
+          `${Formatter.dealNumberFormat(
+            item.averageDepositByMonthlyRent,
+          )} / ${Formatter.dealNumberFormat(item.averageRentCost)}`
+        }}
+      </span>
+    </div>
     <div :class="$style.detail">
       <span>{{ item.roadName }}</span>
     </div>
     <div :class="$style.detail">
       건축년도 <span>{{ item.buildYear }}년</span>
     </div>
-    <div :class="$style.tradeType">전세 거래 평균가 10억</div>
   </div>
 </template>
 
@@ -60,5 +72,15 @@ onUpdated(() => {});
 
 .detail span {
   font-weight: 300;
+}
+
+.tradeAverage {
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+.tradeAverage span {
+  color: var(--color);
+  font-weight: 500;
 }
 </style>
