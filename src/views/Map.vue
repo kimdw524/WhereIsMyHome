@@ -261,7 +261,7 @@ onMounted(() => {
       <div :class="$style.body">
         <div :class="$style.side">
           <ListHeader :count="data.length" v-model="sort" />
-          <HouseList :items="data" />
+          <HouseList :items="data" :map="map" />
         </div>
         <div id="map" :class="$style.map"></div>
       </div>

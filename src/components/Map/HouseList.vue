@@ -1,11 +1,32 @@
 <script setup>
 import Formatter from '@/utils/formatter';
 import TypeLabel from '../MainSearch/TypeLabel.vue';
-const props = defineProps({ items: Array });
+const props = defineProps({ items: Array, map: Object });
+let overlay;
+
+const handleMouseOver = (item) => {
+  overlay?.setMap(null);
+  overlay = new kakao.maps.CustomOverlay({
+    position: new kakao.maps.LatLng(item.lat, item.lng),
+    content: `<div class="houseOverlay${item.houseType === 1 ? ' apart' : ''}"></div>`,
+    yAnchor: 1,
+  });
+  overlay.setMap(props.map);
+};
+
+const handleMouseOut = () => {
+  overlay?.setMap(null);
+};
 </script>
 
 <template>
-  <div v-for="item in items" :key="item.houseCode" :class="$style.container">
+  <div
+    v-for="item in items"
+    :key="item.houseCode"
+    :class="$style.container"
+    @mouseover="() => handleMouseOver(item)"
+    @mouseout="handleMouseOut"
+  >
     <div :class="$style.header">
       <TypeLabel :type="item.houseType" />
       <div :class="$style.houseName">{{ item.houseName }}</div>
@@ -42,6 +63,24 @@ const props = defineProps({ items: Array });
   </div>
 </template>
 
+<style>
+.houseOverlay {
+  position: relative;
+
+  width: 4rem;
+  height: 4rem;
+  border: 1px solid rgb(8, 173, 2);
+  border-radius: 50%;
+
+  background-color: rgba(8, 173, 2, 0.33);
+}
+
+.houseOverlay.apart {
+  border: 1px solid rgb(2, 56, 173);
+  background-color: rgba(2, 56, 173, 0.33);
+}
+</style>
+
 <style module>
 .container {
   display: flex;
@@ -54,7 +93,6 @@ const props = defineProps({ items: Array });
   transition: all 100ms ease;
 
   cursor: pointer;
-  user-select: none;
 }
 
 .container:hover {
