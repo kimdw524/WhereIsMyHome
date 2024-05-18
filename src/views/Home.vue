@@ -71,8 +71,8 @@ const news = [
           <CardBody>전국에 위치한 모든<br />매물과 단지 정보를<br />확인해 보세요.</CardBody>
           <LottieAnimation
             :animation-data="lottieBuilding"
-            :auto-play="true"
-            :loop="true"
+            :auto-play="false"
+            :loop="false"
             :speed="1"
             :class="$style.buildingAnimation"
           />
