@@ -1,8 +1,8 @@
 <script setup>
+import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 import NavLink from './NavLink.vue';
 import NavMenu from './NavMenu.vue';
-import { ref, watch } from 'vue';
 
 const route = useRoute();
 const toggle = ref(false);
