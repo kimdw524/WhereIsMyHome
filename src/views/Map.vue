@@ -9,19 +9,43 @@ import TradeFilter from '@/components/Map/TradeFilter.vue';
 import TypeFilter from '@/components/Map/TypeFilter.vue';
 import { onMounted, ref, watch } from 'vue';
 import Formatter from '@/utils/formatter';
-const type = ref({ apart: true, house: true });
-const trade = ref({ deal: true, fullRent: true, rent: true });
+import { useRouter, useRoute } from 'vue-router';
+
+const router = useRouter();
+const route = useRoute();
+
+let { La, Ma, level, ap, ho, td, tf, tr, sd, ed, sde, ede, sr, er, sb, eb } = route.query;
+
+La = La || 126.922317622367;
+Ma = Ma || 36.9836404099608;
+level = level || 3;
+ap = ap === 'false' ? false : true;
+ho = ho === 'false' ? false : true;
+td = td === 'false' ? false : true;
+tf = tf === 'false' ? false : true;
+tr = tr === 'false' ? false : true;
+sd = isNaN(Number(sd)) ? 0 : Number(sd);
+ed = isNaN(Number(ed)) ? 999_999_999 : Number(ed);
+sde = isNaN(Number(sde)) ? 0 : Number(sde);
+ede = isNaN(Number(ede)) ? 999_999_999 : Number(ede);
+sr = isNaN(Number(sr)) ? 0 : Number(sr);
+er = isNaN(Number(er)) ? 999_999_999 : Number(er);
+sb = isNaN(Number(sb)) ? 0 : Number(sb);
+eb = isNaN(Number(eb)) ? new Date().getFullYear() : Number(eb);
+
+const type = ref({ apart: ap, house: ho });
+const trade = ref({ deal: td, fullRent: tf, rent: tr });
 const price = ref({
-  startDealAmount: 0,
-  endDealAmount: 999_999_999,
-  startDeposit: 0,
-  endDeposit: 999_999_999,
-  startRentCost: 0,
-  endRentCost: 999_999_999,
+  startDealAmount: sd,
+  endDealAmount: ed,
+  startDeposit: sde,
+  endDeposit: ede,
+  startRentCost: sr,
+  endRentCost: er,
 });
 const buildYear = ref({
-  startBuildYear: 1950,
-  endBuildYear: 2024,
+  startBuildYear: sb,
+  endBuildYear: eb,
 });
 const data = ref([]);
 const sort = ref({ type: 1, asc: false });
@@ -65,9 +89,6 @@ watch(sort, (value) => {
   sortList(value);
 });
 
-let lat = 36.9836404099608,
-  lng = 126.922317622367;
-
 const condition = {
   isApart: true,
   isHouse: true,
@@ -82,10 +103,10 @@ const condition = {
   endRentCost: 60,
   startBuildYear: 1998,
   endBuildYear: 2018,
-  startLng: lng - 0.01,
-  endLng: lng + 0.01,
-  startLat: lat - 0.01,
-  endLat: lat + 0.01,
+  startLng: La - 0.01,
+  endLng: La + 0.01,
+  startLat: Ma - 0.01,
+  endLat: Ma + 0.01,
 };
 
 watch(
@@ -118,10 +139,23 @@ let map, clusterer;
 
 const update = () => {
   const { ha, oa, pa, qa } = map.getBounds();
+  const { La, Ma } = map.getCenter();
   condition.startLng = ha;
   condition.endLng = oa;
   condition.startLat = qa;
   condition.endLat = pa;
+
+  router.replace(
+    `?La=${La}&Ma=${Ma}&level=${map.getLevel()}&ap=${type.value.apart}&ho=${type.value.house}&td=${
+      trade.value.deal
+    }&tf=${trade.value.fullRent}&tr=${trade.value.rent}&sd=${price.value.startDealAmount}&ed=${
+      price.value.endDealAmount
+    }&sde=${price.value.startDeposit}&ede=${price.value.endDeposit}&sr=${
+      price.value.startRentCost
+    }&er=${price.value.endRentCost}&sb=${buildYear.value.startBuildYear}&eb=${
+      buildYear.value.endBuildYear
+    }`,
+  );
 
   call = true;
   if (map.getLevel() > 7 || isLoading) return;
@@ -165,8 +199,8 @@ const update = () => {
 onMounted(() => {
   const container = document.getElementById('map');
   const options = {
-    center: new kakao.maps.LatLng(lat, lng),
-    level: 3,
+    center: new kakao.maps.LatLng(Ma, La),
+    level: level,
   };
 
   map = new kakao.maps.Map(container, options);
@@ -174,7 +208,7 @@ onMounted(() => {
   clusterer = new kakao.maps.MarkerClusterer({
     map: map,
     averageCenter: true,
-    minLevel: 2,
+    minLevel: 1,
     calculator: [10, 30, 50],
     styles: [
       {
