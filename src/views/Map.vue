@@ -24,7 +24,46 @@ const buildYear = ref({
   endBuildYear: 2024,
 });
 const data = ref([]);
-const sort = ref({ type: 1, asc: true });
+const sort = ref({ type: 1, asc: false });
+
+const sortList = (value) => {
+  switch (value.type) {
+    case 1: {
+      data.value.sort((a, b) => {
+        if (value.asc) return a.dealNum - b.dealNum;
+        else return b.dealNum - a.dealNum;
+      });
+      break;
+    }
+    case 2: {
+      data.value.sort((a, b) => {
+        const aa =
+            parseFloat(a.averageDealAmount) ||
+            parseFloat(a.averageDepositByFullRent) ||
+            parseFloat(a.averageDepositByMonthlyRent),
+          bb =
+            parseFloat(b.averageDealAmount) ||
+            parseFloat(b.averageDepositByFullRent) ||
+            parseFloat(b.averageDepositByMonthlyRent);
+        if (value.asc) return aa - bb;
+        else return bb - aa;
+      });
+      break;
+    }
+    case 3: {
+      data.value.sort((a, b) => {
+        if (value.asc) return a.buildYear - b.buildYear;
+        else return b.buildYear - a.buildYear;
+      });
+      break;
+    }
+    default:
+  }
+};
+
+watch(sort, (value) => {
+  sortList(value);
+});
 
 let lat = 36.9836404099608,
   lng = 126.922317622367;
@@ -95,6 +134,8 @@ const update = () => {
 
       clusterer.clear();
       clusterer.addMarkers(markers);
+
+      sortList(sort.value);
     })
     .catch((err) => {
       console.log(err);
