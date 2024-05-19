@@ -67,7 +67,13 @@ const news = [
       </div>
 
       <div :class="$style.cardContainer">
-        <Card>
+        <Card
+          @click="
+            $router.push(
+              '/map?La=&Ma=&level=3&ap=true&ho=false&td=true&tf=true&tr=true&sd=0&ed=999999999&sde=0&ede=999999999&sr=0&er=999999999&sb=0&eb=2024',
+            )
+          "
+        >
           <CardTitle>아파트</CardTitle>
           <CardBody>전국에 위치한 모든<br />매물과 단지 정보를<br />확인해 보세요.</CardBody>
           <LottieAnimation
@@ -78,7 +84,13 @@ const news = [
             :class="$style.buildingAnimation"
           />
         </Card>
-        <Card>
+        <Card
+          @click="
+            $router.push(
+              '/map?La=&Ma=&level=3&ap=false&ho=true&td=true&tf=true&tr=true&sd=0&ed=999999999&sde=0&ede=999999999&sr=0&er=999999999&sb=0&eb=2024',
+            )
+          "
+        >
           <CardTitle>연립다세대</CardTitle>
           <CardBody>주택부터 빌라까지<br />다양한 매물을 찾아보세요.</CardBody>
           <LottieAnimation

@@ -1,7 +1,9 @@
-<script setup></script>
+<script setup>
+defineEmits(['click']);
+</script>
 
 <template>
-  <div :class="$style.container"><slot /></div>
+  <div :class="$style.container" @click="$emit('click')"><slot /></div>
 </template>
 
 <style module>
