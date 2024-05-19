@@ -365,6 +365,7 @@ onMounted(() => {
   overflow-y: auto;
 
   border-right: 1px solid var(--map-header-border-bottom);
+  box-sizing: border-box;
 }
 
 .map {

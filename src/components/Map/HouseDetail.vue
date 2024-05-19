@@ -1,28 +1,45 @@
 <script setup>
 import { getHomeDetail } from '@/apis/Home';
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import HouseLabel from './HouseLabel.vue';
+import TradeHistoryOverall from './TradeHistoryOverall.vue';
 import Star from '@/components/Common/Star.vue';
 import Formatter from '@/utils/formatter';
 
 const model = defineModel();
 const data = ref(null);
-const history = ref({ deal: false, fullRent: false, rent: false });
 const interest = ref(false);
+
+const deals = computed(() => {
+  if (data.value) {
+    return data.value.dealList.filter((item) => Formatter.toNumber(item.dealAmount) > 0);
+  } else {
+    return [];
+  }
+});
+
+const fullRents = computed(() => {
+  if (data.value) {
+    return data.value.dealList.filter(
+      (item) => Formatter.toNumber(item.deposit) > 0 && Formatter.toNumber(item.rentCost) === 0,
+    );
+  } else {
+    return [];
+  }
+});
+
+const rents = computed(() => {
+  if (data.value) {
+    return data.value.dealList.filter((item) => Formatter.toNumber(item.rentCost) > 0);
+  } else {
+    return [];
+  }
+});
 
 onMounted(() => {
   getHomeDetail(model.value)
     .then((result) => {
-      console.log(result.data);
       data.value = result.data;
-      history.value.deal =
-        result.data.dealList.findIndex((item) => Formatter.toNumber(item.dealAmount) > 0) > -1;
-      history.value.fullRent =
-        result.data.dealList.findIndex(
-          (item) => Formatter.toNumber(item.deposit) > 0 && Formatter.toNumber(item.rentCost) === 0,
-        ) > -1;
-      history.value.rent =
-        result.data.dealList.findIndex((item) => Formatter.toNumber(item.rentCost) > 0) > -1;
     })
     .catch((error) => {
       console.error(error);
@@ -39,9 +56,9 @@ onMounted(() => {
             <div :class="$style.labelContainer">
               <HouseLabel v-if="data.house.houseType === 1" :type="0" />
               <HouseLabel v-if="data.house.houseType === 2" :type="1" />
-              <HouseLabel v-if="history.deal" :type="2" />
-              <HouseLabel v-if="history.fullRent" :type="3" />
-              <HouseLabel v-if="history.rent" :type="4" />
+              <HouseLabel v-if="deals.length" :type="2" />
+              <HouseLabel v-if="fullRents.length" :type="3" />
+              <HouseLabel v-if="rents.length" :type="4" />
             </div>
             <div :class="$style.houseName">
               <div>
@@ -50,6 +67,7 @@ onMounted(() => {
               <Star v-model="interest" />
             </div>
           </div>
+          <TradeHistoryOverall :deals="deals" :fullRents="fullRents" :rents="rents" />
           <div :class="$style.addressContainer">
             <div :class="$style.address">
               <div><span>지번 주소</span></div>
@@ -116,6 +134,8 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   gap: 0.625rem;
+
+  margin-top: 1rem;
 }
 
 .address {
