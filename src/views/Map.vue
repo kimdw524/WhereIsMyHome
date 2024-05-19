@@ -111,28 +111,6 @@ const condition = {
   endLat: Ma + 0.01,
 };
 
-watch(
-  [type, trade, price, buildYear],
-  () => {
-    condition.isApart = type.value.apart;
-    condition.isHouse = type.value.house;
-    condition.isDeal = trade.value.deal;
-    condition.isFullRent = trade.value.fullRent;
-    condition.isMonthlyRent = trade.value.rent;
-    condition.startDealAmount = price.value.startDealAmount;
-    condition.endDealAmount = price.value.endDealAmount;
-    condition.startDeposit = price.value.startDeposit;
-    condition.endDeposit = price.value.endDeposit;
-    condition.startRentCost = price.value.startRentCost;
-    condition.endRentCost = price.value.endRentCost;
-    condition.startBuildYear = buildYear.value.startBuildYear;
-    condition.endBuildYear = buildYear.value.endBuildYear;
-
-    update();
-  },
-  { deep: true },
-);
-
 let markers = [];
 let isLoading = false,
   call = false;
@@ -272,7 +250,27 @@ onMounted(() => {
     update();
   });
 
-  update();
+  watch(
+    [type, trade, price, buildYear],
+    () => {
+      condition.isApart = type.value.apart;
+      condition.isHouse = type.value.house;
+      condition.isDeal = trade.value.deal;
+      condition.isFullRent = trade.value.fullRent;
+      condition.isMonthlyRent = trade.value.rent;
+      condition.startDealAmount = price.value.startDealAmount;
+      condition.endDealAmount = price.value.endDealAmount;
+      condition.startDeposit = price.value.startDeposit;
+      condition.endDeposit = price.value.endDeposit;
+      condition.startRentCost = price.value.startRentCost;
+      condition.endRentCost = price.value.endRentCost;
+      condition.startBuildYear = buildYear.value.startBuildYear;
+      condition.endBuildYear = buildYear.value.endBuildYear;
+
+      update();
+    },
+    { deep: true, immediate: true },
+  );
 });
 </script>
 
