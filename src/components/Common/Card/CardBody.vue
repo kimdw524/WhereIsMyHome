@@ -11,5 +11,7 @@
   color: var(--color-light);
   font-weight: 400;
   line-height: 150%;
+
+  mix-blend-mode: difference;
 }
 </style>

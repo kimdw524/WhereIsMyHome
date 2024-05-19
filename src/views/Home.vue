@@ -6,6 +6,7 @@ import MainSearch from '@/components/MainSearch/MainSearch.vue';
 import { LottieAnimation } from 'lottie-web-vue';
 import lottieBuilding from '@/assets/lotties/building.json';
 import lottieHouse2 from '@/assets/lotties/house2.json';
+import lottieWrite from '@/assets/lotties/write.json';
 import Section from '@/components/Common/Section/Section.vue';
 import SectionDescription from '@/components/Common/Section/SectionDescription.vue';
 import NewsList from '@/components/News/NewsList.vue';
@@ -88,6 +89,17 @@ const news = [
             :class="$style.houseAnimation"
           />
         </Card>
+        <Card>
+          <CardTitle>자유게시판</CardTitle>
+          <CardBody>부동산 매물에 대한 다양한<br />정보를 자유롭게 나눠보세요.</CardBody>
+          <LottieAnimation
+            :animation-data="lottieWrite"
+            :auto-play="true"
+            :loop="true"
+            :speed="1"
+            :class="$style.writeAnimation"
+          />
+        </Card>
       </div>
 
       <div :class="$style.newsContainer">
@@ -138,6 +150,15 @@ const news = [
   z-index: -10;
 
   width: 15rem;
+}
+
+.writeAnimation {
+  position: absolute;
+  right: -2rem;
+  bottom: -3rem;
+  z-index: -10;
+
+  width: 13rem;
 }
 
 .newsContainer {
