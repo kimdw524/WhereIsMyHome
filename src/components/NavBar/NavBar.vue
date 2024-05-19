@@ -61,9 +61,9 @@ const navLinks = [
             <template v-if="user.isLoggedIn">
               <Profile />
             </template>
-            <temaplte v-else>
+            <template v-else>
               <NavMenu slug="/signin">로그인</NavMenu>
-            </temaplte>
+            </template>
           </div>
         </div>
       </div>
