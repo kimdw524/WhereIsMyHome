@@ -170,19 +170,25 @@ const update = () => {
       data.value = result.data.slice(0, 500);
 
       markers.forEach((marker) => marker.setMap(null));
-      markers = data.value.map(
-        (item) =>
-          new kakao.maps.Marker({
-            position: new kakao.maps.LatLng(item.lat, item.lng),
-            image: new kakao.maps.MarkerImage(
-              `/src/assets/images/marker${item.houseType}.png`,
-              new kakao.maps.Size(29, 42),
-              {
-                offset: new kakao.maps.Point(15, 42),
-              },
-            ),
-          }),
-      );
+      markers = data.value.map((item) => {
+        const marker = new kakao.maps.Marker({
+          position: new kakao.maps.LatLng(item.lat, item.lng),
+          clickable: true,
+          image: new kakao.maps.MarkerImage(
+            `/src/assets/images/marker${item.houseType}.png`,
+            new kakao.maps.Size(29, 42),
+            {
+              offset: new kakao.maps.Point(15, 42),
+            },
+          ),
+        });
+
+        kakao.maps.event.addListener(marker, 'click', () => {
+          detail.value = item.houseCode;
+        });
+
+        return marker;
+      });
 
       clusterer.clear();
       clusterer.addMarkers(markers);
