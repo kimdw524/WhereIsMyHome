@@ -1,15 +1,25 @@
 @ -1,104 +0,0 @@
 <script setup>
+import { signIn } from '@/apis/User';
 import Button from '@/components/Common/Button.vue';
 import Checkbox from '@/components/Common/Checkbox.vue';
 import TextField from '@/components/Common/TextField.vue';
+import { useUserStore } from '@/stores/user';
 import { ref } from 'vue';
 
 const email = ref('');
-const autoLogin = ref(false);
+const password = ref('');
+const rememberId = ref(false);
+const user = useUserStore();
 
 const handleLogin = () => {
-  alert(email.value);
+  signIn({ email: email.value, password: password.value })
+    .then((result) => {
+      user.signIn(result.data.body.id, result.data.body.email, result.data.body.name);
+    })
+    .catch((error) => {
+      console.log(error.response.status);
+    });
 };
 
 const handleKakao = () => {
@@ -25,9 +35,9 @@ const handleKakao = () => {
       <div :class="$style.header">이메일로 로그인</div>
       <div :class="$style.inputForm">
         <TextField label="이메일 주소" v-model="email" />
-        <TextField type="password" label="비밀번호" />
+        <TextField type="password" v-model="password" label="비밀번호" />
       </div>
-      <div :class="$style.autoLogin"><Checkbox v-model="autoLogin">자동 로그인</Checkbox></div>
+      <div :class="$style.autoLogin"><Checkbox v-model="rememberId">이메일 저장</Checkbox></div>
       <div :class="$style.submitForm">
         <div>
           아직 계정이 없으신가요?

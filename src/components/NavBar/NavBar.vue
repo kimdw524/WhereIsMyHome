@@ -1,10 +1,14 @@
 <script setup>
 import { ref } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import NavLink from './NavLink.vue';
 import NavMenu from './NavMenu.vue';
+import Profile from './Profile.vue';
+import { useUserStore } from '@/stores/user';
 
 const route = useRoute();
+const router = useRouter();
+const user = useUserStore();
 const toggle = ref(false);
 
 const navLinks = [
@@ -54,7 +58,12 @@ const navLinks = [
             {{ link.name }}
           </NavLink>
           <div :class="$style.menuContainer">
-            <NavMenu slug="/signin">로그인</NavMenu>
+            <template v-if="user.isLoggedIn">
+              <Profile />
+            </template>
+            <temaplte v-else>
+              <NavMenu slug="/signin">로그인</NavMenu>
+            </temaplte>
           </div>
         </div>
       </div>
@@ -115,6 +124,9 @@ const navLinks = [
 }
 
 .navItem {
+  display: flex;
+  align-items: center;
+
   @media (max-width: 576px) {
     display: none;
     flex-direction: column;
