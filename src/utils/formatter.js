@@ -50,8 +50,13 @@ const joinText = (object) => {
   return result;
 };
 
+const toNumber = (string) => {
+  return Number(String(string).replaceAll(',', ''));
+};
+
 export default {
   moneyFormat,
   dealNumberFormat,
   joinText,
+  toNumber,
 };

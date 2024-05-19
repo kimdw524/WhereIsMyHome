@@ -2,6 +2,7 @@
 import { getMatchHome } from '@/apis/Home';
 import Filter from '@/components/Common/Filter.vue';
 import HouseList from '@/components/Map/HouseList.vue';
+import HouseDetail from '@/components/Map/HouseDetail.vue';
 import ListHeader from '@/components/Map/ListHeader.vue';
 import BuildYearFilter from '@/components/Map/BuildYearFilter.vue';
 import PriceFilter from '@/components/Map/PriceFilter.vue';
@@ -49,6 +50,7 @@ const buildYear = ref({
 });
 const data = ref([]);
 const sort = ref({ type: 1, asc: false });
+const detail = ref(0);
 
 const sortList = (value) => {
   switch (value.type) {
@@ -145,8 +147,8 @@ const update = () => {
   condition.startLat = qa;
   condition.endLat = pa;
 
-  window.history.replaceState(
-    null,
+  history.replaceState(
+    history.state,
     '',
     `?La=${La}&Ma=${Ma}&level=${map.getLevel()}&ap=${type.value.apart}&ho=${type.value.house}&td=${
       trade.value.deal
@@ -297,7 +299,10 @@ onMounted(() => {
       <div :class="$style.body">
         <div :class="$style.side">
           <ListHeader :count="data.length" v-model="sort" />
-          <HouseList :items="data" :map="map" />
+          <HouseList :items="data" :map="map" @detail="(houseCode) => (detail = houseCode)" />
+        </div>
+        <div v-if="detail" :class="$style.houseDetail">
+          <HouseDetail v-model="detail" :key="detail" />
         </div>
         <div id="map" :class="$style.map"></div>
       </div>
@@ -329,6 +334,7 @@ onMounted(() => {
   display: flex;
   flex-direction: row;
   flex: 1 1 auto;
+  position: relative;
 
   height: calc(100vh - 11rem);
 }
@@ -337,12 +343,22 @@ onMounted(() => {
   flex: 0 0 400px;
   overflow-y: auto;
 
-  border-right: 1px solid var(--map-list-header-border);
+  border-right: 1px solid var(--map-header-border-bottom);
 }
 
 .map {
   flex: 1 1 100%;
 
   height: 100%;
+}
+
+.houseDetail {
+  position: absolute;
+  left: 400px;
+  overflow-y: scroll;
+  z-index: 10;
+
+  height: 100%;
+  border-right: 1px solid var(--map-header-border-bottom);
 }
 </style>

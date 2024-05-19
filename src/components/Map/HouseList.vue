@@ -2,6 +2,7 @@
 import Formatter from '@/utils/formatter';
 import TypeLabel from '../MainSearch/TypeLabel.vue';
 const props = defineProps({ items: Array, map: Object });
+const emit = defineEmits(['detail']);
 let overlay;
 
 const handleMouseOver = (item) => {
@@ -24,6 +25,7 @@ const handleMouseOut = () => {
     v-for="item in items"
     :key="item.houseCode"
     :class="$style.container"
+    @click="() => emit('detail', item.houseCode)"
     @mouseover="() => handleMouseOver(item)"
     @mouseout="handleMouseOut"
   >
