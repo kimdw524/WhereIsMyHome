@@ -50,7 +50,7 @@ onMounted(() => {
 <template>
   <div :class="$style.container">
     <template v-if="data">
-      <Transition name="fade" appear>
+      <Transition name="fade2" appear>
         <div>
           <div :class="$style.header">
             <div :class="$style.labelContainer">
