@@ -6,16 +6,19 @@ import Checkbox from '@/components/Common/Checkbox.vue';
 import TextField from '@/components/Common/TextField.vue';
 import { useUserStore } from '@/stores/user';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 const email = ref('');
 const password = ref('');
 const rememberId = ref(false);
 const user = useUserStore();
+const router = useRouter();
 
 const handleLogin = () => {
   signIn({ email: email.value, password: password.value })
     .then((result) => {
       user.signIn(result.data.body.id, result.data.body.email, result.data.body.name);
+      router.push('/home');
     })
     .catch((error) => {
       console.log(error.response.status);

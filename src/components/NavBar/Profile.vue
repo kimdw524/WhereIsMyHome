@@ -1,9 +1,16 @@
 <script setup>
 import { useUserStore } from '@/stores/user';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 const user = useUserStore();
+const router = useRouter();
 const popup = ref(false);
+
+const doLogout = () => {
+  user.logOut();
+  router.push('/home');
+};
 </script>
 <template>
   <div :class="$style.container" @click="popup = !popup">
@@ -16,7 +23,7 @@ const popup = ref(false);
         </div>
         <div :class="$style.menuContainer">
           <div :class="$style.menu">내 정보</div>
-          <div :class="$style.menu" @click="user.logOut()">로그아웃</div>
+          <div :class="$style.menu" @click="doLogout()">로그아웃</div>
         </div>
       </div>
     </TransitionGroup>
