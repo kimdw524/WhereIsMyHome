@@ -303,6 +303,21 @@ onMounted(() => {
         </div>
         <div v-if="detail" :class="$style.houseDetail">
           <HouseDetail v-model="detail" :key="detail" />
+          <div :class="$style.close" @click="detail = 0">
+            <svg
+              stroke="currentColor"
+              fill="currentColor"
+              stroke-width="0"
+              viewBox="0 0 16 16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M8 8.707l3.646 3.647.708-.707L8.707 8l3.647-3.646-.707-.708L8 7.293 4.354 3.646l-.707.708L7.293 8l-3.646 3.646.707.708L8 8.707z"
+              ></path>
+            </svg>
+          </div>
         </div>
         <div id="map" :class="$style.map"></div>
       </div>
@@ -355,10 +370,22 @@ onMounted(() => {
 .houseDetail {
   position: absolute;
   left: 400px;
-  overflow-y: scroll;
   z-index: 10;
 
   height: 100%;
   border-right: 1px solid var(--map-header-border-bottom);
+
+  background-color: var(--bg);
+}
+
+.close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+
+  width: 2rem;
+  height: 2rem;
+
+  cursor: pointer;
 }
 </style>

@@ -2,7 +2,7 @@
 const model = defineModel();
 </script>
 <template>
-  <div :class="$style.star" @click="model = !model">
+  <div :class="$style.star">
     <div :class="[$style.disabled, !model && $style.active]">
       <svg
         stroke="currentColor"

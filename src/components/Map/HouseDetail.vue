@@ -2,11 +2,13 @@
 import { getHomeDetail } from '@/apis/Home';
 import { onMounted, ref } from 'vue';
 import HouseLabel from './HouseLabel.vue';
+import Star from '@/components/Common/Star.vue';
 import Formatter from '@/utils/formatter';
 
 const model = defineModel();
 const data = ref(null);
 const history = ref({ deal: false, fullRent: false, rent: false });
+const interest = ref(false);
 
 onMounted(() => {
   getHomeDetail(model.value)
@@ -31,66 +33,117 @@ onMounted(() => {
 <template>
   <div :class="$style.container">
     <template v-if="data">
-      <div :class="$style.header">
-        <div :class="$style.labelContainer">
-          <HouseLabel v-if="data.house.houseType === 1" :type="0" />
-          <HouseLabel v-if="data.house.houseType === 2" :type="1" />
-          <HouseLabel v-if="history.deal" :type="2" />
-          <HouseLabel v-if="history.fullRent" :type="3" />
-          <HouseLabel v-if="history.rent" :type="4" />
+      <Transition name="fade" appear>
+        <div>
+          <div :class="$style.header">
+            <div :class="$style.labelContainer">
+              <HouseLabel v-if="data.house.houseType === 1" :type="0" />
+              <HouseLabel v-if="data.house.houseType === 2" :type="1" />
+              <HouseLabel v-if="history.deal" :type="2" />
+              <HouseLabel v-if="history.fullRent" :type="3" />
+              <HouseLabel v-if="history.rent" :type="4" />
+            </div>
+            <div :class="$style.houseName">
+              <div>
+                {{ data.house.houseName }}
+              </div>
+              <Star v-model="interest" />
+            </div>
+          </div>
+          <div :class="$style.addressContainer">
+            <div :class="$style.address">
+              <div><span>지번 주소</span></div>
+              <div>
+                {{ `${data.house.sidoName} ${data.house.gugunName} ${data.house.dongJibun}` }}
+              </div>
+            </div>
+            <div :class="$style.address">
+              <div><span>도로명 주소</span></div>
+              <div>{{ data.house.roadName }}</div>
+            </div>
+          </div>
+          <div :class="$style.detailContainer">
+            <div :class="$style.detail">
+              건축년도 <span>{{ data.house.buildYear }}년</span>
+            </div>
+            <div :class="$style.detail">
+              총 거래량 <span>{{ data.dealList.length }}건</span>
+            </div>
+          </div>
         </div>
-        <div :class="$style.houseName">
-          {{ data.house.houseName }}
-        </div>
-      </div>
-      <button @click="model = 0">
-        <svg
-          stroke="currentColor"
-          fill="currentColor"
-          stroke-width="0"
-          viewBox="0 0 24 24"
-          height="200px"
-          width="200px"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M11.9997 10.5865L16.9495 5.63672L18.3637 7.05093L13.4139 12.0007L18.3637 16.9504L16.9495 18.3646L11.9997 13.4149L7.04996 18.3646L5.63574 16.9504L10.5855 12.0007L5.63574 7.05093L7.04996 5.63672L11.9997 10.5865Z"
-          ></path>
-        </svg>
-      </button>
-    </template>
-    <template v-else>
-      <div>로딩 중...</div>
+      </Transition>
     </template>
   </div>
 </template>
 <style module>
 .container {
-  width: 20vw;
-  height: 100%;
-  padding: 0.75rem;
-  box-sizing: border-box;
+  position: relative;
+  overflow-y: scroll;
 
-  background-color: rgba(255, 255, 255, 0.9);
+  width: 400px;
+  height: 100%;
+  padding: 0 1.25rem 1.25rem 1.25rem;
+  box-sizing: border-box;
 }
 
 .header {
   position: sticky;
   top: 0;
 
-  padding: 0.5rem 0.25rem;
+  padding: 1.5rem 0;
+
+  background-color: var(--bg);
 }
 
 .labelContainer {
   display: flex;
   gap: 0.5rem;
 
-  margin-bottom: 1rem;
+  padding-bottom: 1rem;
 }
 
 .houseName {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
   font-size: 1.25rem;
   font-weight: 400;
   letter-spacing: 1px;
+}
+
+.addressContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.address {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+
+  font-size: 0.875rem;
+  font-weight: 300;
+}
+
+.address span {
+  font-weight: 500;
+}
+
+.detailContainer {
+  display: flex;
+  gap: 0.5rem;
+
+  margin: 1rem 0;
+}
+
+.detail {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.detail span {
+  font-weight: 300;
 }
 </style>
