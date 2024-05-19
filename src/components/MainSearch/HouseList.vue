@@ -1,15 +1,21 @@
 <script setup>
+import { useRouter } from 'vue-router';
 import TypeLabel from './TypeLabel.vue';
 
 const props = defineProps({ query: String, item: Object });
+const router = useRouter();
 
 const highlight = (text) => {
   return text.replaceAll(props.query, `<span>${props.query}</span>`);
 };
+
+const handleClick = () => {
+  router.push(`/map?La=${props.item.lng}&Ma=${props.item.lat}&code=${props.item.houseCode}`);
+};
 </script>
 
 <template>
-  <div :class="$style.container">
+  <div :class="$style.container" @mousedown="handleClick">
     <div :class="$style.houseName" v-html="highlight(item.houseName)"></div>
     <div :class="$style.roadName" v-html="highlight(item.roadName)"></div>
     <div :class="$style.labelWrapper">

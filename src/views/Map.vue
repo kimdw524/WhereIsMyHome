@@ -15,7 +15,7 @@ import { useRouter, useRoute } from 'vue-router';
 const router = useRouter();
 const route = useRoute();
 
-let { La, Ma, level, ap, ho, td, tf, tr, sd, ed, sde, ede, sr, er, sb, eb } = route.query;
+let { La, Ma, level, ap, ho, td, tf, tr, sd, ed, sde, ede, sr, er, sb, eb, code } = route.query;
 
 La = La || 126.922317622367;
 Ma = Ma || 36.9836404099608;
@@ -33,6 +33,7 @@ sr = isNaN(Number(sr)) ? 0 : Number(sr);
 er = isNaN(Number(er)) ? 999_999_999 : Number(er);
 sb = isNaN(Number(sb)) ? 0 : Number(sb);
 eb = isNaN(Number(eb)) ? new Date().getFullYear() : Number(eb);
+code = isNaN(Number(code)) ? 0 : Number(code);
 
 const type = ref({ apart: ap, house: ho });
 const trade = ref({ deal: td, fullRent: tf, rent: tr });
@@ -50,7 +51,7 @@ const buildYear = ref({
 });
 const data = ref([]);
 const sort = ref({ type: 1, asc: false });
-const detail = ref(0);
+const detail = ref(code);
 
 const sortList = (value) => {
   switch (value.type) {
