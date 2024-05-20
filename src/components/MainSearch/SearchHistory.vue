@@ -5,7 +5,9 @@ const clear = () => {
   searchHistory.value = [];
 };
 
-const searchHistory = ref((JSON.parse(localStorage.getItem('searchHistory')) || []).splice(-5));
+const searchHistory = ref(
+  (JSON.parse(localStorage.getItem('searchHistory')) || []).splice(-5).reverse(),
+);
 </script>
 
 <template>
@@ -16,9 +18,9 @@ const searchHistory = ref((JSON.parse(localStorage.getItem('searchHistory')) || 
         v-for="(item, index) in searchHistory"
         :key="index"
         :class="$style.item"
-        @mousedown="$router.push(`/map?La=${item.La}&Ma=${item.Ma}&code=${item.code}`)"
+        @mousedown="$router.push(`/map?La=${item.La}&Ma=${item.Ma}&code=${item.code || 0}`)"
       >
-        {{ item.houseName }}
+        {{ item.houseName || item.location }}
       </div>
       <div :class="$style.clear" @mousedown="clear">기록 삭제</div>
     </div>
@@ -42,7 +44,7 @@ const searchHistory = ref((JSON.parse(localStorage.getItem('searchHistory')) || 
 }
 
 .empty {
-  padding: 0 1.5rem 1.5rem 1.5rem;
+  padding: 1rem 1.5rem 1.5rem 1.5rem;
 
   font-size: 1rem;
   font-weight: 300;
