@@ -37,6 +37,7 @@ eb = isNaN(Number(eb)) ? new Date().getFullYear() : Number(eb);
 code = isNaN(Number(code)) ? 0 : Number(code);
 
 const showPrice = ref(false);
+const showTraffic = ref(false);
 const type = ref({ apart: ap, house: ho });
 const trade = ref({ deal: td, fullRent: tf, rent: tr });
 const price = ref({
@@ -92,6 +93,11 @@ const sortList = (value) => {
 
 watch(sort, (value) => {
   sortList(value);
+});
+
+watch(showTraffic, (value) => {
+  if (value) map.addOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC);
+  else map.removeOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC);
 });
 
 const condition = {
@@ -329,9 +335,8 @@ onMounted(() => {
           </Filter>
         </div>
         <div>
-          <Checkbox :style="{ fontSize: '0.875rem' }" v-model="showPrice"
-            >지도에 시세 표시</Checkbox
-          >
+          <Checkbox :style="{ fontSize: '0.875rem' }" v-model="showPrice"> 시세 표시 </Checkbox>
+          <Checkbox :style="{ fontSize: '0.875rem' }" v-model="showTraffic"> 교통 정보 </Checkbox>
         </div>
       </div>
       <div :class="$style.body">
