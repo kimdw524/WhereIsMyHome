@@ -89,3 +89,11 @@ export const deleteCookie = (name) => {
     'max-age': -1,
   });
 };
+
+export const simplePrice = (value) => {
+  const num = parseFloat(value);
+  if (num >= 1000) {
+    return `${parseInt(num / 1000) / 10}억`;
+  }
+  return `${parseInt(num)}만`;
+};

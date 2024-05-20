@@ -9,7 +9,7 @@ import PriceFilter from '@/components/Map/PriceFilter.vue';
 import TradeFilter from '@/components/Map/TradeFilter.vue';
 import TypeFilter from '@/components/Map/TypeFilter.vue';
 import { onMounted, ref, watch } from 'vue';
-import { joinText } from '@/utils/utils';
+import { joinText, simplePrice } from '@/utils/utils';
 import { useRouter, useRoute } from 'vue-router';
 
 const router = useRouter();
@@ -112,7 +112,8 @@ const condition = {
   endLat: Ma + 0.01,
 };
 
-let markers = [];
+let markers = [],
+  overlays = [];
 let isLoading = false,
   call = false;
 
@@ -148,19 +149,46 @@ const update = () => {
     .then((result) => {
       data.value = result.data.slice(0, 500);
 
+      overlays.forEach((overlay) => overlay.setMap(null));
+
       markers.forEach((marker) => marker.setMap(null));
       markers = data.value.map((item) => {
+        const position = new kakao.maps.LatLng(item.lat, item.lng);
         const marker = new kakao.maps.Marker({
-          position: new kakao.maps.LatLng(item.lat, item.lng),
+          position,
           clickable: true,
           image: new kakao.maps.MarkerImage(
-            `/src/assets/images/marker${item.houseType}.png`,
+            `/src/assets/images/marker.png`,
             new kakao.maps.Size(29, 42),
             {
               offset: new kakao.maps.Point(15, 42),
             },
           ),
         });
+
+        if (map.getLevel() <= 6) {
+          const overlayContent = document.createElement('div');
+          const dealType = item.averageDealAmount ? 1 : item.averageDepositByFullRent ? 2 : 3;
+          const dealAmount =
+            item.averageDealAmount || item.averageDepositByFullRent || item.averageRentCost;
+          overlayContent.className = 'overlay';
+          overlayContent.style = `--dealtype-color: var(--dealtype-${dealType})`;
+          overlayContent.innerHTML = `<div class="head">${
+            ['매매', '전세', '월세'][dealType - 1]
+          }</div><div class="body">${simplePrice(dealAmount)}</div>`;
+
+          overlayContent.addEventListener('click', () => {
+            detail.value = item.houseCode;
+          });
+
+          const overlay = new kakao.maps.CustomOverlay({
+            position,
+            content: overlayContent,
+          });
+
+          overlays.push(overlay);
+          overlay.setMap(map);
+        }
 
         kakao.maps.event.addListener(marker, 'click', () => {
           detail.value = item.houseCode;
@@ -324,6 +352,44 @@ onMounted(() => {
     </div>
   </Transition>
 </template>
+
+<style>
+.overlay {
+  --dealtype-1: #326cf9;
+  --dealtype-2: #ed362d;
+  --dealtype-3: #24ab1b;
+
+  display: flex;
+  gap: 0.125rem;
+  overflow: hidden;
+
+  border: 1px solid var(--dealtype-color);
+  border-radius: 0.25rem;
+  box-shadow: 0 0 0.625rem 0.125rem rgba(30, 30, 30, 0.1);
+
+  background-color: #fff;
+
+  font-size: 0.75rem;
+}
+
+.overlay .head {
+  padding: 0.25rem;
+
+  background-color: var(--dealtype-color);
+
+  color: #fff;
+  font-weight: 600;
+}
+
+.overlay .body {
+  padding: 0.25rem;
+
+  background-color: #fff;
+
+  color: #000;
+  font-weight: 400;
+}
+</style>
 
 <style module>
 .container {
