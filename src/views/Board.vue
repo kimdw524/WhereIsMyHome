@@ -104,54 +104,6 @@ const posts = [
     viewCount: 210,
     updatedAt: 1715908781,
   },
-  {
-    id: 9,
-    title: '양규현?4444',
-    content: '안했습니다.',
-    name: '양규현5',
-    viewCount: 210,
-    updatedAt: 1715908781,
-  },
-  {
-    id: 10,
-    title: '양규현?4444',
-    content: '안했습니다.',
-    name: '양규현5',
-    viewCount: 210,
-    updatedAt: 1715908781,
-  },
-  {
-    id: 11,
-    title: '양규현?5555',
-    content: '안했습니다.',
-    name: '양규현5',
-    viewCount: 210,
-    updatedAt: 1715908781,
-  },
-  {
-    id: 12,
-    title: '양규현?6666',
-    content: '안했습니다.',
-    name: '양규현5',
-    viewCount: 210,
-    updatedAt: 1715908781,
-  },
-  {
-    id: 13,
-    title: '양규현?777',
-    content: '안했습니다.',
-    name: '양규현5',
-    viewCount: 210,
-    updatedAt: 1715908781,
-  },
-  {
-    id: 14,
-    title: '양규현?8888',
-    content: '안했습니다.',
-    name: '양규현5',
-    viewCount: 210,
-    updatedAt: 1715908781,
-  },
 ];
 </script>
 
@@ -159,7 +111,6 @@ const posts = [
   <Transition v-if="current" name="fade2" appear>
     <div :class="$style.container">
       <div :class="$style.header">
-        <Category :menu="menu" :current="current.slug" />
         <div :class="$style.subHeader">
           <div :class="$style.title">{{ current.name }}</div>
           <form @submit.prevent="handleSearch">

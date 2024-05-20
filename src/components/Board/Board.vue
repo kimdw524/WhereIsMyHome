@@ -29,7 +29,8 @@ const props = defineProps({
 <style module>
 .container {
   padding: 0 1rem;
+  border: 1px solid rgb(232, 232, 232);
   border-radius: 0.25rem;
-  box-shadow: 0 0 0.5rem 0.0625rem rgba(0, 0, 0, 0.12);
+  box-shadow: 0 0 0.25rem 0.0625rem rgba(120, 120, 120, 0.13);
 }
 </style>
