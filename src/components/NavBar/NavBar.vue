@@ -15,7 +15,7 @@ const navLinks = [
   { name: 'Home', slug: '/home' },
   { name: '지도', slug: '/map' },
   { name: '공지사항', slug: '/board/notice' },
-  { name: 'Q&A', slug: '/board/qna' },
+  { name: '자유게시판', slug: '/board/free' },
 ];
 </script>
 

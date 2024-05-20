@@ -13,7 +13,7 @@ const router = useRouter();
 
 const menu = [
   { name: '공지사항', slug: 'notice' },
-  { name: 'Q&A', slug: 'qna' },
+  { name: '자유게시판', slug: 'free' },
 ];
 
 const current = ref(menu.find((item) => item.slug === route.params.name));
@@ -192,10 +192,6 @@ const posts = [
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  position: sticky;
-  top: 0;
-
-  background-color: var(--bg);
 }
 
 .subHeader {
@@ -204,8 +200,6 @@ const posts = [
   justify-content: space-between;
 
   padding: 1.5rem 1rem 2rem 1rem;
-
-  background: linear-gradient(180deg, rgba(255, 255, 255, 1) 80%, rgba(255, 255, 255, 0) 100%);
 
   @media (max-width: 768px) {
     align-items: center;
