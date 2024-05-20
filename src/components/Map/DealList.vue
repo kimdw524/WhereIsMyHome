@@ -30,32 +30,6 @@ watch(
   },
   { immediate: true, deep: true },
 );
-
-// const deals = computed(() => {
-//   if (data.value) {
-//     return data.value.dealList.filter((item) => toNumber(item.dealAmount) > 0);
-//   } else {
-//     return [];
-//   }
-// });
-
-// const fullRents = computed(() => {
-//   if (data.value) {
-//     return data.value.dealList.filter(
-//       (item) => toNumber(item.deposit) > 0 && toNumber(item.rentCost) === 0,
-//     );
-//   } else {
-//     return [];
-//   }
-// });
-
-// const rents = computed(() => {
-//   if (data.value) {
-//     return data.value.dealList.filter((item) => toNumber(item.rentCost) > 0);
-//   } else {
-//     return [];
-//   }
-// });
 </script>
 
 <template>
@@ -66,7 +40,15 @@ watch(
       <Checkbox v-model="filter.rent">월세</Checkbox>
     </div>
     <div :class="$style.listContainer">
-      <DealListItem v-for="deal in filteredItem" :key="deal.id" :data="deal" />
+      <Transition
+        :key="deal.id"
+        v-for="(deal, index) in filteredItem"
+        name="fade2"
+        :style="{ 'transition-duration': `${(index + 1) * 100}ms` }"
+        appear
+      >
+        <DealListItem :data="deal" />
+      </Transition>
     </div>
   </div>
 </template>
@@ -81,6 +63,7 @@ watch(
   justify-content: space-around;
   position: sticky;
   top: 0;
+  z-index: 10;
 
   padding: 1rem;
   box-shadow: 0 0.125rem 0.5rem 0 #bcbcbc54;
