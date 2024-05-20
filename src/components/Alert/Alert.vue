@@ -13,9 +13,9 @@ const { pop } = useAlertStore();
         {{ props.data.message }}
       </div>
       <div :class="$style.footer">
-        <Button :style="{ padding: '0.5rem 0.75rem', fontSize: '0.875rem' }" @click="pop"
-          >확인</Button
-        >
+        <Button :style="{ padding: '0.5rem 0.75rem', fontSize: '0.875rem' }" @click="pop">
+          확인
+        </Button>
       </div>
     </div>
   </div>
@@ -52,9 +52,10 @@ const { pop } = useAlertStore();
 .message {
   padding: 1rem;
 
-  line-height: 125%;
+  line-height: 137.5%;
+  word-break: break-all;
 
-  /* user-select: none; */
+  user-select: none;
 }
 
 .footer {
