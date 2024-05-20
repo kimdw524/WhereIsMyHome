@@ -84,7 +84,7 @@ const posts = ref([]);
 </script>
 
 <template>
-  <Transition v-if="current" name="fade2" appear>
+  <Transition :key="current.slug" name="fade2" appear>
     <div :class="$style.container">
       <div :class="$style.header">
         <div :class="$style.subHeader">
