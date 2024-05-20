@@ -427,7 +427,7 @@ onMounted(() => {
   box-sizing: border-box;
 }
 
-.header div {
+.header > div {
   display: flex;
   gap: 0.5rem;
 }
