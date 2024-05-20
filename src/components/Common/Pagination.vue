@@ -28,15 +28,19 @@ const pages = new Array(right - left + 1).fill(0).map((value, index) => index + 
 
 <template>
   <div :class="$style.container">
-    <div :class="$style.arrow"><font-awesome-icon :icon="['fas', 'angles-left']" /></div>
+    <div :class="[$style.arrow, $style.item]">
+      <font-awesome-icon :icon="['fas', 'angles-left']" />
+    </div>
     <div
       :class="[$style.item, page === props.current && $style.selected]"
       v-for="page in pages"
       :key="page"
     >
-      {{ page }}
+      <span>{{ page }}</span>
     </div>
-    <div :class="$style.arrow"><font-awesome-icon :icon="['fas', 'angles-right']" /></div>
+    <div :class="[$style.arrow, $style.item]">
+      <font-awesome-icon :icon="['fas', 'angles-right']" />
+    </div>
   </div>
 </template>
 
@@ -48,6 +52,7 @@ const pages = new Array(right - left + 1).fill(0).map((value, index) => index + 
   position: relative;
 
   margin: 0.5rem;
+  box-shadow: 0 0 0.375rem 0 rgba(80, 80, 80, 0.1);
 
   cursor: pointer;
   outline: none;
@@ -55,19 +60,37 @@ const pages = new Array(right - left + 1).fill(0).map((value, index) => index + 
 }
 
 .item {
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  padding: 0.5rem 0.75rem;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--pagination-border);
+  border-right: 0;
 
   font-size: 0.875rem;
+
+  transition: all 150ms ease;
+}
+
+.item:first-child {
+  border-top-left-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+}
+
+.item:last-child {
+  border-right: 1px solid var(--pagination-border);
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
 }
 
 .item:hover {
-  text-decoration: underline;
+  background-color: var(--pagination-bg-hover);
 }
 
 .item.selected {
-  font-weight: 800;
+  background-color: var(--pagination-bg-selected);
 }
 
 .item.selected:hover {
@@ -77,9 +100,5 @@ const pages = new Array(right - left + 1).fill(0).map((value, index) => index + 
 .arrow {
   color: var(--color-light);
   font-size: 0.75rem;
-}
-
-.arrow:hover {
-  color: var(--color);
 }
 </style>

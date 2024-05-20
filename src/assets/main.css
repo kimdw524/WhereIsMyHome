@@ -64,6 +64,8 @@ body {
   --post-separator: #e7eaee;
   --post-color-light: #777f88;
 
+  --postlist-header-bg: #f5f5f5;
+
   --board-category-selected: #288ce5;
   --board-bg: #f7fbff;
 
@@ -90,6 +92,10 @@ body {
   --typelabel-deal: #c90000;
   --typelabel-fullRent: #c90000;
   --typelabel-rent: #d77905;
+
+  --pagination-border: #bbb;
+  --pagination-bg-hover: #fff;
+  --pagination-bg-selected: #e0e6ec;
 
   --alert-border: #e2e2e2;
 
