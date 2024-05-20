@@ -6,13 +6,10 @@ const props = defineProps({ items: Array });
 
 <template>
   <div :class="$style.container">
-    <div
-      v-for="(item, index) in items"
-      :key="index"
-      :class="[$style.item, model === index && $style.active]"
-      @click="model = index"
-    >
-      {{ item }}
+    <div v-for="(item, index) in items" :key="index" :class="$style.wrapper" @click="model = index">
+      <div :class="[$style.item, model === index && $style.active]">
+        {{ item }}
+      </div>
     </div>
   </div>
 </template>
@@ -27,7 +24,15 @@ const props = defineProps({ items: Array });
   cursor: pointer;
 }
 
+.wrapper {
+  flex-grow: 1;
+
+  text-align: center;
+}
+
 .item {
+  display: inline-block;
+
   padding: 0.75rem 0.5rem;
   border-top: 0.1875rem solid transparent;
   border-bottom: 0.1875rem solid transparent;
