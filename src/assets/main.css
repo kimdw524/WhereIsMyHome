@@ -65,6 +65,7 @@ body {
   --post-color-light: #777f88;
 
   --board-category-selected: #288ce5;
+  --board-bg: #f7fbff;
 
   --card-border-color: #d7dbdf;
 
@@ -80,6 +81,9 @@ body {
   --map-list-header-border: #dfdfdf;
   --map-houselist-border: #ececec;
   --map-houselist-bg-hover: #f0f4fa;
+
+  --tab-border: #e7e7e7;
+  --tab-color-active: #3496ff;
 
   --typelabel-apart: #0c67c3;
   --typelabel-house: #007724;
