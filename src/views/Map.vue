@@ -197,7 +197,7 @@ onMounted(() => {
   clusterer = new kakao.maps.MarkerClusterer({
     map: map,
     averageCenter: true,
-    minLevel: 1,
+    minLevel: 2,
     calculator: [10, 30, 50],
     styles: [
       {

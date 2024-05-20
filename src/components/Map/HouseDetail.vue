@@ -1,14 +1,20 @@
 <script setup>
 import { getHomeDetail } from '@/apis/Home';
+import Star from '@/components/Common/Star.vue';
+import Tab from '@/components/Common/Tab.vue';
+import { useAlertStore } from '@/stores/alert';
+import { toNumber } from '@/utils/utils';
 import { computed, onMounted, ref } from 'vue';
 import HouseLabel from './HouseLabel.vue';
-import TradeHistoryOverall from './TradeHistoryOverall.vue';
-import Star from '@/components/Common/Star.vue';
-import { toNumber } from '@/utils/utils';
+import HouseOverall from './HouseOverall.vue';
+import DealList from './DealList.vue';
 
 const model = defineModel();
 const data = ref(null);
 const interest = ref(false);
+const tab = ref(0);
+
+const { alert } = useAlertStore();
 
 const deals = computed(() => {
   if (data.value) {
@@ -48,69 +54,82 @@ onMounted(() => {
 });
 </script>
 <template>
-  <div :class="$style.container">
-    <template v-if="data">
-      <Transition name="fade2" appear>
-        <div>
-          <div :class="$style.header">
-            <div :class="$style.labelContainer">
-              <HouseLabel v-if="data.house.houseType === 1" :type="0" />
-              <HouseLabel v-if="data.house.houseType === 2" :type="1" />
-              <HouseLabel v-if="deals.length" :type="2" />
-              <HouseLabel v-if="fullRents.length" :type="3" />
-              <HouseLabel v-if="rents.length" :type="4" />
-            </div>
-            <div :class="$style.houseName">
-              <div>
-                {{ data.house.houseName }}
-              </div>
-              <Star v-model="interest" />
-            </div>
+  <Transition name="fade2" appear>
+    <div :class="$style.container">
+      <template v-if="data">
+        <div :class="$style.header">
+          <div :class="$style.labelContainer">
+            <HouseLabel v-if="data.house.houseType === 1" :type="0" />
+            <HouseLabel v-if="data.house.houseType === 2" :type="1" />
+            <HouseLabel v-if="deals.length" :type="2" />
+            <HouseLabel v-if="fullRents.length" :type="3" />
+            <HouseLabel v-if="rents.length" :type="4" />
           </div>
-          <TradeHistoryOverall :deals="deals" :fullRents="fullRents" :rents="rents" />
-          <div :class="$style.addressContainer">
-            <div :class="$style.address">
-              <div><span>지번 주소</span></div>
-              <div>
-                {{ `${data.house.sidoName} ${data.house.gugunName} ${data.house.dongJibun}` }}
-              </div>
+          <div :class="$style.houseName">
+            <div>
+              {{ data.house.houseName }}
             </div>
-            <div :class="$style.address">
-              <div><span>도로명 주소</span></div>
-              <div>{{ data.house.roadName }}</div>
-            </div>
-          </div>
-          <div :class="$style.detailContainer">
-            <div :class="$style.detail">
-              건축년도 <span>{{ data.house.buildYear }}년</span>
-            </div>
-            <div :class="$style.detail">
-              총 거래량 <span>{{ data.dealList.length }}건</span>
-            </div>
+            <Star v-model="interest" />
           </div>
         </div>
-      </Transition>
-    </template>
-  </div>
+        <Tab :items="['정보', '거래 내역', '로드뷰', '????']" v-model="tab" :class="$style.tab" />
+        <div :class="$style.body">
+          <div :class="$style.innerContainer">
+            <TransitionGroup name="fade2">
+              <div :key="tab" :class="$style.animationContainer">
+                <HouseOverall
+                  v-if="tab === 0"
+                  :deals="deals"
+                  :fullRents="fullRents"
+                  :rents="rents"
+                  :data="data"
+                />
+                <DealList v-if="tab === 1" :items="data.dealList" />
+              </div>
+            </TransitionGroup>
+          </div>
+        </div>
+      </template>
+    </div>
+  </Transition>
 </template>
 <style module>
 .container {
+  display: flex;
+  flex-direction: column;
   position: relative;
   overflow-y: scroll;
 
   width: 400px;
   height: 100%;
-  padding: 0 1.25rem 1.25rem 1.25rem;
   box-sizing: border-box;
 }
 
-.header {
-  position: sticky;
-  top: 0;
+.innerContainer {
+  position: relative;
+}
 
-  padding: 1.5rem 0;
+.animationContainer {
+  position: absolute;
+  inset: 0;
+}
+
+.header {
+  flex: 0 0 auto;
+
+  padding: 1.5rem 1.25rem 0 1.25rem;
 
   background-color: var(--bg);
+}
+
+.body {
+  flex: 1 1 auto;
+
+  overflow-y: scroll;
+}
+
+.tab {
+  flex: 0 0 auto;
 }
 
 .labelContainer {
@@ -125,45 +144,10 @@ onMounted(() => {
   align-items: center;
   justify-content: space-between;
 
+  margin-bottom: 1rem;
+
   font-size: 1.25rem;
   font-weight: 400;
   letter-spacing: 1px;
-}
-
-.addressContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 0.625rem;
-
-  margin-top: 1rem;
-}
-
-.address {
-  display: flex;
-  flex-direction: column;
-  gap: 0.125rem;
-
-  font-size: 0.875rem;
-  font-weight: 300;
-}
-
-.address span {
-  font-weight: 500;
-}
-
-.detailContainer {
-  display: flex;
-  gap: 0.5rem;
-
-  margin: 1rem 0;
-}
-
-.detail {
-  font-size: 0.875rem;
-  font-weight: 500;
-}
-
-.detail span {
-  font-weight: 300;
 }
 </style>
