@@ -4,6 +4,7 @@ import { signIn } from '@/apis/User';
 import Button from '@/components/Common/Button.vue';
 import Checkbox from '@/components/Common/Checkbox.vue';
 import TextField from '@/components/Common/TextField.vue';
+import { useAlertStore } from '@/stores/alert';
 import { useUserStore } from '@/stores/user';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
@@ -13,6 +14,7 @@ const password = ref('');
 const rememberId = ref(false);
 const user = useUserStore();
 const router = useRouter();
+const { alert } = useAlertStore();
 
 const handleLogin = () => {
   signIn({ email: email.value, password: password.value })
@@ -21,7 +23,7 @@ const handleLogin = () => {
       router.push('/home');
     })
     .catch((error) => {
-      console.log(error.response.status);
+      alert('아이디 또는 비밀번호를 확인해 주세요.');
     });
 };
 
