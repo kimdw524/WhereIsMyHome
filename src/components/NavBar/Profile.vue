@@ -1,6 +1,6 @@
 <script setup>
 import { useUserStore } from '@/stores/user';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
 
 const user = useUserStore();
@@ -11,9 +11,21 @@ const doLogout = () => {
   user.logOut();
   router.push('/home');
 };
+
+const handleClick = () => {
+  popup.value = false;
+};
+
+watch(popup, (value) => {
+  if (value) {
+    window.addEventListener('mousedown', handleClick);
+  } else {
+    window.removeEventListener('mousedown', handleClick);
+  }
+});
 </script>
 <template>
-  <div :class="$style.container" @click="popup = !popup">
+  <div :class="$style.container" @mousedown.stop="popup = !popup">
     <font-awesome-icon :icon="['fas', 'user']" :class="$style.icon" />
     <TransitionGroup name="fade" tag="div">
       <div v-if="popup" :class="$style.popup">
