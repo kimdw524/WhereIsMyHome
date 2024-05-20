@@ -1,8 +1,24 @@
 <script setup>
 import { useAlertStore } from '@/stores/alert';
 import Button from '../Common/Button.vue';
+import { onMounted, onUnmounted } from 'vue';
 const props = defineProps({ data: Object });
 const { pop } = useAlertStore();
+
+const handleKeyDown = (e) => {
+  e.preventDefault();
+  if (e.keyCode === 13 || e.keyCode === 27) {
+    pop();
+  }
+};
+
+onMounted(() => {
+  window.addEventListener('keydown', handleKeyDown);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('keydown', handleKeyDown);
+});
 </script>
 
 <template>
