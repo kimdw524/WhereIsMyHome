@@ -9,8 +9,6 @@ const filter = ref({ deal: true, fullRent: true, rent: true });
 
 const filteredItem = ref([]);
 
-console.log(props.items);
-
 watch(
   filter,
   (filter) => {
