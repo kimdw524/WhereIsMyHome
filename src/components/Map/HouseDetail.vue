@@ -113,6 +113,7 @@ onMounted(() => {
 
 .innerContainer {
   position: relative;
+  min-height: 100%;
 }
 
 .animationContainer {
