@@ -14,19 +14,19 @@ console.log(props.items);
 watch(
   filter,
   (filter) => {
-    filteredItem.value = props.items.filter((item) => {
-      const dealType = toNumber(item.dealAmount) > 0 ? 0 : toNumber(item.rentCost) === 0 ? 1 : 2;
-      if (dealType === 0 && filter.deal) {
-        return true;
-      } else if (dealType === 1 && filter.fullRent) {
-        return true;
-      } else if (dealType === 2 && filter.rent) {
-        return true;
-      }
-      return false;
-    });
-
-    console.log(props.items, filteredItem.value);
+    filteredItem.value = props.items
+      .filter((item) => {
+        const dealType = toNumber(item.dealAmount) > 0 ? 0 : toNumber(item.rentCost) === 0 ? 1 : 2;
+        if (dealType === 0 && filter.deal) {
+          return true;
+        } else if (dealType === 1 && filter.fullRent) {
+          return true;
+        } else if (dealType === 2 && filter.rent) {
+          return true;
+        }
+        return false;
+      })
+      .reverse();
   },
   { immediate: true, deep: true },
 );
