@@ -8,6 +8,7 @@ import { computed, onMounted, ref } from 'vue';
 import HouseLabel from './HouseLabel.vue';
 import HouseOverall from './HouseOverall.vue';
 import DealList from './DealList.vue';
+import Roadview from './Roadview.vue';
 
 const model = defineModel();
 const data = ref(null);
@@ -72,7 +73,11 @@ onMounted(() => {
             <Star v-model="interest" />
           </div>
         </div>
-        <Tab :items="['정보', '거래 내역', '로드뷰', '????']" v-model="tab" :class="$style.tab" />
+        <Tab
+          :items="['정보', '거래 내역', '로드뷰', '매물토론실']"
+          v-model="tab"
+          :class="$style.tab"
+        />
         <div :class="$style.body">
           <div :class="$style.innerContainer">
             <TransitionGroup name="fade2">
@@ -85,6 +90,7 @@ onMounted(() => {
                   :data="data"
                 />
                 <DealList v-if="tab === 1" :items="data.dealList" />
+                <Roadview v-if="tab === 2" :lat="data.house.lat" :lng="data.house.lng" />
               </div>
             </TransitionGroup>
           </div>
