@@ -61,7 +61,7 @@ const dateFormat = (time) => {
 .title {
   color: var(--color);
   font-size: 1.125rem;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 .name {

@@ -11,7 +11,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <div>
+  <div :class="$style.container">
     <Transition
       :key="post.id"
       v-for="(post, index) in posts"
@@ -25,3 +25,11 @@ const props = defineProps({
 
   <Pagination :current="currentPage" :max="maxPage" />
 </template>
+
+<style module>
+.container {
+  padding: 0 1rem;
+  border-radius: 0.25rem;
+  box-shadow: 0 0 0.5rem 0.0625rem rgba(0, 0, 0, 0.12);
+}
+</style>
