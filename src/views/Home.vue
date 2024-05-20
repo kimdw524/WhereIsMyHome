@@ -101,7 +101,7 @@ const news = [
             :class="$style.houseAnimation"
           />
         </Card>
-        <Card>
+        <Card @click="$router.push('/board/free')">
           <CardTitle>자유게시판</CardTitle>
           <CardBody>부동산 매물에 대한 다양한<br />정보를 자유롭게 나눠보세요.</CardBody>
           <LottieAnimation
