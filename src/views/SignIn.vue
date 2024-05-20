@@ -19,10 +19,11 @@ const { alert } = useAlertStore();
 const handleLogin = () => {
   signIn({ email: email.value, password: password.value })
     .then((result) => {
-      user.signIn(result.data.body.id, result.data.body.email, result.data.body.name);
+      user.signIn(result.data.id, result.data.email, result.data.name);
       router.push('/home');
     })
     .catch((error) => {
+      console.log(error);
       alert('아이디 또는 비밀번호를 확인해 주세요.');
     });
 };
@@ -36,7 +37,7 @@ const handleKakao = () => {
 
 <template>
   <Transition name="fade" appear>
-    <div :class="$style.container">
+    <form @submit.prevent="handleLogin" :class="$style.container">
       <div :class="$style.header">이메일로 로그인</div>
       <div :class="$style.inputForm">
         <TextField label="이메일 주소" v-model="email" />
@@ -48,14 +49,14 @@ const handleKakao = () => {
           아직 계정이 없으신가요?
           <RouterLink to="signup" :class="$style.signup">회원가입</RouterLink>
         </div>
-        <Button @click="handleLogin">로그인</Button>
+        <Button type="submit">로그인</Button>
       </div>
       <div :class="$style.oauthContainer">
         <Button variant="kakao" :class="$style.oauth" @click="handleKakao">
           <img src="@/assets/images/kakao.png" />카카오로 로그인
         </Button>
       </div>
-    </div>
+    </form>
   </Transition>
 </template>
 
