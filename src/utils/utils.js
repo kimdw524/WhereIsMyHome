@@ -1,4 +1,4 @@
-const moneyFormat = (number) => {
+export const moneyFormat = (number) => {
   let num = number,
     result = '';
   if (num >= 100_000_000) {
@@ -20,7 +20,7 @@ const moneyFormat = (number) => {
   return result;
 };
 
-const dealNumberFormat = (number) => {
+export const dealNumberFormat = (number) => {
   let num = parseFloat(number),
     result = '';
 
@@ -37,7 +37,7 @@ const dealNumberFormat = (number) => {
   return result.trim();
 };
 
-const joinText = (object) => {
+export const joinText = (object) => {
   let result = '';
   for (const [key, value] of Object.entries(object)) {
     if (value) {
@@ -50,13 +50,13 @@ const joinText = (object) => {
   return result;
 };
 
-const toNumber = (string) => {
+export const toNumber = (string) => {
   return Number(String(string).replaceAll(',', ''));
 };
 
-export default {
-  moneyFormat,
-  dealNumberFormat,
-  joinText,
-  toNumber,
+export const getCookie = (name) => {
+  const matches = document.cookie.match(
+    new RegExp('(?:^|; )' + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)'),
+  );
+  return matches ? decodeURIComponent(matches[1]) : undefined;
 };
