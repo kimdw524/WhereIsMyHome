@@ -11,6 +11,7 @@ import TypeFilter from '@/components/Map/TypeFilter.vue';
 import { onMounted, ref, watch } from 'vue';
 import { joinText, simplePrice } from '@/utils/utils';
 import { useRouter, useRoute } from 'vue-router';
+import Checkbox from '@/components/Common/Checkbox.vue';
 
 const router = useRouter();
 const route = useRoute();
@@ -35,6 +36,7 @@ sb = isNaN(Number(sb)) ? 0 : Number(sb);
 eb = isNaN(Number(eb)) ? new Date().getFullYear() : Number(eb);
 code = isNaN(Number(code)) ? 0 : Number(code);
 
+const showPrice = ref(false);
 const type = ref({ apart: ap, house: ho });
 const trade = ref({ deal: td, fullRent: tf, rent: tr });
 const price = ref({
@@ -154,11 +156,12 @@ const update = () => {
       markers.forEach((marker) => marker.setMap(null));
       markers = data.value.map((item) => {
         const position = new kakao.maps.LatLng(item.lat, item.lng);
+
         const marker = new kakao.maps.Marker({
           position,
           clickable: true,
           image: new kakao.maps.MarkerImage(
-            `/src/assets/images/marker.png`,
+            `/src/assets/images/marker${item.houseType}.png`,
             new kakao.maps.Size(29, 42),
             {
               offset: new kakao.maps.Point(15, 42),
@@ -166,7 +169,7 @@ const update = () => {
           ),
         });
 
-        if (map.getLevel() <= 6) {
+        if (map.getLevel() <= 6 && showPrice.value) {
           const overlayContent = document.createElement('div');
           const dealType = item.averageDealAmount ? 1 : item.averageDepositByFullRent ? 2 : 3;
           const dealAmount =
@@ -198,7 +201,7 @@ const update = () => {
       });
 
       clusterer.clear();
-      clusterer.addMarkers(markers);
+      if (!showPrice.value) clusterer.addMarkers(markers);
 
       sortList(sort.value);
     })
@@ -280,7 +283,7 @@ onMounted(() => {
   });
 
   watch(
-    [type, trade, price, buildYear],
+    [type, trade, price, buildYear, showPrice],
     () => {
       condition.isApart = type.value.apart;
       condition.isHouse = type.value.house;
@@ -307,22 +310,29 @@ onMounted(() => {
   <Transition name="fade2" appear>
     <div :class="$style.container">
       <div :class="$style.header">
-        <Filter :text="joinText({ 아파트: type.apart, 연립다세대: type.house }) || '부동산 종류'">
-          <TypeFilter v-model="type" />
-        </Filter>
-        <Filter
-          :text="
-            joinText({ 매매: trade.deal, 전세: trade.fullRent, 월세: trade.rent }) || '거래 유형'
-          "
-        >
-          <TradeFilter v-model="trade" />
-        </Filter>
-        <Filter text="가격">
-          <PriceFilter v-model="price" />
-        </Filter>
-        <Filter text="건축년도">
-          <BuildYearFilter v-model="buildYear" />
-        </Filter>
+        <div>
+          <Filter :text="joinText({ 아파트: type.apart, 연립다세대: type.house }) || '부동산 종류'">
+            <TypeFilter v-model="type" />
+          </Filter>
+          <Filter
+            :text="
+              joinText({ 매매: trade.deal, 전세: trade.fullRent, 월세: trade.rent }) || '거래 유형'
+            "
+          >
+            <TradeFilter v-model="trade" />
+          </Filter>
+          <Filter text="가격">
+            <PriceFilter v-model="price" />
+          </Filter>
+          <Filter text="건축년도">
+            <BuildYearFilter v-model="buildYear" />
+          </Filter>
+        </div>
+        <div>
+          <Checkbox :style="{ fontSize: '0.875rem' }" v-model="showPrice"
+            >지도에 시세 표시</Checkbox
+          >
+        </div>
       </div>
       <div :class="$style.body">
         <div :class="$style.side">
@@ -402,6 +412,7 @@ onMounted(() => {
 .header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 0.5rem;
   flex: 0 0 4rem;
 
@@ -409,6 +420,11 @@ onMounted(() => {
   border-top: 1px solid var(--map-header-border-top);
   border-bottom: 1px solid var(--map-header-border-bottom);
   box-sizing: border-box;
+}
+
+.header div {
+  display: flex;
+  gap: 0.5rem;
 }
 
 .body {

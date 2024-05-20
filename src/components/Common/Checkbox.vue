@@ -26,6 +26,7 @@ const model = defineModel();
 .container {
   display: inline-flex;
   align-items: center;
+  gap: 0 !important;
 
   cursor: pointer;
 }
