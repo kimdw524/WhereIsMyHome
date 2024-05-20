@@ -4,11 +4,14 @@ const props = defineProps({
     type: String,
     default: 'primary',
   },
+  size: {
+    type: String,
+  },
 });
 </script>
 
 <template>
-  <button :class="[$style.button, $style[variant]]"><slot /></button>
+  <button :class="[$style.button, $style[variant], size === 'sm' && $style.sm]"><slot /></button>
 </template>
 
 <style module>
@@ -33,6 +36,13 @@ const props = defineProps({
   cursor: pointer;
   outline: none;
   user-select: none;
+}
+
+.button.sm {
+  padding: 0.625rem 1rem;
+
+  font-size: 0.875rem;
+  font-weight: 00;
 }
 
 .button:hover {

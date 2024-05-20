@@ -2,6 +2,7 @@
 import Pagination from '@/components/Common/Pagination.vue';
 import { dateFormat } from '@/utils/utils';
 import { useRouter } from 'vue-router';
+import Button from '../Common/Button.vue';
 
 const router = useRouter();
 
@@ -33,8 +34,13 @@ const handlePage = (page) => {
         <td>{{ post.viewCount }}</td>
       </tr>
     </table>
-    <div :class="$style.right">
-      <Pagination :current="currentPage" :max="maxPage" @change="handlePage" />
+    <div :class="$style.footer">
+      <div>
+        <Button size="sm">글쓰기</Button>
+      </div>
+      <div>
+        <Pagination :current="currentPage" :max="maxPage" @change="handlePage" />
+      </div>
     </div>
   </div>
 </template>
@@ -92,9 +98,10 @@ const handlePage = (page) => {
   padding: 0.875rem 0.5rem;
 }
 
-.right {
+.footer {
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
+  justify-content: space-between;
 
   padding: 0.5rem 1rem;
 
