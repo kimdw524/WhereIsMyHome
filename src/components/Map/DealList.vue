@@ -42,7 +42,7 @@ watch(
         :key="deal.id"
         v-for="(deal, index) in filteredItem"
         name="fade2"
-        :style="{ 'transition-duration': `${(index + 1) * 100}ms` }"
+        :style="{ 'transition-duration': `${Math.min((index + 1) * 100, 1500)}ms` }"
         appear
       >
         <DealListItem :data="deal" />
