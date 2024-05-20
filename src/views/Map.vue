@@ -9,7 +9,7 @@ import PriceFilter from '@/components/Map/PriceFilter.vue';
 import TradeFilter from '@/components/Map/TradeFilter.vue';
 import TypeFilter from '@/components/Map/TypeFilter.vue';
 import { onMounted, ref, watch } from 'vue';
-import Formatter from '@/utils/formatter';
+import { joinText } from '@/utils/utils';
 import { useRouter, useRoute } from 'vue-router';
 
 const router = useRouter();
@@ -279,17 +279,12 @@ onMounted(() => {
   <Transition name="fade2" appear>
     <div :class="$style.container">
       <div :class="$style.header">
-        <Filter
-          :text="
-            Formatter.joinText({ 아파트: type.apart, 연립다세대: type.house }) || '부동산 종류'
-          "
-        >
+        <Filter :text="joinText({ 아파트: type.apart, 연립다세대: type.house }) || '부동산 종류'">
           <TypeFilter v-model="type" />
         </Filter>
         <Filter
           :text="
-            Formatter.joinText({ 매매: trade.deal, 전세: trade.fullRent, 월세: trade.rent }) ||
-            '거래 유형'
+            joinText({ 매매: trade.deal, 전세: trade.fullRent, 월세: trade.rent }) || '거래 유형'
           "
         >
           <TradeFilter v-model="trade" />

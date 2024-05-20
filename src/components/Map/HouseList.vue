@@ -1,5 +1,5 @@
 <script setup>
-import Formatter from '@/utils/formatter';
+import { dealNumberFormat } from '@/utils/utils';
 import TypeLabel from '../MainSearch/TypeLabel.vue';
 const props = defineProps({ items: Array, map: Object });
 const emit = defineEmits(['detail']);
@@ -35,18 +35,18 @@ const handleMouseOut = () => {
     </div>
     <div :class="$style.tradeContainer">
       <div v-if="item.averageDealAmount" :class="$style.tradeAverage">
-        매매 평균가 <span>{{ Formatter.dealNumberFormat(item.averageDealAmount) }}</span>
+        매매 평균가 <span>{{ dealNumberFormat(item.averageDealAmount) }}</span>
       </div>
       <div v-if="item.averageDepositByFullRent" :class="$style.tradeAverage">
-        전세 평균가 <span>{{ Formatter.dealNumberFormat(item.averageDepositByFullRent) }}</span>
+        전세 평균가 <span>{{ dealNumberFormat(item.averageDepositByFullRent) }}</span>
       </div>
       <div v-if="item.averageDepositByMonthlyRent" :class="$style.tradeAverage">
         월세 평균가
         <span>
           {{
-            `${Formatter.dealNumberFormat(
-              item.averageDepositByMonthlyRent,
-            )} / ${Formatter.dealNumberFormat(item.averageRentCost)}`
+            `${dealNumberFormat(item.averageDepositByMonthlyRent)} / ${dealNumberFormat(
+              item.averageRentCost,
+            )}`
           }}
         </span>
       </div>

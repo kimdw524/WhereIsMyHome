@@ -1,29 +1,23 @@
 <script setup>
-import Formatter from '@/utils/formatter';
+import { dealNumberFormat, toNumber } from '@/utils/utils';
 
 const props = defineProps({ deals: Array, fullRents: Array, rents: Array });
 
 const dealRange =
   props.deals.length === 0
     ? '정보 없음'
-    : `${Formatter.dealNumberFormat(
-        props.deals.reduce(
-          (prev, cur) => Math.min(prev, Formatter.toNumber(cur.dealAmount)),
-          999_999_999,
-        ),
-      )} ~ ${Formatter.dealNumberFormat(
-        props.deals.reduce((prev, cur) => Math.max(prev, Formatter.toNumber(cur.dealAmount)), 0),
+    : `${dealNumberFormat(
+        props.deals.reduce((prev, cur) => Math.min(prev, toNumber(cur.dealAmount)), 999_999_999),
+      )} ~ ${dealNumberFormat(
+        props.deals.reduce((prev, cur) => Math.max(prev, toNumber(cur.dealAmount)), 0),
       )}`;
 const fullRentRange =
   props.fullRents.length === 0
     ? '정보 없음'
-    : `${Formatter.dealNumberFormat(
-        props.fullRents.reduce(
-          (prev, cur) => Math.min(prev, Formatter.toNumber(cur.deposit)),
-          999_999_999,
-        ),
-      )} ~ ${Formatter.dealNumberFormat(
-        props.fullRents.reduce((prev, cur) => Math.max(prev, Formatter.toNumber(cur.deposit)), 0),
+    : `${dealNumberFormat(
+        props.fullRents.reduce((prev, cur) => Math.min(prev, toNumber(cur.deposit)), 999_999_999),
+      )} ~ ${dealNumberFormat(
+        props.fullRents.reduce((prev, cur) => Math.max(prev, toNumber(cur.deposit)), 0),
       )}`;
 </script>
 <template>
@@ -31,9 +25,7 @@ const fullRentRange =
     <div :class="$style.dealOverall">
       <div>최근 매매 실거래가</div>
       <span>{{
-        deals.length === 0
-          ? '정보 없음'
-          : Formatter.dealNumberFormat(Formatter.toNumber(props.deals.at(-1).dealAmount))
+        deals.length === 0 ? '정보 없음' : dealNumberFormat(toNumber(props.deals.at(-1).dealAmount))
       }}</span>
     </div>
     <div :class="$style.rangeContainer">

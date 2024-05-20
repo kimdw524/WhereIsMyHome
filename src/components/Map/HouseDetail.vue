@@ -4,7 +4,7 @@ import { computed, onMounted, ref } from 'vue';
 import HouseLabel from './HouseLabel.vue';
 import TradeHistoryOverall from './TradeHistoryOverall.vue';
 import Star from '@/components/Common/Star.vue';
-import Formatter from '@/utils/formatter';
+import { toNumber } from '@/utils/utils';
 
 const model = defineModel();
 const data = ref(null);
@@ -12,7 +12,7 @@ const interest = ref(false);
 
 const deals = computed(() => {
   if (data.value) {
-    return data.value.dealList.filter((item) => Formatter.toNumber(item.dealAmount) > 0);
+    return data.value.dealList.filter((item) => toNumber(item.dealAmount) > 0);
   } else {
     return [];
   }
@@ -21,7 +21,7 @@ const deals = computed(() => {
 const fullRents = computed(() => {
   if (data.value) {
     return data.value.dealList.filter(
-      (item) => Formatter.toNumber(item.deposit) > 0 && Formatter.toNumber(item.rentCost) === 0,
+      (item) => toNumber(item.deposit) > 0 && toNumber(item.rentCost) === 0,
     );
   } else {
     return [];
@@ -30,7 +30,7 @@ const fullRents = computed(() => {
 
 const rents = computed(() => {
   if (data.value) {
-    return data.value.dealList.filter((item) => Formatter.toNumber(item.rentCost) > 0);
+    return data.value.dealList.filter((item) => toNumber(item.rentCost) > 0);
   } else {
     return [];
   }
