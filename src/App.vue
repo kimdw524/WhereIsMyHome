@@ -4,15 +4,24 @@ import { useRouter } from 'vue-router';
 import Alert from './components/Alert/Alert.vue';
 import Layout from './components/Layout.vue';
 import { useAlertStore } from './stores/alert';
+import { getCookie } from '@/utils/utils';
+import { useUserStore } from '@/stores/user.js';
 
 const router = useRouter();
 const navBar = ref(false);
 const footer = ref(false);
 const { alerts } = useAlertStore();
 
+const user = useUserStore();
+
 router.beforeEach((to, from, next) => {
   navBar.value = !(to.meta.navBar === false);
   footer.value = !(to.meta.footer === false);
+
+  if (getCookie('userData')) {
+    const userData = JSON.parse(getCookie('userData'));
+    user.signIn(userData.id, userData.email, userData.name);
+  }
 
   next();
 });

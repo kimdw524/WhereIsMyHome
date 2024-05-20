@@ -36,6 +36,7 @@ const doLogout = () => {
   align-items: center;
   justify-content: center;
   position: relative;
+  z-index: 40;
 
   width: 2.5rem;
   height: 2.5rem;
