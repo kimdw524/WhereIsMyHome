@@ -1,6 +1,9 @@
 <script setup>
 import Pagination from '@/components/Common/Pagination.vue';
-import PostList from './PostList.vue';
+import { dateFormat } from '@/utils/utils';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
 
 const props = defineProps({
   slug: String,
@@ -9,7 +12,9 @@ const props = defineProps({
   maxPage: Number,
 });
 
-console.log(props.posts);
+const handlePage = (page) => {
+  router.replace(`?page=${page}`);
+};
 </script>
 
 <template>
@@ -21,23 +26,15 @@ console.log(props.posts);
         <th>작성일</th>
         <th>조회수</th>
       </tr>
-      <Transition
-        :key="post.id"
-        v-for="(post, index) in posts"
-        name="fade2"
-        :style="{ 'transition-duration': `${Math.max((index + 1) * 100, 1000)}ms` }"
-        appear
-      >
-        <tr>
-          <td :class="$style.title">{{ post.title }}</td>
-          <td>{{ post.name }}</td>
-          <td>{{ post.updatedAt }}</td>
-          <td>{{ post.viewCount }}</td>
-        </tr>
-      </Transition>
+      <tr :key="`${slug}/${currentPage}/${index}`" v-for="(post, index) in posts">
+        <td :class="$style.title">{{ post.title }}</td>
+        <td>{{ post.name }}</td>
+        <td>{{ dateFormat(post.updatedAt) }}</td>
+        <td>{{ post.viewCount }}</td>
+      </tr>
     </table>
     <div :class="$style.right">
-      <Pagination :current="currentPage" :max="maxPage" />
+      <Pagination :current="currentPage" :max="maxPage" @change="handlePage" />
     </div>
   </div>
 </template>

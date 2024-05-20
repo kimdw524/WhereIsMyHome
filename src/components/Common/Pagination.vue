@@ -1,4 +1,6 @@
 <script setup>
+defineEmits(['change']);
+
 const props = defineProps({
   current: {
     type: Number,
@@ -28,17 +30,18 @@ const pages = new Array(right - left + 1).fill(0).map((value, index) => index + 
 
 <template>
   <div :class="$style.container">
-    <div :class="[$style.arrow, $style.item]">
+    <div :class="[$style.arrow, $style.item]" @click="$emit('change', 1)">
       <font-awesome-icon :icon="['fas', 'angles-left']" />
     </div>
     <div
       :class="[$style.item, page === props.current && $style.selected]"
       v-for="page in pages"
       :key="page"
+      @click="$emit('change', page)"
     >
       <span>{{ page }}</span>
     </div>
-    <div :class="[$style.arrow, $style.item]">
+    <div :class="[$style.arrow, $style.item]" @click="$emit('change', max)">
       <font-awesome-icon :icon="['fas', 'angles-right']" />
     </div>
   </div>

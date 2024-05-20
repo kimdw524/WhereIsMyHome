@@ -1,11 +1,10 @@
 <script setup>
+import { getBoardList } from '@/apis/Board';
 import Board from '@/components/Board/Board.vue';
-import Category from '@/components/Board/Category.vue';
 import Button from '@/components/Common/Button.vue';
-import Pagination from '@/components/Common/Pagination.vue';
 import Select from '@/components/Common/Select.vue';
 import TextField from '@/components/Common/TextField.vue';
-import { ref, watch } from 'vue';
+import { onMounted, onUpdated, ref, watch } from 'vue';
 import { onBeforeRouteUpdate, useRoute, useRouter } from 'vue-router';
 
 const route = useRoute();
@@ -20,6 +19,42 @@ const current = ref(menu.find((item) => item.slug === route.params.name));
 
 const searchType = ref(1);
 const query = ref('');
+const currentPage = ref(1);
+const maxPage = ref(1);
+const board = ref('');
+
+const handleSearch = () => {
+  console.log(searchType.value, query.value);
+};
+
+const updateList = (slug) => {
+  switch (slug) {
+    case 'notice':
+      getBoardList('boardNotice', currentPage.value - 1)
+        .then((result) => {
+          posts.value = result.data.pages.content;
+          currentPage.value = result.data.pages.number + 1;
+          maxPage.value = result.data.pages.totalPages;
+          board.value = current.value.slug;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      break;
+    case 'free':
+      getBoardList('board', currentPage.value - 1)
+        .then((result) => {
+          posts.value = result.data.pages.content;
+          currentPage.value = result.data.pages.number + 1;
+          maxPage.value = result.data.pages.totalPages;
+          board.value = current.value.slug;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      break;
+  }
+};
 
 watch(
   current,
@@ -31,80 +66,21 @@ watch(
   { immediate: true },
 );
 
-const handleSearch = () => {
-  console.log(searchType.value, query.value);
-};
+onMounted(() => {
+  currentPage.value = parseInt(route.query.page || 1);
+  updateList(current.value.slug);
+});
+
+onUpdated(() => {
+  currentPage.value = parseInt(route.query.page || 1);
+  updateList(current.value.slug);
+});
 
 onBeforeRouteUpdate((updateGuard) => {
   current.value = menu.find((item) => item.slug === updateGuard.params.name);
 });
 
-const posts = [
-  {
-    id: 1,
-    title: '양규현?',
-    content: '안했습니다.',
-    name: '양규현1',
-    viewCount: 100,
-    updatedAt: 1715304681,
-  },
-  {
-    id: 2,
-    title: '양규현?1111',
-    content: '안했습니다.',
-    name: '양규현2',
-    viewCount: 120,
-    updatedAt: 1715305081,
-  },
-  {
-    id: 3,
-    title: '양규현?2222',
-    content: '안했습니다.',
-    name: '양규현3',
-    viewCount: 147,
-    updatedAt: 1715308781,
-  },
-  {
-    id: 4,
-    title: '양규현?3333',
-    content: '안했습니다.',
-    name: '양규현4',
-    viewCount: 147,
-    updatedAt: 1715808781,
-  },
-  {
-    id: 5,
-    title: '양규현?4444',
-    content: '안했습니다.',
-    name: '양규현5',
-    viewCount: 210,
-    updatedAt: 1715908781,
-  },
-  {
-    id: 6,
-    title: '양규현?4444',
-    content: '안했습니다.',
-    name: '양규현5',
-    viewCount: 210,
-    updatedAt: 1715908781,
-  },
-  {
-    id: 7,
-    title: '양규현?4444',
-    content: '안했습니다.',
-    name: '양규현5',
-    viewCount: 210,
-    updatedAt: 1715908781,
-  },
-  {
-    id: 8,
-    title: '양규현?4444',
-    content: '안했습니다.',
-    name: '양규현5',
-    viewCount: 210,
-    updatedAt: 1715908781,
-  },
-];
+const posts = ref([]);
 </script>
 
 <template>
@@ -127,7 +103,13 @@ const posts = [
         </div>
       </div>
       <div :class="$style.boardContainer">
-        <Board :slug="current.slug" :currentPage="1" :maxPage="10" :posts="posts" />
+        <Board
+          :slug="current.slug"
+          :currentPage="currentPage"
+          :key="board"
+          :maxPage="maxPage"
+          :posts="posts"
+        />
       </div>
     </div>
   </Transition>
