@@ -10,6 +10,15 @@ const highlight = (text) => {
 };
 
 const handleClick = () => {
+  const searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
+  searchHistory.push({
+    type: 'house',
+    houseName: props.item.houseName,
+    La: props.item.lng,
+    Ma: props.item.lat,
+    code: props.item.houseCode,
+  });
+  localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
   router.push(`/map?La=${props.item.lng}&Ma=${props.item.lat}&code=${props.item.houseCode}`);
 };
 </script>

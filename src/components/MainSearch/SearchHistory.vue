@@ -1,9 +1,28 @@
-<script setup></script>
+<script setup>
+import { ref } from 'vue';
+const clear = () => {
+  localStorage.removeItem('searchHistory');
+  searchHistory.value = [];
+};
+
+const searchHistory = ref((JSON.parse(localStorage.getItem('searchHistory')) || []).splice(-5));
+</script>
 
 <template>
   <div :class="$style.container">
     <div :class="$style.header">최근 검색어</div>
-    <div :class="$style.empty">최근 검색어가 없습니다.</div>
+    <div v-if="searchHistory.length">
+      <div
+        v-for="(item, index) in searchHistory"
+        :key="index"
+        :class="$style.item"
+        @mousedown="$router.push(`/map?La=${item.La}&Ma=${item.Ma}&code=${item.code}`)"
+      >
+        {{ item.houseName }}
+      </div>
+      <div :class="$style.clear" @mousedown="clear">기록 삭제</div>
+    </div>
+    <div v-else :class="$style.empty">최근 검색어가 없습니다.</div>
   </div>
 </template>
 
@@ -12,19 +31,48 @@
   display: flex;
   flex-direction: column;
 
-  margin: 1rem;
   box-sizing: border-box;
 }
 
 .header {
-  margin-bottom: 1rem;
+  padding: 1.25rem 1.25rem 0.5rem 1.25rem;
 
   font-size: 1.125rem;
   font-weight: 500;
 }
 
 .empty {
+  padding: 0 1.5rem 1.5rem 1.5rem;
+
   font-size: 1rem;
   font-weight: 300;
+}
+
+.item {
+  padding: 0.75rem 1.5rem;
+
+  font-weight: 400;
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition: all 100ms ease;
+}
+
+.item:hover {
+  background-color: #eee;
+}
+
+.clear {
+  padding: 0.5rem 1.25rem 1.25rem 1.25rem;
+
+  font-size: 0.875rem;
+  font-weight: 300;
+
+  cursor: pointer;
+}
+
+.clear:hover {
+  text-decoration: underline;
 }
 </style>
