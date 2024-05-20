@@ -79,6 +79,7 @@ const navLinks = [
   justify-content: space-between;
 
   padding: 0.5rem 2.5rem;
+  box-sizing: border-box;
   /* border-bottom: 1px solid var(--navbar-border); */
 
   @media (max-width: 768px) {

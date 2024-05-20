@@ -13,10 +13,13 @@ const props = defineProps({
   height: {
     type: String,
   },
-
   type: {
     type: String,
     default: 'text',
+  },
+  red: {
+    type: Boolean,
+    default: false,
   },
 });
 
@@ -26,7 +29,7 @@ const focus = ref(false);
 </script>
 
 <template>
-  <div :class="$style.container" :style="{ width: width }">
+  <div :class="[$style.container, red && $style.red]" :style="{ width: width }">
     <span v-if="label" :class="[focus || model ? $style.floatLabel : $style.label]">{{
       label
     }}</span>
@@ -55,6 +58,14 @@ const focus = ref(false);
 <style module>
 .container {
   position: relative;
+}
+
+.container.red {
+  --textfield-border: #ff0000;
+  --textfield-color: #ff0000;
+  --textfield-border-focus: #ff0000;
+  --textfield-label-color: #ff0000;
+  --textfield-label-color-focus: #ff0000;
 }
 
 .text {
