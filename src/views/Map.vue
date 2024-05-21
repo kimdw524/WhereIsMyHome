@@ -187,7 +187,6 @@ const updateData = (result) => {
 };
 
 const update = () => {
-  if (interest.value) return;
   const { ha, oa, pa, qa } = map.getBounds();
   const { La, Ma } = map.getCenter();
   condition.startLng = ha;
@@ -208,6 +207,8 @@ const update = () => {
       buildYear.value.endBuildYear
     }`,
   );
+
+  if (interest.value) return;
 
   call = true;
   if (map.getLevel() > 7 || isLoading) return;
