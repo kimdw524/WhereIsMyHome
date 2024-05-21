@@ -2,8 +2,6 @@
 import { getBoardList } from '@/apis/Board';
 import Board from '@/components/Board/Board.vue';
 import Button from '@/components/Common/Button.vue';
-import Select from '@/components/Common/Select.vue';
-import TextField from '@/components/Common/TextField.vue';
 import { useUserStore } from '@/stores/user';
 import { onMounted, onUpdated, ref, watch } from 'vue';
 import { onBeforeRouteUpdate, useRoute, useRouter } from 'vue-router';
@@ -19,16 +17,10 @@ const menu = [
 
 const current = ref(menu.find((item) => item.slug === route.params.name));
 
-const searchType = ref(1);
-const query = ref('');
 const currentPage = ref(1);
 const maxPage = ref(1);
 const writable = ref(true);
 const board = ref('');
-
-const handleSearch = () => {
-  console.log(searchType.value, query.value);
-};
 
 const updateList = (slug) => {
   switch (slug) {
@@ -91,68 +83,79 @@ const posts = ref([]);
 </script>
 
 <template>
-  <Transition :key="current.slug" name="fade2" appear>
-    <div :class="$style.container">
-      <div :class="$style.header">
-        <div :class="$style.subHeader">
-          <div :class="$style.title">{{ current.name }}</div>
-          <form @submit.prevent="handleSearch">
-            <div :class="$style.searchContainer">
-              <Select style="width: 12rem" v-model.number="searchType">
-                <option value="1">전체</option>
-                <option value="2">제목</option>
-                <option value="3">내용</option>
-              </Select>
-              <TextField v-model="query" placeholder="검색어를 입력해 주세요." />
-              <Button type="submit" style="flex-shrink: 0">검색</Button>
-            </div>
-          </form>
+  <div :class="$style.top">
+    <div :class="$style.header">
+      <div :class="$style.title">{{ current.name }}</div>
+      <div>
+        <div
+          v-if="writable"
+          :class="$style.write"
+          @click="$router.push(`/board/write/${current.slug}`)"
+        >
+          <svg
+            stroke="currentColor"
+            fill="currentColor"
+            stroke-width="0"
+            viewBox="0 0 16 16"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+            ></path>
+            <path
+              fill-rule="evenodd"
+              d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"
+            ></path>
+          </svg>
         </div>
       </div>
-      <div :class="$style.boardContainer">
-        <Board
-          :slug="current.slug"
-          :currentPage="currentPage"
-          :key="board"
-          :maxPage="maxPage"
-          :posts="posts"
-          :writable="writable"
-        />
-      </div>
     </div>
-  </Transition>
+  </div>
+  <div :class="$style.wrapper">
+    <Transition :key="current.slug" name="fade2" appear>
+      <div :class="$style.container">
+        <div :class="$style.boardContainer">
+          <Board
+            :slug="current.slug"
+            :currentPage="currentPage"
+            :key="board"
+            :maxPage="maxPage"
+            :posts="posts"
+          />
+        </div>
+      </div>
+    </Transition>
+  </div>
 </template>
 
 <style module>
-.container {
-  max-width: 1024px;
-  margin: 0 auto;
+.top {
+  padding: 1.5rem 1rem;
+  border-bottom: 1px solid var(--map-header-border-top);
 }
 
 .header {
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.subHeader {
-  display: flex;
-  align-items: center;
   justify-content: space-between;
 
-  padding: 1.5rem 1rem 2rem 1rem;
+  max-width: 1024px;
+  margin: 0 auto;
+}
 
-  @media (max-width: 768px) {
-    align-items: center;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
+.wrapper {
+  padding: 1.5rem 0;
+  box-sizing: border-box;
 }
 
 .title {
   font-size: 1.5rem;
   font-weight: 600;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
+}
+
+.container {
+  max-width: 1024px;
+  margin: 0 auto;
 }
 
 .searchContainer {
@@ -171,5 +174,22 @@ const posts = ref([]);
 .boardContainer {
   margin-bottom: 1rem;
   padding: 0 1rem;
+}
+
+.write {
+  width: 2rem;
+  height: 2rem;
+
+  transition: all 150ms ease;
+
+  cursor: pointer;
+}
+
+.write:hover {
+  color: var(--color-primary);
+}
+
+.write:active {
+  transform: scale(0.95);
 }
 </style>

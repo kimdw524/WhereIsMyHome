@@ -55,7 +55,6 @@ const pages = new Array(right - left + 1).fill(0).map((value, index) => index + 
   position: relative;
 
   margin: 0.5rem;
-  box-shadow: 0 0 0.375rem 0 rgba(80, 80, 80, 0.1);
 
   cursor: pointer;
   outline: none;
@@ -69,23 +68,12 @@ const pages = new Array(right - left + 1).fill(0).map((value, index) => index + 
 
   width: 2rem;
   height: 2rem;
-  border: 1px solid var(--pagination-border);
-  border-right: 0;
+  border-radius: 50%;
 
   font-size: 0.875rem;
+  font-weight: 300;
 
-  transition: all 150ms ease;
-}
-
-.item:first-child {
-  border-top-left-radius: 0.25rem;
-  border-bottom-left-radius: 0.25rem;
-}
-
-.item:last-child {
-  border-right: 1px solid var(--pagination-border);
-  border-top-right-radius: 0.25rem;
-  border-bottom-right-radius: 0.25rem;
+  transition: all 200ms ease;
 }
 
 .item:hover {
@@ -93,7 +81,9 @@ const pages = new Array(right - left + 1).fill(0).map((value, index) => index + 
 }
 
 .item.selected {
-  background-color: var(--pagination-bg-selected);
+  font-weight: 700;
+
+  transform: scale(1.25);
 }
 
 .item.selected:hover {

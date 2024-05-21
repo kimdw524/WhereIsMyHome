@@ -2,7 +2,6 @@
 import Pagination from '@/components/Common/Pagination.vue';
 import { dateFormat } from '@/utils/utils';
 import { useRouter } from 'vue-router';
-import Button from '../Common/Button.vue';
 
 const router = useRouter();
 
@@ -11,7 +10,6 @@ const props = defineProps({
   posts: Array,
   currentPage: Number,
   maxPage: Number,
-  writable: Boolean,
 });
 
 const handlePage = (page) => {
@@ -23,6 +21,7 @@ const handlePage = (page) => {
   <div :class="$style.container">
     <table :class="$style.postList">
       <tr :class="$style.header">
+        <th>번호</th>
         <th>제목</th>
         <th>작성자</th>
         <th>작성일</th>
@@ -32,7 +31,9 @@ const handlePage = (page) => {
         :key="`${slug}/${currentPage}/${index}`"
         v-for="(post, index) in posts"
         @click="$router.push(`/board/${slug}/${post.id}`)"
+        :class="$style.item"
       >
+        <td>{{ post.id }}</td>
         <td :class="$style.title">{{ post.title }}</td>
         <td>{{ post.name }}</td>
         <td>{{ dateFormat(post.updatedAt) }}</td>
@@ -40,25 +41,13 @@ const handlePage = (page) => {
       </tr>
     </table>
     <div :class="$style.footer">
-      <div>
-        <Button v-if="writable" size="sm" @click="$router.push(`/board/write/${slug}`)">
-          글쓰기
-        </Button>
-      </div>
-      <div>
-        <Pagination :current="currentPage" :max="maxPage" @change="handlePage" />
-      </div>
+      <Pagination :current="currentPage" :max="maxPage" @change="handlePage" />
     </div>
   </div>
 </template>
 
 <style module>
 .container {
-  overflow: hidden;
-
-  border-radius: 0.25rem;
-  box-shadow: 0 0 0.125rem 0rem rgba(60, 60, 60, 0.5);
-
   font-weight: 400;
 }
 
@@ -67,28 +56,30 @@ const handlePage = (page) => {
   border-collapse: collapse;
 }
 
-.postList tr {
-  border-bottom: 1px solid #e7e7e7;
+.postList tr.header {
+  border-left: 0.1875rem solid transparent;
+}
+
+.postList tr.item {
+  border-left: 0.1875rem solid transparent;
 
   transition: all 100ms ease !important;
+
+  cursor: pointer;
 }
 
-.postList tr:hover {
-  background-color: rgb(247, 251, 255);
-}
-
-.postList tr.header {
-  background-color: var(--postlist-header-bg);
-
-  color: #000000;
+.postList tr.item:hover {
+  border-left: 0.1875rem solid var(--color-primary);
 }
 
 .postList th {
-  font-weight: 400;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 1px;
 }
 
 .postList td {
-  padding: 1rem 0.75rem;
+  padding: 1.125rem 0.75rem;
 
   font-weight: 400;
   text-align: center;
@@ -97,7 +88,7 @@ const handlePage = (page) => {
 .postList td.title {
   width: 60%;
 
-  font-weight: 500;
+  font-weight: 300;
   text-align: left;
 }
 
@@ -107,11 +98,8 @@ const handlePage = (page) => {
 
 .footer {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 
   padding: 0.5rem 1rem;
-
-  background-color: var(--postlist-header-bg);
 }
 </style>

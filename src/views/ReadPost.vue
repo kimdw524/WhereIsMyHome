@@ -25,6 +25,24 @@ readPost('board', route.params.id)
 </script>
 
 <template>
+  <div :class="$style.top">
+    <div :class="$style.topHeader">
+      <div :class="$style.topTitle">자유게시판</div>
+      <div :class="$style.list" @click="router.go(-1)">
+        <svg
+          stroke="currentColor"
+          fill="currentColor"
+          stroke-width="0"
+          viewBox="0 0 256 256"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M80,64a8,8,0,0,1,8-8H216a8,8,0,0,1,0,16H88A8,8,0,0,1,80,64Zm136,56H88a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Zm0,64H88a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16ZM44,52A12,12,0,1,0,56,64,12,12,0,0,0,44,52Zm0,64a12,12,0,1,0,12,12A12,12,0,0,0,44,116Zm0,64a12,12,0,1,0,12,12A12,12,0,0,0,44,180Z"
+          ></path>
+        </svg>
+      </div>
+    </div>
+  </div>
   <Transition name="fade2" v-if="body" appear>
     <div :class="$style.wrapper">
       <div :class="$style.container">
@@ -46,28 +64,35 @@ readPost('board', route.params.id)
   </Transition>
 </template>
 
-<style>
-.ql-snow {
-  border: 0 !important;
-  border-bottom: 1px solid #d1d5db !important;
-}
-</style>
-
 <style module>
+.top {
+  padding: 1.5rem 1rem;
+  border-bottom: 1px solid var(--map-header-border-top);
+}
+
+.topHeader {
+  display: flex;
+  justify-content: space-between;
+
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+.topTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
 .wrapper {
   max-width: 1024px;
   margin: 0 auto;
   padding: 1rem;
   box-sizing: border-box;
 }
+
 .container {
   position: relative;
-  overflow: hidden;
-
-  box-shadow: 0 0 0.125rem 0rem rgba(60, 60, 60, 0.35);
-  box-sizing: border-box;
-
-  font-weight: 400;
 }
 
 .header {
@@ -77,9 +102,6 @@ readPost('board', route.params.id)
 
   padding: 1rem;
   border-bottom: 1px solid #e7e7e7;
-  box-shadow: 0 0.125rem 0.5rem 0 rgba(218, 218, 210, 0.3);
-
-  background-color: rgb(248, 248, 248);
 }
 
 .title {
@@ -116,5 +138,22 @@ readPost('board', route.params.id)
   border-top: 1px solid #e7e7e7;
 
   background-color: rgb(248, 248, 248);
+}
+
+.list {
+  width: 2rem;
+  height: 2rem;
+
+  transition: all 150ms ease;
+
+  cursor: pointer;
+}
+
+.list:hover {
+  color: var(--color-primary);
+}
+
+.list:active {
+  transform: scale(0.95);
 }
 </style>

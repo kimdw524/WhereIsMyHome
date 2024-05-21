@@ -70,7 +70,6 @@ body {
   --postlist-header-bg: #f5f5f5;
 
   --board-category-selected: #288ce5;
-  --board-bg: #f7fbff;
 
   --card-border-color: #d7dbdf;
 
@@ -96,9 +95,7 @@ body {
   --typelabel-fullRent: #c90000;
   --typelabel-rent: #d77905;
 
-  --pagination-border: #bbb;
-  --pagination-bg-hover: #fff;
-  --pagination-bg-selected: #e0e6ec;
+  --pagination-bg-hover: #d1d6e1;
 
   --alert-border: #e2e2e2;
 
