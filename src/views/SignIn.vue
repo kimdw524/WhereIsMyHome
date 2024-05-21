@@ -30,7 +30,7 @@ const handleLogin = () => {
 
 const handleKakao = () => {
   window.open(
-    'https://accounts.kakao.com/login/?continue=https%3A%2F%2Fkauth.kakao.com%2Foauth%2Fauthorize%3Fresponse_type%3Dcode%26redirect_uri%3Dhttps%253A%252F%252Fwww.tmon.co.kr%252Fuser%252Fsocialcallback%26state%3D7b22736e735470223a226b616b616f222c227265646972656374557269223a2268747470733a5c2f5c2f7777772e746d6f6e2e636f2e6b725c2f757365725c2f736f6369616c63616c6c6261636b222c227265717565737450617468223a225c2f222c2272657475726e55726c223a22222c22636f6d706c65746555726c223a225c2f222c226f70656e54797065223a22706f707570222c22736e734f726967696e223a2268747470733a5c2f5c2f7777772e746d6f6e2e636f2e6b72227d%26through_account%3Dtrue%26client_id%3Dce7333e7f39d0197109bc1f09398108a#login',
+    'https://kauth.kakao.com/oauth/authorize?client_id=d476f3898d6a5422a15bdea57516a63e&redirect_uri=http://localhost:5173/oauth&response_type=code',
   );
 };
 </script>
@@ -52,7 +52,7 @@ const handleKakao = () => {
         <Button type="submit">로그인</Button>
       </div>
       <div :class="$style.oauthContainer">
-        <Button variant="kakao" :class="$style.oauth" @click="handleKakao">
+        <Button variant="kakao" :class="$style.oauth" @click.prevent="handleKakao">
           <img src="@/assets/images/kakao.png" />카카오로 로그인
         </Button>
       </div>
