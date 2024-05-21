@@ -1,7 +1,64 @@
 <script setup>
+import { toNumber } from '@/utils/utils';
 import TradeHistoryOverall from './TradeHistoryOverall.vue';
+import ApexCharts from 'vue3-apexcharts';
 
-defineProps({ deals: Array, fullRents: Array, rents: Array, data: Object });
+const props = defineProps({ deals: Array, fullRents: Array, rents: Array, data: Object });
+
+const chartOptions = {
+  chart: {
+    toolbar: {
+      show: false,
+    },
+    selection: {
+      enabled: false,
+    },
+    zoom: {
+      enabled: false,
+    },
+    animations: {
+      enabled: false,
+    },
+    fontFamily: 'Pretendard',
+  },
+  dataLabels: {
+    enabled: false,
+  },
+  stroke: {
+    curve: 'straight',
+    width: 1,
+  },
+  xaxis: {
+    type: 'datetime',
+  },
+  tooltip: {
+    fixed: {
+      enabled: false,
+      position: 'topRight',
+    },
+  },
+  legend: {
+    fontSize: '14px',
+  },
+};
+const series = [
+  {
+    name: '매매',
+    data: props.deals.map((item) => [
+      new Date(`${item.dealMonth} ${item.dealDay} ${item.dealYear} GMT`).getTime(),
+      toNumber(item.dealAmount),
+    ]),
+    color: '#00f',
+  },
+  {
+    name: '전세',
+    data: props.fullRents.map((item) => [
+      new Date(`${item.dealMonth} ${item.dealDay} ${item.dealYear} GMT`).getTime(),
+      toNumber(item.deposit),
+    ]),
+    color: '#f00',
+  },
+];
 </script>
 
 <template>
@@ -27,6 +84,13 @@ defineProps({ deals: Array, fullRents: Array, rents: Array, data: Object });
         총 거래량 <span>{{ data.dealList.length }}건</span>
       </div>
     </div>
+    <ApexCharts
+      width="100%"
+      height="350"
+      type="scatter"
+      :options="chartOptions"
+      :series="series"
+    ></ApexCharts>
   </div>
 </template>
 
