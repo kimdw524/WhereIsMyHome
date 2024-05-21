@@ -11,7 +11,7 @@ const router = useRouter();
 
 const body = ref(null);
 
-readPost('board', route.params.id)
+readPost(route.params.name === 'notice' ? 'boardNotice' : 'board', route.params.id)
   .then((result) => {
     body.value = result.data.body;
   })
@@ -52,7 +52,7 @@ readPost('board', route.params.id)
           </div>
         </div>
         <div :class="$style.content" v-html="body.content"></div>
-        <div :class="$style.footer">
+        <div :class="$style.footer" v-if="$route.params.name !== 'notice'">
           <Comment :name="route.params.name" :id="route.params.id" />
         </div>
       </div>

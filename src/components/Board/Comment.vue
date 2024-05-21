@@ -6,7 +6,7 @@ import { writeComment, getComments, deleteComment } from '@/apis/Board';
 import DebateItem from '../Map/DebateItem.vue';
 import { useAlertStore } from '@/stores/alert';
 
-const props = defineProps({ name: String, id: Number });
+const props = defineProps({ name: String, id: String });
 const text = ref('');
 const comments = ref([]);
 const { alert } = useAlertStore();
