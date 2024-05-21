@@ -19,7 +19,7 @@ const { alert } = useAlertStore();
 const handleLogin = () => {
   signIn({ email: email.value, password: password.value })
     .then((result) => {
-      user.signIn(result.data.id, result.data.email, result.data.name);
+      user.signIn(result.data.id, result.data.email, result.data.name, result.data.admin);
       router.push('/home');
     })
     .catch((error) => {

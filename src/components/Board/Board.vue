@@ -11,6 +11,7 @@ const props = defineProps({
   posts: Array,
   currentPage: Number,
   maxPage: Number,
+  writable: Boolean,
 });
 
 const handlePage = (page) => {
@@ -36,7 +37,7 @@ const handlePage = (page) => {
     </table>
     <div :class="$style.footer">
       <div>
-        <Button size="sm" @click="$router.push(`/write/${slug}`)">글쓰기</Button>
+        <Button v-if="writable" size="sm" @click="$router.push(`/write/${slug}`)">글쓰기</Button>
       </div>
       <div>
         <Pagination :current="currentPage" :max="maxPage" @change="handlePage" />

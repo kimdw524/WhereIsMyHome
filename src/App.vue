@@ -20,7 +20,7 @@ router.beforeEach((to, from, next) => {
 
   if (getCookie('userData')) {
     const userData = JSON.parse(getCookie('userData'));
-    user.signIn(userData.id, userData.email, userData.name);
+    user.signIn(userData.id, userData.email, userData.name, userData.admin);
   }
 
   next();

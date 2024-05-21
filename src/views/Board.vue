@@ -4,11 +4,13 @@ import Board from '@/components/Board/Board.vue';
 import Button from '@/components/Common/Button.vue';
 import Select from '@/components/Common/Select.vue';
 import TextField from '@/components/Common/TextField.vue';
+import { useUserStore } from '@/stores/user';
 import { onMounted, onUpdated, ref, watch } from 'vue';
 import { onBeforeRouteUpdate, useRoute, useRouter } from 'vue-router';
 
 const route = useRoute();
 const router = useRouter();
+const user = useUserStore();
 
 const menu = [
   { name: '공지사항', slug: 'notice' },
@@ -21,6 +23,7 @@ const searchType = ref(1);
 const query = ref('');
 const currentPage = ref(1);
 const maxPage = ref(1);
+const writable = ref(true);
 const board = ref('');
 
 const handleSearch = () => {
@@ -30,6 +33,9 @@ const handleSearch = () => {
 const updateList = (slug) => {
   switch (slug) {
     case 'notice':
+      if (!user.userData.admin) {
+        writable.value = false;
+      }
       getBoardList('boardNotice', currentPage.value - 1)
         .then((result) => {
           posts.value = result.data.pages.content;
@@ -109,6 +115,7 @@ const posts = ref([]);
           :key="board"
           :maxPage="maxPage"
           :posts="posts"
+          :writable="writable"
         />
       </div>
     </div>
