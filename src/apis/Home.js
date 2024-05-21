@@ -21,3 +21,15 @@ export const getHomeDetail = (houseCode) => {
     endRentCost: 999999999,
   });
 };
+
+export const getDebate = (houseCode) => {
+  return AxiosInstance.get(`/home/${houseCode}/tok`);
+};
+
+export const writeDebate = (houseCode, content) => {
+  return AxiosInstance.post(`/home/${houseCode}/tok`, { content });
+};
+
+export const deleteDebate = (houseCode, id) => {
+  return AxiosInstance.delete(`/home/${houseCode}/tok/${id}`);
+};

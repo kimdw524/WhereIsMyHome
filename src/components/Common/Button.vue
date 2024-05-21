@@ -32,6 +32,7 @@ const props = defineProps({
   font-size: 1rem;
   text-decoration: none;
   letter-spacing: 1px;
+  word-break: keep-all;
 
   cursor: pointer;
   outline: none;

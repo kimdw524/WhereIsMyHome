@@ -9,6 +9,7 @@ import HouseLabel from './HouseLabel.vue';
 import HouseOverall from './HouseOverall.vue';
 import DealList from './DealList.vue';
 import Roadview from './Roadview.vue';
+import Debate from './Debate.vue';
 
 const model = defineModel();
 const data = ref(null);
@@ -91,6 +92,7 @@ onMounted(() => {
                 />
                 <DealList v-if="tab === 1" :items="data.dealList" />
                 <Roadview v-if="tab === 2" :lat="data.house.lat" :lng="data.house.lng" />
+                <Debate v-if="tab === 3" :houseCode="data.house.houseCode" />
               </div>
             </TransitionGroup>
           </div>
