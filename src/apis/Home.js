@@ -41,3 +41,7 @@ export const setStar = (houseCode) => {
 export const removeStar = (houseCode) => {
   return AxiosInstance.delete(`/home/favorite`, { data: { houseCode } });
 };
+
+export const getInterest = () => {
+  return AxiosInstance.get('/home/favorite');
+};

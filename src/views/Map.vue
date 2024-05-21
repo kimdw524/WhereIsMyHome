@@ -1,19 +1,19 @@
 <script setup>
-import { getMatchHome } from '@/apis/Home';
+import { getInterest, getMatchHome } from '@/apis/Home';
+import Checkbox from '@/components/Common/Checkbox.vue';
 import Filter from '@/components/Common/Filter.vue';
-import HouseList from '@/components/Map/HouseList.vue';
-import HouseDetail from '@/components/Map/HouseDetail.vue';
-import ListHeader from '@/components/Map/ListHeader.vue';
+import Toggle from '@/components/Common/Toggle.vue';
 import BuildYearFilter from '@/components/Map/BuildYearFilter.vue';
+import HouseDetail from '@/components/Map/HouseDetail.vue';
+import HouseList from '@/components/Map/HouseList.vue';
+import ListHeader from '@/components/Map/ListHeader.vue';
 import PriceFilter from '@/components/Map/PriceFilter.vue';
 import TradeFilter from '@/components/Map/TradeFilter.vue';
 import TypeFilter from '@/components/Map/TypeFilter.vue';
-import { onMounted, ref, watch } from 'vue';
 import { joinText, simplePrice } from '@/utils/utils';
-import { useRouter, useRoute } from 'vue-router';
-import Checkbox from '@/components/Common/Checkbox.vue';
+import { onMounted, ref, watch } from 'vue';
+import { useRoute } from 'vue-router';
 
-const router = useRouter();
 const route = useRoute();
 
 let { La, Ma, level, ap, ho, td, tf, tr, sd, ed, sde, ede, sr, er, sb, eb, code } = route.query;
@@ -55,6 +55,7 @@ const buildYear = ref({
 const data = ref([]);
 const sort = ref({ type: 1, asc: false });
 const detail = ref(code);
+const interest = ref(false);
 
 const sortList = (value) => {
   switch (value.type) {
@@ -127,7 +128,66 @@ let isLoading = false,
 
 let map, clusterer;
 
+const updateData = (result) => {
+  data.value = result.data.slice(0, 500);
+
+  overlays.forEach((overlay) => overlay.setMap(null));
+
+  markers.forEach((marker) => marker.setMap(null));
+  markers = data.value.map((item) => {
+    const position = new kakao.maps.LatLng(item.lat, item.lng);
+
+    const marker = new kakao.maps.Marker({
+      position,
+      clickable: true,
+      image: new kakao.maps.MarkerImage(
+        `/src/assets/images/marker${item.houseType}.png`,
+        new kakao.maps.Size(29, 42),
+        {
+          offset: new kakao.maps.Point(15, 42),
+        },
+      ),
+    });
+
+    if (map.getLevel() <= 6 && showPrice.value) {
+      const overlayContent = document.createElement('div');
+      const dealType = item.averageDealAmount ? 1 : item.averageDepositByFullRent ? 2 : 3;
+      const dealAmount =
+        item.averageDealAmount || item.averageDepositByFullRent || item.averageRentCost;
+      overlayContent.className = 'overlay';
+      overlayContent.style = `--dealtype-color: var(--dealtype-${dealType})`;
+      overlayContent.innerHTML = `<div class="head">${
+        ['매매', '전세', '월세'][dealType - 1]
+      }</div><div class="body">${simplePrice(dealAmount)}</div>`;
+
+      overlayContent.addEventListener('click', () => {
+        detail.value = item.houseCode;
+      });
+
+      const overlay = new kakao.maps.CustomOverlay({
+        position,
+        content: overlayContent,
+      });
+
+      overlays.push(overlay);
+      overlay.setMap(map);
+    }
+
+    kakao.maps.event.addListener(marker, 'click', () => {
+      detail.value = item.houseCode;
+    });
+
+    return marker;
+  });
+
+  clusterer.clear();
+  if (!showPrice.value) clusterer.addMarkers(markers);
+
+  sortList(sort.value);
+};
+
 const update = () => {
+  if (interest.value) return;
   const { ha, oa, pa, qa } = map.getBounds();
   const { La, Ma } = map.getCenter();
   condition.startLng = ha;
@@ -155,61 +215,7 @@ const update = () => {
   call = false;
   getMatchHome(condition)
     .then((result) => {
-      data.value = result.data.slice(0, 500);
-
-      overlays.forEach((overlay) => overlay.setMap(null));
-
-      markers.forEach((marker) => marker.setMap(null));
-      markers = data.value.map((item) => {
-        const position = new kakao.maps.LatLng(item.lat, item.lng);
-
-        const marker = new kakao.maps.Marker({
-          position,
-          clickable: true,
-          image: new kakao.maps.MarkerImage(
-            `/src/assets/images/marker${item.houseType}.png`,
-            new kakao.maps.Size(29, 42),
-            {
-              offset: new kakao.maps.Point(15, 42),
-            },
-          ),
-        });
-
-        if (map.getLevel() <= 6 && showPrice.value) {
-          const overlayContent = document.createElement('div');
-          const dealType = item.averageDealAmount ? 1 : item.averageDepositByFullRent ? 2 : 3;
-          const dealAmount =
-            item.averageDealAmount || item.averageDepositByFullRent || item.averageRentCost;
-          overlayContent.className = 'overlay';
-          overlayContent.style = `--dealtype-color: var(--dealtype-${dealType})`;
-          overlayContent.innerHTML = `<div class="head">${
-            ['매매', '전세', '월세'][dealType - 1]
-          }</div><div class="body">${simplePrice(dealAmount)}</div>`;
-
-          overlayContent.addEventListener('click', () => {
-            detail.value = item.houseCode;
-          });
-
-          const overlay = new kakao.maps.CustomOverlay({
-            position,
-            content: overlayContent,
-          });
-
-          overlays.push(overlay);
-          overlay.setMap(map);
-        }
-
-        kakao.maps.event.addListener(marker, 'click', () => {
-          detail.value = item.houseCode;
-        });
-
-        return marker;
-      });
-
-      clusterer.clear();
-      if (!showPrice.value) clusterer.addMarkers(markers);
-
-      sortList(sort.value);
+      updateData(result);
     })
     .catch((err) => {
       console.log(err);
@@ -226,6 +232,20 @@ const handleDetail = (house) => {
   detail.value = house.houseCode;
   map.panTo(new kakao.maps.LatLng(house.lat, house.lng));
 };
+
+watch(interest, (value) => {
+  if (value) {
+    getInterest()
+      .then((result) => {
+        updateData(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  } else {
+    update();
+  }
+});
 
 onMounted(() => {
   const container = document.getElementById('map');
@@ -338,6 +358,7 @@ onMounted(() => {
           <Filter text="건축년도">
             <BuildYearFilter v-model="buildYear" />
           </Filter>
+          <Toggle v-model="interest">관심 매물 보기</Toggle>
         </div>
         <div>
           <Checkbox :style="{ fontSize: '0.875rem' }" v-model="showPrice"> 시세 표시 </Checkbox>
