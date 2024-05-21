@@ -48,6 +48,7 @@ const updateList = (slug) => {
         });
       break;
     case 'free':
+      writable.value = user.isLoggedIn;
       getBoardList('board', currentPage.value - 1)
         .then((result) => {
           posts.value = result.data.pages.content;
