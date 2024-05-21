@@ -40,9 +40,10 @@ const props = defineProps({
 
 .button.sm {
   padding: 0.625rem 1rem;
+  border-radius: 0.1875rem;
 
   font-size: 0.875rem;
-  font-weight: 00;
+  font-weight: 400;
 }
 
 .button:hover {
@@ -59,5 +60,11 @@ const props = defineProps({
   --bg: var(--button-kakao-bg);
   --bg-hover: var(--button-kakao-bg-hover);
   --color: var(--button-kakao-color);
+}
+
+.secondary {
+  --bg: var(--button-secondary-bg);
+  --bg-hover: var(--button-secondary-bg-hover);
+  --color: var(--button-secondary-color);
 }
 </style>

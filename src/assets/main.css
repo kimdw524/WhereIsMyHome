@@ -44,6 +44,9 @@ body {
   --button-kakao-bg: #ffe91c;
   --button-kakao-bg-hover: #f3dd13;
   --button-kakao-color: #000;
+  --button-secondary-bg: #1c5ffd;
+  --button-secondary-bg-hover: #0f50e9;
+  --button-secondary-color: #fff;
 
   --checkbox-border: #a7a7a7;
   --checkbox-bg: #fff;

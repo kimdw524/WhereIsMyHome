@@ -36,7 +36,7 @@ const handlePage = (page) => {
     </table>
     <div :class="$style.footer">
       <div>
-        <Button size="sm">글쓰기</Button>
+        <Button size="sm" @click="$router.push(`/write/${slug}`)">글쓰기</Button>
       </div>
       <div>
         <Pagination :current="currentPage" :max="maxPage" @change="handlePage" />
