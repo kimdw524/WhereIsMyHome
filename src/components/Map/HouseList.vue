@@ -25,7 +25,7 @@ const handleMouseOut = () => {
     v-for="item in items"
     :key="item.houseCode"
     :class="$style.container"
-    @click="() => emit('detail', item.houseCode)"
+    @click="() => emit('detail', item)"
     @mouseover="() => handleMouseOver(item)"
     @mouseout="handleMouseOut"
   >

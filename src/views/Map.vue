@@ -222,6 +222,11 @@ const update = () => {
     });
 };
 
+const handleDetail = (house) => {
+  detail.value = house.houseCode;
+  map.panTo(new kakao.maps.LatLng(house.lat, house.lng));
+};
+
 onMounted(() => {
   const container = document.getElementById('map');
   const options = {
@@ -342,7 +347,7 @@ onMounted(() => {
       <div :class="$style.body">
         <div :class="$style.side">
           <ListHeader :count="data.length" v-model="sort" />
-          <HouseList :items="data" :map="map" @detail="(houseCode) => (detail = houseCode)" />
+          <HouseList :items="data" :map="map" @detail="handleDetail" />
         </div>
         <div v-if="detail" :class="$style.houseDetail">
           <HouseDetail v-model="detail" :key="detail" />
