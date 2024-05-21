@@ -33,3 +33,11 @@ export const writeDebate = (houseCode, content) => {
 export const deleteDebate = (houseCode, id) => {
   return AxiosInstance.delete(`/home/${houseCode}/tok/${id}`);
 };
+
+export const setStar = (houseCode) => {
+  return AxiosInstance.put(`/home/favorite`, { houseCode });
+};
+
+export const removeStar = (houseCode) => {
+  return AxiosInstance.delete(`/home/favorite`, { data: { houseCode } });
+};

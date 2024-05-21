@@ -1,5 +1,5 @@
 <script setup>
-import { getHomeDetail } from '@/apis/Home';
+import { getHomeDetail, setStar, removeStar } from '@/apis/Home';
 import Star from '@/components/Common/Star.vue';
 import Tab from '@/components/Common/Tab.vue';
 import { useAlertStore } from '@/stores/alert';
@@ -44,10 +44,33 @@ const rents = computed(() => {
   }
 });
 
+const handleStar = () => {
+  if (interest.value === true) {
+    removeStar(model.value)
+      .then((result) => {
+        console.log(result.data);
+        interest.value = false;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  } else {
+    setStar(model.value)
+      .then((result) => {
+        interest.value = true;
+        console.log(result.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+};
+
 onMounted(() => {
   getHomeDetail(model.value)
     .then((result) => {
       data.value = result.data;
+      interest.value = result.data.favorite;
     })
     .catch((error) => {
       console.error(error);
@@ -71,7 +94,7 @@ onMounted(() => {
             <div>
               {{ data.house.houseName }}
             </div>
-            <Star v-model="interest" />
+            <Star v-model="interest" @click="handleStar" />
           </div>
         </div>
         <Tab
