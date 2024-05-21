@@ -10,6 +10,7 @@ import ListHeader from '@/components/Map/ListHeader.vue';
 import PriceFilter from '@/components/Map/PriceFilter.vue';
 import TradeFilter from '@/components/Map/TradeFilter.vue';
 import TypeFilter from '@/components/Map/TypeFilter.vue';
+import Share from '@/components/Map/Share.vue';
 import { joinText, simplePrice } from '@/utils/utils';
 import { onMounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
@@ -361,9 +362,19 @@ onMounted(() => {
           </Filter>
           <Toggle v-model="interest">관심 매물 보기</Toggle>
         </div>
-        <div>
+        <div :class="$style.rightMenuContainer">
           <Checkbox :style="{ fontSize: '0.875rem' }" v-model="showPrice"> 시세 표시 </Checkbox>
           <Checkbox :style="{ fontSize: '0.875rem' }" v-model="showTraffic"> 교통 정보 </Checkbox>
+          <Share
+            :option="{
+              objectType: 'text',
+              text: '부동산 지도를 공유할게요.',
+              link: {
+                mobileWebUrl: `location.href`,
+                webUrl: `location.href`,
+              },
+            }"
+          />
         </div>
       </div>
       <div :class="$style.body">
@@ -502,5 +513,10 @@ onMounted(() => {
   height: 2rem;
 
   cursor: pointer;
+}
+
+.rightMenuContainer {
+  display: flex;
+  gap: 1rem !important;
 }
 </style>
