@@ -98,6 +98,17 @@ export const simplePrice = (value) => {
   return `${parseInt(num)}만`;
 };
 
+export const fullDateFormat = (time) => {
+  return new Date(time * 1000).toLocaleString('ko', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hourCycle: 'h24',
+  });
+};
+
 export const dateFormat = (time) => {
   const date = new Date(time * 1000).toLocaleString('ko', {
     year: 'numeric',
@@ -111,9 +122,6 @@ export const dateFormat = (time) => {
   });
   if (date === now)
     return new Date(time * 1000).toLocaleString('ko', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
       hour: '2-digit',
       minute: '2-digit',
       hourCycle: 'h24',
