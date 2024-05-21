@@ -1,5 +1,5 @@
 <script setup>
-import { toNumber } from '@/utils/utils';
+import { simplePrice, toNumber } from '@/utils/utils';
 import TradeHistoryOverall from './TradeHistoryOverall.vue';
 import ApexCharts from 'vue3-apexcharts';
 
@@ -40,6 +40,11 @@ const chartOptions = {
   legend: {
     fontSize: '14px',
   },
+  yaxis: {
+    labels: {
+      formatter: (value) => simplePrice(value),
+    },
+  },
 };
 const series = [
   {
@@ -48,7 +53,7 @@ const series = [
       new Date(`${item.dealMonth} ${item.dealDay} ${item.dealYear} GMT`).getTime(),
       toNumber(item.dealAmount),
     ]),
-    color: '#00f',
+    color: '#165cff',
   },
   {
     name: '전세',
@@ -56,7 +61,15 @@ const series = [
       new Date(`${item.dealMonth} ${item.dealDay} ${item.dealYear} GMT`).getTime(),
       toNumber(item.deposit),
     ]),
-    color: '#f00',
+    color: '#f44',
+  },
+  {
+    name: '월세',
+    data: props.rents.map((item) => [
+      new Date(`${item.dealMonth} ${item.dealDay} ${item.dealYear} GMT`).getTime(),
+      toNumber(item.rentCost),
+    ]),
+    color: '#28e73f',
   },
 ];
 </script>
@@ -103,17 +116,17 @@ const series = [
 .addressContainer {
   display: flex;
   flex-direction: column;
-  gap: 0.625rem;
+  gap: 0.875rem;
 
-  margin-top: 1rem;
+  margin-top: 1.25rem;
 }
 
 .address {
   display: flex;
   flex-direction: column;
-  gap: 0.125rem;
+  gap: 0.25rem;
 
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: 300;
 }
 
