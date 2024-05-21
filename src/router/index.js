@@ -6,6 +6,7 @@ import SignIn from '@/views/SignIn.vue';
 import SignUp from '@/views/SignUp.vue';
 import WritePost from '@/views/WritePost.vue';
 import { createRouter, createWebHistory } from 'vue-router';
+import ReadPost from '@/views/ReadPost.vue';
 
 const routes = [
   {
@@ -32,8 +33,12 @@ const routes = [
     component: SignUp,
   },
   {
-    path: '/write/:name',
+    path: '/board/write/:name',
     component: WritePost,
+  },
+  {
+    path: '/board/:name/:id',
+    component: ReadPost,
   },
   {
     path: '/map',
