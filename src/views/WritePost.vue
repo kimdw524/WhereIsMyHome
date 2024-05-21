@@ -40,15 +40,17 @@ const handleSubmit = () => {
 
 <template>
   <Transition name="fade2" appear>
-    <div :class="$style.container">
-      <div :class="$style.header">
-        <TextField v-model="title" placeholder="제목"></TextField>
-        <div :class="$style.write">
-          <Button variant="secondary" size="sm" @click="handleSubmit">글쓰기</Button>
+    <div :class="$style.wrapper">
+      <div :class="$style.container">
+        <div :class="$style.header">
+          <TextField v-model="title" placeholder="제목"></TextField>
+          <div :class="$style.write">
+            <Button variant="secondary" size="sm" @click="handleSubmit">글쓰기</Button>
+          </div>
         </div>
-      </div>
-      <div>
-        <QuillEditor ref="editor" :class="$style.editor" theme="snow" />
+        <div>
+          <QuillEditor ref="editor" :class="$style.editor" theme="snow" />
+        </div>
       </div>
     </div>
   </Transition>
@@ -62,12 +64,14 @@ const handleSubmit = () => {
 </style>
 
 <style module>
+.wrapper {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 1rem;
+}
 .container {
   overflow: hidden;
 
-  max-width: 1024px;
-  margin: 0 auto;
-  margin-top: 2rem;
   border-radius: 0.25rem;
   box-shadow: 0 0 0.125rem 0rem rgba(60, 60, 60, 0.5);
   box-sizing: border-box;

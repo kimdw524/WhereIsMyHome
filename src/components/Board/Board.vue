@@ -28,7 +28,11 @@ const handlePage = (page) => {
         <th>작성일</th>
         <th>조회수</th>
       </tr>
-      <tr :key="`${slug}/${currentPage}/${index}`" v-for="(post, index) in posts">
+      <tr
+        :key="`${slug}/${currentPage}/${index}`"
+        v-for="(post, index) in posts"
+        @click="$router.push(`/board/${slug}/${post.id}`)"
+      >
         <td :class="$style.title">{{ post.title }}</td>
         <td>{{ post.name }}</td>
         <td>{{ dateFormat(post.updatedAt) }}</td>

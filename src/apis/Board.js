@@ -7,3 +7,7 @@ export const getBoardList = (board, page) => {
 export const writePost = (board, body) => {
   return AxiosInstance.post(`/${board}`, body);
 };
+
+export const readPost = (board, id) => {
+  return AxiosInstance.get(`/${board}/${id}`);
+};
