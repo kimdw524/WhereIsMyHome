@@ -1,7 +1,6 @@
 <script setup>
 import { readPost } from '@/apis/Board';
-import Button from '@/components/Common/Button.vue';
-import { useAlertStore } from '@/stores/alert';
+import Comment from '@/components/Board/Comment.vue';
 import { fullDateFormat } from '@/utils/utils';
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
 import { ref } from 'vue';
@@ -9,9 +8,6 @@ import { useRoute, useRouter } from 'vue-router';
 
 const route = useRoute();
 const router = useRouter();
-const { alert } = useAlertStore();
-
-console.log(router);
 
 const body = ref(null);
 
@@ -57,7 +53,7 @@ readPost('board', route.params.id)
         </div>
         <div :class="$style.content" v-html="body.content"></div>
         <div :class="$style.footer">
-          <Button variant="secondary" size="sm" @click="router.go(-1)">목록</Button>
+          <Comment :name="route.params.name" :id="route.params.id" />
         </div>
       </div>
     </div>
@@ -131,13 +127,8 @@ readPost('board', route.params.id)
 }
 
 .footer {
-  display: flex;
-  justify-content: flex-end;
-
   padding: 1rem;
   border-top: 1px solid #e7e7e7;
-
-  background-color: rgb(248, 248, 248);
 }
 
 .list {

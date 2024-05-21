@@ -11,3 +11,15 @@ export const writePost = (board, body) => {
 export const readPost = (board, id) => {
   return AxiosInstance.get(`/${board}/${id}`);
 };
+
+export const getComments = (id) => {
+  return AxiosInstance.get(`/board/${id}/comments`);
+};
+
+export const writeComment = (id, content) => {
+  return AxiosInstance.post(`/board/${id}/comments`, { content });
+};
+
+export const deleteComment = (postId, id) => {
+  return AxiosInstance.delete(`/board/${postId}/comments/${id}`);
+};
