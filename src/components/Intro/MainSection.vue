@@ -8,7 +8,7 @@ import EnterButton from '@/components/Intro/EnterButton.vue';
 <template>
   <div :class="$style.container">
     <div :class="$style.left">
-      <div :class="$style.title">구해줘! 홈즈</div>
+      <div :class="$style.title">집콕</div>
       <div :class="$style.body">
         <CountUp to="1505408" duration="1000" />개의 부동산 거래 데이터를 바탕으로<br />어쩌구
         저쩌구 어쩌구 저쩌구 시작하세요.

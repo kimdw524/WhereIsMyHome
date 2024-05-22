@@ -10,7 +10,7 @@ import Section2 from '@/components/Intro/Section2.vue';
     <MainSection />
     <Section1 />
     <Section2 />
-    <Down>아래로 스크롤 하여 구해줘! 홈즈에 대해 알아보세요.</Down>
+    <Down>아래로 스크롤 하여 집콕에 대해 알아보세요.</Down>
   </div>
 </template>
 

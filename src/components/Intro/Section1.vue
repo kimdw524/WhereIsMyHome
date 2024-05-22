@@ -61,7 +61,7 @@ const draw = (ratio) => {
             transform: translateY(${-value * mul}vh);
             opacity: ${1 - value};`,
             imageStyle: `
-            transform: translateX(${value * mul}vw);
+            transform: rotateY(${-value * 90}deg) translateX(${value * 50}%);
             opacity: ${1 - value};
             `,
           },
@@ -75,7 +75,7 @@ const draw = (ratio) => {
             transform: translateY(${(1 - value) * mul}vh);
             opacity: ${value};`,
             imageStyle: `
-            transform: translateX(0);
+            transform: rotateY(0) translateX(0);
             opacity: ${value};
             `,
           },
@@ -175,7 +175,7 @@ onUnmounted(() => {
   font-weight: 600;
   letter-spacing: 1px;
 
-  transition: all 100ms linear;
+  transition: all 300ms linear;
 
   user-select: none;
 
@@ -192,7 +192,7 @@ onUnmounted(() => {
   letter-spacing: 1px;
   line-height: 150%;
 
-  transition: all 100ms linear;
+  transition: all 300ms linear;
 
   user-select: none;
 
