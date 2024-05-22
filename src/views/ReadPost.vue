@@ -8,6 +8,7 @@ import { useRoute, useRouter } from 'vue-router';
 import ListIcon from '@/components/Svg/List.vue';
 import { useUserStore } from '@/stores/user';
 import { useAlertStore } from '@/stores/alert';
+import Button from '@/components/Common/Button.vue';
 
 const route = useRoute();
 const router = useRouter();
@@ -67,8 +68,15 @@ readPost(route.params.name === 'notice' ? 'boardNotice' : 'board', route.params.
           </div>
         </div>
         <div :class="$style.content" v-html="body.content"></div>
-        <div :class="$style.footer" v-if="$route.params.name !== 'notice'">
-          <Comment :name="route.params.name" :id="route.params.id" />
+        <div :class="$style.footer">
+          <Comment
+            v-if="$route.params.name !== 'notice'"
+            :name="route.params.name"
+            :id="route.params.id"
+          />
+          <div v-else :class="$style.footerItem">
+            <Button @click="$router.push('/board/notice')">목록</Button>
+          </div>
         </div>
       </div>
     </div>
@@ -172,5 +180,10 @@ readPost(route.params.name === 'notice' ? 'boardNotice' : 'board', route.params.
 
 .list:active {
   transform: scale(0.95);
+}
+
+.footerItem {
+  display: flex;
+  justify-content: center;
 }
 </style>
