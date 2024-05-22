@@ -8,15 +8,13 @@ import HouseDetail from '@/components/Map/HouseDetail.vue';
 import HouseList from '@/components/Map/HouseList.vue';
 import ListHeader from '@/components/Map/ListHeader.vue';
 import PriceFilter from '@/components/Map/PriceFilter.vue';
+import Share from '@/components/Map/Share.vue';
 import TradeFilter from '@/components/Map/TradeFilter.vue';
 import TypeFilter from '@/components/Map/TypeFilter.vue';
-import Share from '@/components/Map/Share.vue';
+import { useMapStore } from '@/stores/map';
 import { joinText, simplePrice } from '@/utils/utils';
 import { onMounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
-import Line from '@/components/Svg/Line.vue';
-import Circle from '@/components/Svg/Circle.vue';
-import { useMapStore } from '@/stores/map';
 const route = useRoute();
 const mapStore = useMapStore();
 
@@ -60,14 +58,6 @@ const data = ref([]);
 const sort = ref({ type: 1, asc: false });
 const detail = ref(code);
 const interest = ref(false);
-const drawMode = ref({ line: false, circle: false });
-
-const cancleDrawMode = (current) => {
-  for (const i in drawMode.value) {
-    if (i === current) continue;
-    drawMode.value[i] = false;
-  }
-};
 
 const sortList = (value) => {
   switch (value.type) {
@@ -373,8 +363,6 @@ onMounted(() => {
             <BuildYearFilter v-model="buildYear" />
           </Filter>
           <Toggle v-model="interest">관심 매물 보기</Toggle>
-          <Toggle @click="cancleDrawMode('line')" v-model="drawMode.line"><Line /></Toggle>
-          <Toggle @click="cancleDrawMode('circle')" v-model="drawMode.circle"><Circle /></Toggle>
         </div>
         <div :class="$style.rightMenuContainer">
           <Checkbox :style="{ fontSize: '0.875rem' }" v-model="showPrice"> 시세 표시 </Checkbox>
