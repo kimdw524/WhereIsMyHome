@@ -10,6 +10,7 @@ import lottieWrite from '@/assets/lotties/write.json';
 import Section from '@/components/Common/Section/Section.vue';
 import SectionDescription from '@/components/Common/Section/SectionDescription.vue';
 import NewsList from '@/components/News/NewsList.vue';
+import BoardPreview from '@/components/Board/BoardPreview.vue';
 </script>
 
 <template>
@@ -65,6 +66,11 @@ import NewsList from '@/components/News/NewsList.vue';
             :class="$style.writeAnimation"
           />
         </Card>
+      </div>
+
+      <div :class="$style.boardPreviewContainer">
+        <BoardPreview name="notice" />
+        <BoardPreview name="free" />
       </div>
 
       <div :class="$style.newsContainer">
@@ -127,5 +133,11 @@ import NewsList from '@/components/News/NewsList.vue';
 }
 
 .newsContainer {
+}
+
+.boardPreviewContainer {
+  display: flex;
+  justify-content: space-around;
+  gap: 0.5rem;
 }
 </style>
