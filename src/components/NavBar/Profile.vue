@@ -124,6 +124,6 @@ watch(popup, (value) => {
 }
 
 .menu:hover {
-  background-color: #f3f5f7;
+  background-color: var(--profile-menu-bg-hover);
 }
 </style>
