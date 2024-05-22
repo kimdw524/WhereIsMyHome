@@ -1,7 +1,6 @@
 <script setup>
 import { getBoardList } from '@/apis/Board';
 import Board from '@/components/Board/Board.vue';
-import Button from '@/components/Common/Button.vue';
 import { useUserStore } from '@/stores/user';
 import { onMounted, onUpdated, ref, watch } from 'vue';
 import { onBeforeRouteUpdate, useRoute, useRouter } from 'vue-router';

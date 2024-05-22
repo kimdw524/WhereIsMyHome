@@ -21,7 +21,7 @@
 
 body {
   --scrollbar-bg: #ccd4e1;
-  --scrollbar-thumb-bg: #6a7897;
+  --scrollbar-thumb-bg: rgba(56, 69, 96, 0.66);
 
   --bg: #fff;
   --color: #000;
@@ -59,6 +59,8 @@ body {
   --textfield-color: #000;
   --textfield-label-color: #000;
   --textfield-label-color-focus: #000;
+
+  --house-overall-separator: #dbe1e7;
 
   --login-link-color: #3354ff;
 

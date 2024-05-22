@@ -129,3 +129,11 @@ export const dateFormat = (time) => {
 
   return date;
 };
+
+export const distanceFormat = (km) => {
+  if (km >= 1) {
+    return `${Math.round(km * 10) / 10}km`;
+  }
+
+  return `${Math.round(km * 1000)}m`;
+};

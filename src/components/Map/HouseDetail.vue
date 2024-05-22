@@ -129,7 +129,6 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   position: relative;
-  overflow-y: scroll;
 
   width: 400px;
   height: 100%;
@@ -158,6 +157,11 @@ onMounted(() => {
   flex: 1 1 auto;
 
   overflow-y: scroll;
+}
+
+.body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
 
 .tab {
