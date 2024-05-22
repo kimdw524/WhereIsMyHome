@@ -236,8 +236,8 @@ const handleDetail = (house) => {
   map.panTo(new kakao.maps.LatLng(house.lat, house.lng));
 };
 
-watch(interest, (value) => {
-  if (value) {
+watch([interest, showPrice], (value) => {
+  if (value[0]) {
     getInterest()
       .then((result) => {
         updateData(result);
@@ -333,7 +333,6 @@ onMounted(() => {
       condition.endRentCost = price.value.endRentCost;
       condition.startBuildYear = buildYear.value.startBuildYear;
       condition.endBuildYear = buildYear.value.endBuildYear;
-
       update();
     },
     { deep: true, immediate: true },
