@@ -17,7 +17,11 @@ current.value = getCountUp(0, duration, props.to).toLocaleString();
 
 onMounted(() => {
   timer = setInterval(() => {
-    current.value = getCountUp((count += 50), duration, props.to).toLocaleString();
+    current.value = getCountUp(
+      count >= 900 ? (count >= 980 ? (count += 2) : (count += 10)) : (count += 50),
+      duration,
+      props.to,
+    ).toLocaleString();
 
     if (count >= duration) {
       clearInterval(timer);
