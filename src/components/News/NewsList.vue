@@ -1,11 +1,15 @@
 <script setup>
-import { onMounted, onUnmounted, ref } from 'vue';
+import { getNews } from '@/apis/News';
+import { onMounted, ref } from 'vue';
 
-const props = defineProps({ news: Array });
+const news = ref([]);
 const wrapper = ref(null);
 
+const LIMIT = 8;
+
 const cardWidth = 16 * 17;
-let current = 0;
+let current = 0,
+  offset = 0;
 
 const ellipsis = (text) => {
   if (text.length > 30) return text.substr(0, 30) + '...';
@@ -21,15 +25,31 @@ const handleWheel = (event) => {
 
   current += direction ? 1 : -1;
   current = Math.min(
-    props.news.length - Math.ceil(wrapper.value.offsetWidth / cardWidth) + 1,
+    news.value.length - Math.ceil(wrapper.value.offsetWidth / cardWidth) + 1,
     Math.max(current, 0),
   );
+
+  if (wrapper.value.scrollWidth - wrapper.value.offsetWidth - wrapper.value.scrollLeft < 300) {
+    appendNews((offset += LIMIT));
+  }
 
   wrapper.value.scrollLeft = current * cardWidth;
 };
 
+const appendNews = (offset) => {
+  getNews(offset)
+    .then((result) => {
+      news.value.push(...result.data.body);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
+
 onMounted(() => {
   wrapper.value.addEventListener('wheel', handleWheel, { passive: true });
+
+  appendNews(0);
 });
 </script>
 
@@ -38,14 +58,13 @@ onMounted(() => {
     <div :class="$style.container">
       <div
         :class="$style.card"
-        v-for="item in props.news"
+        v-for="item in news"
         :key="item.link"
         @click="forwardNews(item.link)"
       >
         <img :src="item.thumbnail" :class="$style.thumbnail" alt="thumbnail" />
         <div :class="$style.title">{{ ellipsis(item.title) }}</div>
         <div :class="$style.source">
-          <div :class="$style.journalist">{{ item.journalist }}</div>
           <div :class="$style.press">{{ item.press }}</div>
         </div>
       </div>
@@ -128,11 +147,6 @@ onMounted(() => {
   justify-content: space-between;
 
   padding: 0.75rem;
-}
-
-.journalist {
-  font-size: 0.875rem;
-  font-weight: 500;
 }
 
 .press {
