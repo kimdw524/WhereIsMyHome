@@ -27,3 +27,7 @@ export const validateTelephone = (telephone) => {
 export const signUp = (body) => {
   return AxiosInstance.post('/user', body);
 };
+
+export const kakaoOAuth = (body) => {
+  return AxiosInstance.post('/oauth2/login', body);
+};
