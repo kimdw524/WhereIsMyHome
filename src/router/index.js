@@ -7,6 +7,7 @@ import SignUp from '@/views/SignUp.vue';
 import WritePost from '@/views/WritePost.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import ReadPost from '@/views/ReadPost.vue';
+import OAuth from '@/views/OAuth.vue';
 
 const routes = [
   {
@@ -46,6 +47,10 @@ const routes = [
     meta: {
       footer: false,
     },
+  },
+  {
+    path: '/oauth',
+    component: OAuth,
   },
 ];
 

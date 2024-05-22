@@ -30,7 +30,7 @@ const handleLogin = () => {
 
 const handleKakao = () => {
   window.open(
-    'https://kauth.kakao.com/oauth/authorize?client_id=d476f3898d6a5422a15bdea57516a63e&redirect_uri=http://localhost:5173/oauth&response_type=code',
+    'https://kauth.kakao.com/oauth/authorize?client_id=d476f3898d6a5422a15bdea57516a63e&redirect_uri=https://localhost:5173/oauth&response_type=code',
   );
 };
 </script>
