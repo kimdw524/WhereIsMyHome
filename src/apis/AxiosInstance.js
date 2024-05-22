@@ -14,7 +14,7 @@ AxiosInstance.interceptors.response.use(
   (error) => {
     if (error.response.status === 401) {
       deleteCookie('userData');
-      location.href = './signin';
+      location.href = '/signin';
     }
 
     return Promise.reject(error);
