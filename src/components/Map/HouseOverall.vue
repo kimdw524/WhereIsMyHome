@@ -27,6 +27,7 @@ const chartOptions = {
       enabled: false,
     },
     fontFamily: 'Pretendard',
+    foreColor: 'var(--color)',
   },
   dataLabels: {
     enabled: false,
