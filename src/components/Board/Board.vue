@@ -34,7 +34,9 @@ const handlePage = (page) => {
         :class="$style.item"
       >
         <td>{{ post.id }}</td>
-        <td :class="$style.title">{{ post.title }}</td>
+        <td :class="$style.title">
+          {{ post.title }}<span v-if="post.commentCount">[{{ post.commentCount }}]</span>
+        </td>
         <td>{{ post.name }}</td>
         <td>{{ dateFormat(post.updatedAt) }}</td>
         <td>{{ post.viewCount }}</td>
@@ -90,6 +92,11 @@ const handlePage = (page) => {
 
   font-weight: 300;
   text-align: left;
+}
+
+.postList td.title span {
+  margin-left: 0.5rem;
+  font-weight: 400;
 }
 
 .postList th {
