@@ -1,15 +1,31 @@
 <script setup>
-import { readPost } from '@/apis/Board';
+import { readPost, deletePost } from '@/apis/Board';
 import Comment from '@/components/Board/Comment.vue';
 import { fullDateFormat } from '@/utils/utils';
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
 import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import ListIcon from '@/components/Svg/List.vue';
+import { useUserStore } from '@/stores/user';
+import { useAlertStore } from '@/stores/alert';
 
 const route = useRoute();
 const router = useRouter();
+const user = useUserStore();
+const { alert } = useAlertStore();
 
 const body = ref(null);
+
+const handleDelete = () => {
+  deletePost(route.params.name === 'notice' ? 'boardNotice' : 'board', route.params.id)
+    .then((result) => {
+      alert('게시글을 삭제했습니다.');
+      history.go(-1);
+    })
+    .catch((error) => {
+      alert('게시글 삭제를 실패했습니다.');
+    });
+};
 
 readPost(route.params.name === 'notice' ? 'boardNotice' : 'board', route.params.id)
   .then((result) => {
@@ -25,17 +41,7 @@ readPost(route.params.name === 'notice' ? 'boardNotice' : 'board', route.params.
     <div :class="$style.topHeader">
       <div :class="$style.topTitle">자유게시판</div>
       <div :class="$style.list" @click="router.go(-1)">
-        <svg
-          stroke="currentColor"
-          fill="currentColor"
-          stroke-width="0"
-          viewBox="0 0 256 256"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M80,64a8,8,0,0,1,8-8H216a8,8,0,0,1,0,16H88A8,8,0,0,1,80,64Zm136,56H88a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Zm0,64H88a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16ZM44,52A12,12,0,1,0,56,64,12,12,0,0,0,44,52Zm0,64a12,12,0,1,0,12,12A12,12,0,0,0,44,116Zm0,64a12,12,0,1,0,12,12A12,12,0,0,0,44,180Z"
-          ></path>
-        </svg>
+        <ListIcon />
       </div>
     </div>
   </div>
@@ -44,7 +50,16 @@ readPost(route.params.name === 'notice' ? 'boardNotice' : 'board', route.params.
       <div :class="$style.container">
         <div :class="$style.header">
           <div :class="$style.title">
-            {{ body.title }}
+            <div>
+              {{ body.title }}
+            </div>
+            <div
+              v-if="body.userId === user.userData.id"
+              :class="$style.delete"
+              @click="handleDelete"
+            >
+              삭제
+            </div>
           </div>
           <div :class="$style.detail">
             <div>{{ body.name }}<span>|</span>{{ fullDateFormat(body.updatedAt) }}</div>
@@ -101,8 +116,19 @@ readPost(route.params.name === 'notice' ? 'boardNotice' : 'board', route.params.
 }
 
 .title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
   font-size: 1.125rem;
   font-weight: 500;
+}
+
+.delete {
+  font-size: 1rem;
+  font-weight: 400;
+
+  cursor: pointer;
 }
 
 .detail {

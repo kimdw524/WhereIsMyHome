@@ -23,3 +23,7 @@ export const writeComment = (id, content) => {
 export const deleteComment = (postId, id) => {
   return AxiosInstance.delete(`/board/${postId}/comments/${id}`);
 };
+
+export const deletePost = (board, id) => {
+  return AxiosInstance.delete(`/${board}/${id}`);
+};
