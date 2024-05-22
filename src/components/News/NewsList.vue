@@ -22,6 +22,7 @@ const forwardNews = (link) => {
 
 const handleWheel = (event) => {
   const direction = event.deltaX || event.deltaY > 0;
+  event.preventDefault();
 
   current += direction ? 1 : -1;
   current = Math.min(
@@ -47,7 +48,7 @@ const appendNews = (offset) => {
 };
 
 onMounted(() => {
-  wrapper.value.addEventListener('wheel', handleWheel, { passive: true });
+  wrapper.value.addEventListener('wheel', handleWheel, { passive: false });
 
   appendNews(0);
 });
@@ -87,9 +88,8 @@ onMounted(() => {
 .wrapper::-webkit-scrollbar {
   width: 0.375rem;
   height: 0.375rem;
-  border-radius: 0.125rem;
 
-  background-color: var(--scrollbar-bg);
+  background-color: transparent;
 }
 
 .wrapper::-webkit-scrollbar-thumb {
