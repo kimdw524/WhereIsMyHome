@@ -58,6 +58,14 @@ const data = ref([]);
 const sort = ref({ type: 1, asc: false });
 const detail = ref(code);
 const interest = ref(false);
+const share = ref({
+  objectType: 'text',
+  text: '부동산 지도를 공유할게요.',
+  link: {
+    mobileWebUrl: location.href,
+    webUrl: location.href,
+  },
+});
 
 const sortList = (value) => {
   switch (value.type) {
@@ -209,6 +217,9 @@ const update = () => {
       buildYear.value.endBuildYear
     }`,
   );
+
+  share.value.link.mobileWebUrl = location.href;
+  share.value.link.webUrl = location.href;
 
   if (interest.value) return;
 
@@ -366,16 +377,7 @@ onMounted(() => {
         <div :class="$style.rightMenuContainer">
           <Checkbox :style="{ fontSize: '0.875rem' }" v-model="showPrice"> 시세 표시 </Checkbox>
           <Checkbox :style="{ fontSize: '0.875rem' }" v-model="showTraffic"> 교통 정보 </Checkbox>
-          <Share
-            :option="{
-              objectType: 'text',
-              text: '부동산 지도를 공유할게요.',
-              link: {
-                mobileWebUrl: `location.href`,
-                webUrl: `location.href`,
-              },
-            }"
-          />
+          <Share :option="share" />
         </div>
       </div>
       <div :class="$style.body">

@@ -10,11 +10,20 @@ import HouseOverall from './HouseOverall.vue';
 import DealList from './DealList.vue';
 import Roadview from './Roadview.vue';
 import Debate from './Debate.vue';
+import Share from './Share.vue';
 
 const model = defineModel();
 const data = ref(null);
 const interest = ref(false);
 const tab = ref(0);
+const share = ref({
+  objectType: 'text',
+  text: '매물을 공유할게요.',
+  link: {
+    mobileWebUrl: `${location.origin}/map?code=${model.value}`,
+    webUrl: `${location.origin}/map?code=${model.value}`,
+  },
+});
 
 const { alert } = useAlertStore();
 
@@ -70,6 +79,7 @@ onMounted(() => {
   getHomeDetail(model.value)
     .then((result) => {
       data.value = result.data;
+      share.value.text = `${data.value.house.houseName}`;
       interest.value = result.data.favorite;
     })
     .catch((error) => {
@@ -94,7 +104,10 @@ onMounted(() => {
             <div>
               {{ data.house.houseName }}
             </div>
-            <Star v-model="interest" @click="handleStar" />
+            <div :class="$style.menuContainer">
+              <Share :option="share" />
+              <Star v-model="interest" @click="handleStar" />
+            </div>
           </div>
         </div>
         <Tab
@@ -185,5 +198,10 @@ onMounted(() => {
   font-size: 1.25rem;
   font-weight: 400;
   letter-spacing: 1px;
+}
+
+.menuContainer {
+  display: flex;
+  gap: 0.5rem;
 }
 </style>

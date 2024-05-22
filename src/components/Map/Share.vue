@@ -2,6 +2,7 @@
 const props = defineProps({ option: Object });
 
 const share = () => {
+  console.log(props.option);
   Kakao.Share.sendDefault(props.option);
 };
 </script>
