@@ -9,9 +9,9 @@ import { useUserStore } from '@/stores/user';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
-const email = ref('');
+const email = ref(localStorage.getItem('email') || '');
 const password = ref('');
-const rememberId = ref(false);
+const rememberId = ref(!!localStorage.getItem('email'));
 const user = useUserStore();
 const router = useRouter();
 const { alert } = useAlertStore();
@@ -21,6 +21,11 @@ const handleLogin = () => {
     .then((result) => {
       user.signIn(result.data.id, result.data.email, result.data.name, result.data.admin);
       router.push('/home');
+      if (rememberId.value) {
+        localStorage.setItem('email', result.data.email);
+      } else {
+        localStorage.removeItem('email');
+      }
     })
     .catch((error) => {
       console.log(error);
