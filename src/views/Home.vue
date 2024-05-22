@@ -10,7 +10,10 @@ import lottieWrite from '@/assets/lotties/write.json';
 import Section from '@/components/Common/Section/Section.vue';
 import SectionDescription from '@/components/Common/Section/SectionDescription.vue';
 import NewsList from '@/components/News/NewsList.vue';
-import BoardPreview from '@/components/Board/BoardPreview.vue';
+import PopularHouse from '@/components/PopularHouse/PopularHouse.vue';
+import { ref } from 'vue';
+
+const currentLocation = ref('우리 동네');
 </script>
 
 <template>
@@ -68,12 +71,15 @@ import BoardPreview from '@/components/Board/BoardPreview.vue';
         </Card>
       </div>
 
-      <div :class="$style.boardPreviewContainer">
-        <BoardPreview name="notice" />
-        <BoardPreview name="free" />
+      <div>
+        <Section
+          >🏡 <span>{{ currentLocation }} 주변</span> 인기 매물</Section
+        >
+        <SectionDescription>내 주변 부동산 매물을 거래량 순으로 보여드릴게요.</SectionDescription>
+        <PopularHouse v-model="currentLocation" />
       </div>
 
-      <div :class="$style.newsContainer">
+      <div>
         <Section>📰 부동산 <span>뉴스</span></Section>
         <SectionDescription>최신 부동산 뉴스를 한눈에 보세요.</SectionDescription>
         <NewsList style="margin-top: 1rem" />
@@ -130,14 +136,5 @@ import BoardPreview from '@/components/Board/BoardPreview.vue';
   z-index: -10;
 
   width: 13rem;
-}
-
-.newsContainer {
-}
-
-.boardPreviewContainer {
-  display: flex;
-  justify-content: space-around;
-  gap: 0.5rem;
 }
 </style>

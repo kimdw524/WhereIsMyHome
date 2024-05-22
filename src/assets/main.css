@@ -108,12 +108,14 @@ body {
 
   --profile-menu-bg-hover: #f3f5f7;
 
+  --popular-house-alert-bg: #e5e9fa;
+
   --footer-bg: #373737;
 }
 
 body.dark {
   --scrollbar-bg: #434343;
-  --scrollbar-thumb-bg: rgba(56, 97, 188, 0.66);
+  --scrollbar-thumb-bg: rgba(67, 72, 83, 0.66);
 
   --bg: #282828;
   --color: #fff;
@@ -200,6 +202,8 @@ body.dark {
   --deal-list-boxShadow: #00000054;
 
   --profile-menu-bg-hover: #2f3136;
+
+  --popular-house-alert-bg: #2c303d;
 
   --footer-bg: #373737;
 }
