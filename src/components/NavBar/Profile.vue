@@ -2,14 +2,21 @@
 import { useUserStore } from '@/stores/user';
 import { ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
+import { logOut } from '@/apis/User';
 
 const user = useUserStore();
 const router = useRouter();
 const popup = ref(false);
 
 const doLogout = () => {
-  user.logOut();
-  router.push('/home');
+  logOut()
+    .then((result) => {
+      user.logOut();
+      router.push('/home');
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 };
 
 const handleClick = () => {
