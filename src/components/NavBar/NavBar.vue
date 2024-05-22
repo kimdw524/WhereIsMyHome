@@ -1,13 +1,13 @@
 <script setup>
 import { ref } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { useRoute } from 'vue-router';
 import NavLink from './NavLink.vue';
 import NavMenu from './NavMenu.vue';
 import Profile from './Profile.vue';
 import { useUserStore } from '@/stores/user';
+import ThemeToggle from './ThemeToggle.vue';
 
 const route = useRoute();
-const router = useRouter();
 const user = useUserStore();
 const toggle = ref(false);
 
@@ -64,6 +64,7 @@ const navLinks = [
             <template v-else>
               <NavMenu slug="/signin">로그인</NavMenu>
             </template>
+            <ThemeToggle />
           </div>
         </div>
       </div>
@@ -105,7 +106,9 @@ const navLinks = [
 }
 
 .menuContainer {
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 
   margin-left: 1rem;
 }
