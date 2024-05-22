@@ -76,7 +76,7 @@ watch(query, (value) => {
   position: relative;
   overflow: hidden;
 
-  border: 1px solid #ddd;
+  border: 1px solid var(--card-border-color);
   border-radius: 0.25rem;
 
   transition: all 200ms ease;
@@ -110,6 +110,9 @@ watch(query, (value) => {
   padding: 0 0.75rem 0 0.25rem;
   border: 0;
 
+  background-color: var(--textfield-bg);
+
+  color: var(--color);
   font-size: 1.125rem;
   font-weight: 300;
 

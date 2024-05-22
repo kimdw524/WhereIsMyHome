@@ -62,7 +62,7 @@ onUnmounted(() => {
   box-sizing: border-box;
   box-shadow: 0 0 1rem 0.125rem rgba(0, 0, 0, 0.25);
 
-  background-color: #fff;
+  background-color: var(--alert-bg);
 }
 
 .message {

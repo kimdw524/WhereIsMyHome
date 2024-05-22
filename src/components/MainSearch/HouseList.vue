@@ -46,7 +46,7 @@ const handleClick = () => {
 }
 
 .container:hover {
-  background-color: #f2f5f8;
+  background-color: var(--search-result-bg-hover);
 }
 
 .container span {

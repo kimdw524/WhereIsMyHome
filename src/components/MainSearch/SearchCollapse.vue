@@ -56,7 +56,7 @@ onUpdated(() => {
   width: 100%;
   box-sizing: border-box;
 
-  border: 1px solid #ddd;
+  border: 1px solid var(--card-border-color);
   border-top: 0;
   border-bottom-left-radius: 0.25rem;
   border-bottom-right-radius: 0.25rem;

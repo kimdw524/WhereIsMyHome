@@ -46,7 +46,7 @@ const price =
   flex-direction: column;
   gap: 1rem;
   padding: 1rem;
-  border-bottom: 1px solid rgb(240, 240, 240);
+  border-bottom: 1px solid var(--map-houselist-border);
 }
 
 .dealAmount {

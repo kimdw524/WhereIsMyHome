@@ -64,7 +64,7 @@ watch(
   z-index: 10;
 
   padding: 1rem;
-  box-shadow: 0 0.125rem 0.5rem 0 #bcbcbc54;
+  box-shadow: 0 0.125rem 0.5rem 0 var(--deal-list-boxShadow);
   background-color: var(--bg);
 }
 

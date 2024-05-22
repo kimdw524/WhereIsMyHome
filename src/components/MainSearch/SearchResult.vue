@@ -102,7 +102,7 @@ const isEmpty = computed(() => {
 
   min-height: 12rem;
   max-height: 50vh;
-  border-right: 1px solid #ddd;
+  border-right: 1px solid var(--card-border-color);
   box-sizing: border-box;
 }
 
@@ -111,17 +111,6 @@ const isEmpty = computed(() => {
 }
 
 .list:first-child {
-  border-right: 1px solid #ddd;
-}
-
-.item {
-  padding: 0.625rem 0.75rem;
-  border-radius: 0.25rem;
-
-  cursor: pointer;
-}
-
-.item:hover {
-  background-color: #f2f5f8;
+  border-right: 1px solid var(--card-border-color);
 }
 </style>

@@ -62,7 +62,7 @@ const searchHistory = ref(
 }
 
 .item:hover {
-  background-color: #eee;
+  background-color: var(--search-result-bg-hover);
 }
 
 .clear {
