@@ -10,7 +10,7 @@
   width: 0.375rem;
   height: 0.375rem;
 
-  background-color: transparent; /* (--scrollbar-bg); */
+  background-color: var(--scrollbar-bg);
 }
 
 *::-webkit-scrollbar-thumb {
@@ -151,7 +151,7 @@ body.dark {
   --textfield-label-color: #fff;
   --textfield-label-color-focus: #fff;
 
-  --house-overall-separator: #000000;
+  --house-overall-separator: #1c1c1c;
 
   --login-link-color: #3354ff;
 
@@ -175,7 +175,7 @@ body.dark {
 
   --map-header-border-top: #656565;
   --map-header-border-bottom: #3c3c3c;
-  --map-list-header-border: #dfdfdf;
+  --map-list-header-border: #5f5f5f;
   --map-houselist-border: #3a3a3a;
   --map-houselist-bg-hover: #303234;
 

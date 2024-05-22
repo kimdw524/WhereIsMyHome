@@ -112,7 +112,7 @@ watch(popup, (value) => {
 .menu {
   padding: 1rem;
 
-  border-top: 1px solid #ebebeb;
+  border-top: 1px solid var(--map-houselist-border);
 
   font-size: 0.875rem;
   font-weight: 400;
