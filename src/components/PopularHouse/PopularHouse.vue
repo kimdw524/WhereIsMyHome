@@ -47,10 +47,10 @@ const getPopularHouse = (lat, lng) => {
     endRentCost: 999_999_999,
     startBuildYear: 1950,
     endBuildYear: 2024,
-    startLng: lng - 0.01,
-    endLng: lng + 0.005,
-    startLat: lat - 0.01,
-    endLat: lat + 0.005,
+    startLng: lng - 0.015,
+    endLng: lng + 0.015,
+    startLat: lat - 0.015,
+    endLat: lat + 0.015,
   };
   getMatchHome(condition)
     .then((result) => {
