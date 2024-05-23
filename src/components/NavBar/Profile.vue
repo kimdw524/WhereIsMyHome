@@ -41,7 +41,6 @@ watch(popup, (value) => {
           <div>{{ user.userData.email || '...' }}</div>
         </div>
         <div :class="$style.menuContainer">
-          <div :class="$style.menu">내 정보</div>
           <div :class="$style.menu" @click="doLogout()">로그아웃</div>
         </div>
       </div>
