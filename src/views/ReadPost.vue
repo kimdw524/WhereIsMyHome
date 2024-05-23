@@ -1,14 +1,14 @@
 <script setup>
-import { readPost, deletePost } from '@/apis/Board';
+import { deletePost, readPost } from '@/apis/Board';
 import Comment from '@/components/Board/Comment.vue';
+import Button from '@/components/Common/Button.vue';
+import ListIcon from '@/components/Svg/List.vue';
+import { useAlertStore } from '@/stores/alert';
+import { useUserStore } from '@/stores/user';
 import { fullDateFormat } from '@/utils/utils';
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
 import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import ListIcon from '@/components/Svg/List.vue';
-import { useUserStore } from '@/stores/user';
-import { useAlertStore } from '@/stores/alert';
-import Button from '@/components/Common/Button.vue';
 
 const route = useRoute();
 const router = useRouter();
@@ -54,10 +54,6 @@ readPost(route.params.name === 'notice' ? 'boardNotice' : 'board', route.params.
             <div>
               {{ body.title }}
             </div>
-            <div v-if="body.userId === user.userData.id" :class="$style.buttonContainer">
-              <span @click="router.push(`/board/edit/${route.params.id}`)">수정</span>
-              <span :class="$style.delete" @click="handleDelete">삭제</span>
-            </div>
           </div>
           <div :class="$style.detail">
             <div>{{ body.name }}<span>|</span>{{ fullDateFormat(body.updatedAt) }}</div>
@@ -66,6 +62,12 @@ readPost(route.params.name === 'notice' ? 'boardNotice' : 'board', route.params.
         </div>
         <div :class="$style.content" v-html="body.content"></div>
         <div :class="$style.footer">
+          <div v-if="body.userId === user.userData.id" :class="$style.buttonContainer">
+            <Button @click="router.push(`/board/edit/${route.params.id}`)" size="sm" variant="edit">
+              수정
+            </Button>
+            <Button @click="handleDelete" size="sm" variant="delete">삭제</Button>
+          </div>
           <Comment
             v-if="$route.params.name !== 'notice'"
             :name="route.params.name"
@@ -182,15 +184,6 @@ readPost(route.params.name === 'notice' ? 'boardNotice' : 'board', route.params.
   justify-content: flex-end;
   gap: 0.5rem;
 
-  font-size: 0.875rem;
-  font-weight: 400;
-}
-
-.buttonContainer > span {
-  cursor: pointer;
-}
-
-.delete {
-  color: var(--color-danger);
+  color: var(--color);
 }
 </style>

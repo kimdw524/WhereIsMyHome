@@ -79,4 +79,22 @@ const props = defineProps({
   --bg-hover: var(--button-danger-bg-hover);
   --color: var(--button-danger-color);
 }
+
+.edit {
+  --bg: #2083fc;
+  --bg-hover: #4397ff;
+  --color: var(--button-danger-color);
+
+  border: 1px solid #0055bf;
+  box-shadow: 0 0 0.375rem 0.125rem #9e9e9e54;
+}
+
+.delete {
+  --bg: #ff3030;
+  --bg-hover: #ff5858;
+  --color: var(--button-danger-color);
+
+  border: 1px solid #810000;
+  box-shadow: 0 0 0.375rem 0.125rem #9e9e9e54;
+}
 </style>
