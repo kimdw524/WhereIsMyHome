@@ -55,7 +55,7 @@ readPost(route.params.name === 'notice' ? 'boardNotice' : 'board', route.params.
               {{ body.title }}
             </div>
             <div v-if="body.userId === user.userData.id" :class="$style.buttonContainer">
-              <span>수정</span>
+              <span @click="router.push(`/board/edit/${route.params.id}`)">수정</span>
               <span :class="$style.delete" @click="handleDelete">삭제</span>
             </div>
           </div>

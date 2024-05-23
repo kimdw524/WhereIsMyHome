@@ -1,0 +1,104 @@
+<script setup>
+import Button from '@/components/Common/Button.vue';
+import TextField from '@/components/Common/TextField.vue';
+import { editPost, readPost } from '@/apis/Board';
+import { useAlertStore } from '@/stores/alert';
+import { QuillEditor } from '@vueup/vue-quill';
+import '@vueup/vue-quill/dist/vue-quill.snow.css';
+import { onMounted, ref } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+
+const route = useRoute();
+const router = useRouter();
+const { alert } = useAlertStore();
+const editor = ref(null);
+const title = ref('');
+
+const handleSubmit = () => {
+  editPost(route.params.id, { title: title.value, content: editor.value.getHTML() })
+    .then((result) => {
+      router.push(`/board/free/${route.params.id}`);
+    })
+    .catch((error) => {
+      alert('게시글 수정을 실패했습니다.');
+    });
+};
+
+onMounted(() => {
+  readPost('board', route.params.id)
+    .then((result) => {
+      title.value = result.data.body.title;
+      console.log(editor.value);
+      editor.value.setHTML(result.data.body.content);
+    })
+    .catch((error) => {
+      history.go(-1);
+    });
+});
+</script>
+
+<template>
+  <Transition name="fade2" appear>
+    <div :class="$style.wrapper">
+      <div :class="$style.container">
+        <div :class="$style.header">
+          <TextField v-model="title" placeholder="제목"></TextField>
+          <div :class="$style.write">
+            <Button variant="secondary" size="sm" @click="handleSubmit">수정하기</Button>
+          </div>
+        </div>
+        <div>
+          <QuillEditor ref="editor" :class="$style.editor" theme="snow" />
+        </div>
+      </div>
+    </div>
+  </Transition>
+</template>
+
+<style>
+.ql-snow {
+  border: 0 !important;
+  border-bottom: 1px solid #d1d5db !important;
+}
+</style>
+
+<style module>
+.wrapper {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+.container {
+  overflow: hidden;
+
+  border-radius: 0.25rem;
+  box-shadow: 0 0 0.125rem 0rem rgba(60, 60, 60, 0.5);
+  box-sizing: border-box;
+
+  font-weight: 400;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+
+  padding: 1rem;
+  border-bottom: 1px solid #e7e7e7;
+
+  background-color: var(--postlist-header-bg);
+}
+
+.write {
+  display: flex;
+  justify-content: center;
+
+  width: 5rem;
+}
+
+.editor {
+  height: 30rem;
+  border: 0 !important;
+}
+</style>

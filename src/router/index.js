@@ -10,6 +10,7 @@ import ReadPost from '@/views/ReadPost.vue';
 import OAuth from '@/views/OAuth.vue';
 import FindPassword from '@/views/FindPassword.vue';
 import MyPage from '@/views/MyPage.vue';
+import EditPost from '@/views/EditPost.vue';
 
 const routes = [
   {
@@ -61,6 +62,10 @@ const routes = [
   {
     path: '/mypage',
     component: MyPage,
+  },
+  {
+    path: '/board/edit/:id',
+    component: EditPost,
   },
 ];
 

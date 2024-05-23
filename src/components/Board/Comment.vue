@@ -55,7 +55,7 @@ updateComment();
     <form @submit.prevent="handleSubmit">
       <div :class="$style.textContainer">
         <TextField v-model="text" />
-        <Button type="submit">등록</Button>
+        <Button type="submit" variant="secondary">등록</Button>
       </div>
     </form>
   </div>
