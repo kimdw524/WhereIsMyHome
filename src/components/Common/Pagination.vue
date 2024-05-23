@@ -1,5 +1,9 @@
 <script setup>
+import { ref, onUpdated } from 'vue';
 defineEmits(['change']);
+
+const pages = ref([]);
+const current = ref(0);
 
 const props = defineProps({
   current: {
@@ -16,16 +20,19 @@ const props = defineProps({
   },
 });
 
-let left = Math.max(1, props.current - Math.floor(props.visible / 2)),
-  right = Math.min(props.max, props.current + Math.floor(props.visible / 2));
+const updatePage = () => {
+  let left = Math.max(1, props.current - Math.floor(props.visible / 2)),
+    right = Math.min(props.max, props.current + Math.floor(props.visible / 2));
 
-if (left === 1) {
-  right = Math.min(props.max, props.visible);
-} else if (right === props.max) {
-  left = Math.max(1, props.max - props.visible + 1);
-}
+  if (left === 1) {
+    right = Math.min(props.max, props.visible);
+  } else if (right === props.max) {
+    left = Math.max(1, props.max - props.visible + 1);
+  }
+  pages.value = new Array(right - left + 1).fill(0).map((value, index) => index + left);
+};
 
-const pages = new Array(right - left + 1).fill(0).map((value, index) => index + left);
+updatePage();
 </script>
 
 <template>

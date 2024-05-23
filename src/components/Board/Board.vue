@@ -43,7 +43,7 @@ const handlePage = (page) => {
       </tr>
     </table>
     <div :class="$style.footer">
-      <Pagination :current="currentPage" :max="maxPage" @change="handlePage" />
+      <Pagination :key="currentPage" :current="currentPage" :max="maxPage" @change="handlePage" />
     </div>
   </div>
 </template>
