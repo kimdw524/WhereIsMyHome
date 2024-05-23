@@ -2,11 +2,14 @@
 import { useUserStore } from '@/stores/user';
 import { ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
+import Modal from '../Modal/Modal.vue';
 import { logOut } from '@/apis/User';
+import MyPage from '@/views/MyPage.vue';
 
 const user = useUserStore();
 const router = useRouter();
 const popup = ref(false);
+const myPage = ref(false);
 
 const doLogout = () => {
   logOut()
@@ -32,6 +35,9 @@ watch(popup, (value) => {
 });
 </script>
 <template>
+  <Modal v-model="myPage">
+    <MyPage v-model="myPage" />
+  </Modal>
   <div :class="$style.container" @mousedown.stop="popup = !popup">
     <font-awesome-icon :icon="['fas', 'user']" :class="$style.icon" />
     <TransitionGroup name="fade" tag="div">
@@ -40,7 +46,7 @@ watch(popup, (value) => {
           <div>{{ user.userData.email || '...' }}<span>님</span></div>
         </div>
         <div :class="$style.menuContainer">
-          <div :class="$style.menu" @click="$router.push('/mypage')">마이페이지</div>
+          <div :class="$style.menu" @click="myPage = true">마이페이지</div>
           <div :class="$style.menu" @click="doLogout()">로그아웃</div>
         </div>
       </div>

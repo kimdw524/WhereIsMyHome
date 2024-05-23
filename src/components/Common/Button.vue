@@ -69,6 +69,9 @@ const props = defineProps({
   --bg: var(--button-secondary-bg);
   --bg-hover: var(--button-secondary-bg-hover);
   --color: var(--button-secondary-color);
+
+  border: 1px solid #0055bf;
+  box-shadow: 0 0 0.375rem 0.125rem #50505054;
 }
 
 .danger {
