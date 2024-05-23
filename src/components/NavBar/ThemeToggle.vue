@@ -1,12 +1,25 @@
 <script setup>
 import Light from '@/components/Svg/Light.vue';
 import Dark from '@/components/Svg/Dark.vue';
-import { ref, watch } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 
 const dark = ref(false);
 
 watch(dark, (value) => {
-  document.body.classList.toggle('dark');
+  if (value) {
+    document.body.classList.add('dark');
+    localStorage.setItem('darkTheme', '1');
+  } else {
+    document.body.classList.remove('dark');
+    localStorage.removeItem('darkTheme');
+  }
+});
+
+onMounted(() => {
+  if (localStorage.getItem('darkTheme')) {
+    dark.value = true;
+    document.body.classList.add('dark');
+  }
 });
 </script>
 
