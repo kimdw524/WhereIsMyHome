@@ -31,3 +31,7 @@ export const signUp = (body) => {
 export const kakaoOAuth = (body) => {
   return AxiosInstance.post('/oauth2/login', body);
 };
+
+export const findPassword = (body) => {
+  return AxiosInstance.post('/user/findpassword', body);
+};
