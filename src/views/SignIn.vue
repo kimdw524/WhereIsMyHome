@@ -48,11 +48,16 @@ const handleKakao = () => {
         <TextField label="이메일 주소" v-model="email" />
         <TextField type="password" v-model="password" label="비밀번호" />
       </div>
-      <div :class="$style.autoLogin"><Checkbox v-model="rememberId">이메일 저장</Checkbox></div>
+      <div :class="$style.autoLogin">
+        <Checkbox v-model="rememberId">이메일 저장</Checkbox>
+        <div>
+          <RouterLink to="findpassword" :class="$style.linkLight">비밀번호 찾기</RouterLink>
+        </div>
+      </div>
       <div :class="$style.submitForm">
         <div>
           아직 계정이 없으신가요?
-          <RouterLink to="signup" :class="$style.signup">회원가입</RouterLink>
+          <RouterLink to="signup" :class="$style.link">회원가입</RouterLink>
         </div>
         <Button type="submit">로그인</Button>
       </div>
@@ -92,6 +97,10 @@ const handleKakao = () => {
 }
 
 .autoLogin {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
   margin: 1.5rem 0 1rem;
 }
 
@@ -121,9 +130,15 @@ const handleKakao = () => {
   margin-top: 1rem;
 }
 
-.signup {
+.link {
   color: var(--login-link-color);
   font-weight: 600;
+  text-decoration: none;
+}
+
+.linkLight {
+  color: var(--login-link-color);
+  font-weight: 500;
   text-decoration: none;
 }
 </style>
