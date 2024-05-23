@@ -21,6 +21,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  readonly: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emit = defineEmits(['focus', 'blur']);
@@ -41,6 +45,7 @@ const focus = ref(false);
       :placeholder="placeholder"
       @focus="(focus = true), emit('focus')"
       @blur="(focus = false), emit('blur')"
+      :readonly="readonly"
     />
     <textarea
       v-else

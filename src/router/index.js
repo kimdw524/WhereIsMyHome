@@ -9,6 +9,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import ReadPost from '@/views/ReadPost.vue';
 import OAuth from '@/views/OAuth.vue';
 import FindPassword from '@/views/FindPassword.vue';
+import MyPage from '@/views/MyPage.vue';
 
 const routes = [
   {
@@ -56,6 +57,10 @@ const routes = [
   {
     path: '/findpassword',
     component: FindPassword,
+  },
+  {
+    path: '/mypage',
+    component: MyPage,
   },
 ];
 

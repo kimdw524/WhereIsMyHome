@@ -40,7 +40,7 @@ watch(popup, (value) => {
           <div>{{ user.userData.email || '...' }}<span>님</span></div>
         </div>
         <div :class="$style.menuContainer">
-          <div :class="$style.menu" @click="doLogout()">마이페이지</div>
+          <div :class="$style.menu" @click="$router.push('/mypage')">마이페이지</div>
           <div :class="$style.menu" @click="doLogout()">로그아웃</div>
         </div>
       </div>

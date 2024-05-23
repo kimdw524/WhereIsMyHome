@@ -116,6 +116,9 @@ body {
 
   --popular-house-alert-bg: #e5e9fa;
 
+  --mypage-border: #f1f1f1;
+  --mypage-boxShadow: #f1f1f1;
+
   --footer-bg: #373737;
 }
 
@@ -216,6 +219,9 @@ body.dark {
   --profile-boxShadow: #45454554;
 
   --popular-house-alert-bg: #2c303d;
+
+  --mypage-border: #151515;
+  --mypage-boxShadow: #1a1a1a;
 
   --footer-bg: #373737;
 }
