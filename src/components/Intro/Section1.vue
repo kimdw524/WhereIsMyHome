@@ -1,34 +1,30 @@
 <script setup>
+import IPad from './IPad.vue';
 import { ref, onMounted, onUnmounted } from 'vue';
 const wrapper = ref(null);
+``;
 const container = ref(null);
 const items = ref([]);
 
 const duration = 0.2;
 const children = [
   {
-    icon: ['fas', 'poo'],
-    head: '양규현',
-    body: '양규현 찾기<br />양규현을 찾을 수 있습니다.<br />찾아보세요.',
-    image: './src/assets/images/intro/1.png',
+    icon: ['fas', 'magnifying-glass'],
+    head: '다양한 검색 조건',
+    body: '다양한 조건을 설정하여 원하는 매물을 쉽게 찾을 수 있어요.',
+    webm: 'src/assets/webms/1.webm',
   },
   {
-    icon: ['fas', 'user'],
-    head: '김다운',
-    body: '김다운 찾기<br />김다운을 찾을 수 있습니다.<br />찾아보세요.',
-    image: './src/assets/images/intro/2.png',
+    icon: ['fas', 'heart'],
+    head: '관심 매물',
+    body: '관심있는 매물만 모아서 따로 볼 수 있어요.',
+    webm: 'src/assets/webms/2.webm',
   },
   {
-    icon: ['fas', 'user'],
-    head: '손동희',
-    body: '손동희 찾기<br />손동희를 찾을 수 있습니다.<br />찾아보세요.',
-    image: './src/assets/images/intro/1.png',
-  },
-  {
-    icon: ['fas', 'user'],
-    head: '최요하',
-    body: '최요하 찾기<br />최요하를 찾을 수 있습니다.<br />찾아보세요.',
-    image: './src/assets/images/intro/2.png',
+    icon: ['fas', 'location-dot'],
+    head: '내 주변 인기 매물',
+    body: '접속 위치를 바탕으로 주변에서 가장 인기 있는 매물을 추천해드려요.',
+    webm: 'src/assets/webms/3.webm',
   },
 ];
 
@@ -107,8 +103,8 @@ onUnmounted(() => {
   <div :class="$style.wrapper" ref="wrapper">
     <div :class="$style.container" ref="container">
       <div :class="$style.header">
-        <div :class="$style.head">검색</div>
-        <div :class="$style.body">검색 기능이 있습니다.</div>
+        <div :class="$style.head">수십만 개의 데이터 중</div>
+        <div :class="$style.body">꼭 필요한 데이터만 보여드려요.</div>
       </div>
 
       <div :class="$style.childContainer" v-for="item in items" :key="item.index">
@@ -123,7 +119,7 @@ onUnmounted(() => {
           ></div>
         </div>
         <div :class="$style.imageWrapper">
-          <img :class="$style.image" :src="children[item.index].image" :style="item.imageStyle" />
+          <IPad :class="$style.image" :src="children[item.index].webm" :style="item.imageStyle" />
         </div>
       </div>
     </div>
@@ -135,7 +131,7 @@ onUnmounted(() => {
   position: relative;
   top: 0;
 
-  height: 3000px;
+  height: 2250px;
 
   background-color: var(--intro-section-bg);
 }
@@ -185,12 +181,14 @@ onUnmounted(() => {
 }
 
 .body {
+  max-width: 30vw;
   margin: 1.5rem 0;
 
   font-size: 2.25rem;
   font-weight: 600;
   letter-spacing: 1px;
   line-height: 150%;
+  word-break: keep-all;
 
   transition: all 300ms linear;
 
@@ -253,6 +251,10 @@ onUnmounted(() => {
 }
 
 .imageWrapper {
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: flex-end;
+
   @media (max-width: 576px) {
     width: 100%;
 

@@ -1,6 +1,6 @@
 <template>
   <div :class="$style.container">
-    <div :class="$style.strong">WhereIsMyHome - 구미 5반 13팀</div>
+    <div :class="$style.strong">집콕 - 구미 5반 13팀</div>
   </div>
 </template>
 

@@ -10,8 +10,7 @@ import EnterButton from '@/components/Intro/EnterButton.vue';
     <div :class="$style.left">
       <div :class="$style.title">집콕</div>
       <div :class="$style.body">
-        <CountUp to="1505408" duration="1000" />개의 부동산 거래 데이터를 바탕으로<br />어쩌구
-        저쩌구 어쩌구 저쩌구 시작하세요.
+        <CountUp to="663842" duration="1000" />개의 데이터 중<br />콕 찝어주는 당신의 집 🥰
       </div>
       <div :class="$style.buttonWrapper">
         <EnterButton>시작하기</EnterButton>
@@ -63,7 +62,7 @@ import EnterButton from '@/components/Intro/EnterButton.vue';
 .body {
   margin: 1.5rem 0;
 
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   font-weight: 400;
   line-height: 175%;
   letter-spacing: 1px;
