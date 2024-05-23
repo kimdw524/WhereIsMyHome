@@ -37,10 +37,10 @@ watch(popup, (value) => {
     <TransitionGroup name="fade" tag="div">
       <div v-if="popup" :class="$style.popup">
         <div :class="$style.email">
-          <span>이메일</span>
-          <div>{{ user.userData.email || '...' }}</div>
+          <div>{{ user.userData.email || '...' }}<span>님</span></div>
         </div>
         <div :class="$style.menuContainer">
+          <div :class="$style.menu" @click="doLogout()">마이페이지</div>
           <div :class="$style.menu" @click="doLogout()">로그아웃</div>
         </div>
       </div>
@@ -101,6 +101,8 @@ watch(popup, (value) => {
 }
 
 .email span {
+  margin-left: 0.25rem;
+
   font-weight: 600;
 }
 
