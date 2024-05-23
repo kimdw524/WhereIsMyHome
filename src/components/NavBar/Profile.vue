@@ -81,8 +81,9 @@ watch(popup, (value) => {
   z-index: 20;
 
   width: 15rem;
+  border: 1px solid var(--profile-border);
   border-radius: 0.25rem;
-  box-shadow: 0 0 0.5rem 0.0625rem rgba(167, 167, 167, 0.33);
+  box-shadow: 0 0 0.125rem 0.0625rem var(--profile-boxShadow);
 
   background-color: var(--bg);
 

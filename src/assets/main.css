@@ -111,6 +111,8 @@ body {
   --deal-list-boxShadow: #bcbcbc54;
 
   --profile-menu-bg-hover: #f3f5f7;
+  --profile-border: #b3b3b3;
+  --profile-boxShadow: #bbbbbb54;
 
   --popular-house-alert-bg: #e5e9fa;
 
@@ -210,6 +212,8 @@ body.dark {
   --deal-list-boxShadow: #00000054;
 
   --profile-menu-bg-hover: #2f3136;
+  --profile-border: #222222;
+  --profile-boxShadow: #45454554;
 
   --popular-house-alert-bg: #2c303d;
 
