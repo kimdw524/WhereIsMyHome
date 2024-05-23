@@ -116,8 +116,8 @@ body {
 
   --popular-house-alert-bg: #e5e9fa;
 
-  --mypage-border: #f1f1f1;
-  --mypage-boxShadow: #f1f1f1;
+  --modal-border: #747474;
+  --modal-boxShadow: #868686;
 
   --footer-bg: #373737;
 }
@@ -220,8 +220,8 @@ body.dark {
 
   --popular-house-alert-bg: #2c303d;
 
-  --mypage-border: #151515;
-  --mypage-boxShadow: #1a1a1a;
+  --modal-border: #3f3f3f;
+  --modal-boxShadow: #161616;
 
   --footer-bg: #373737;
 }
