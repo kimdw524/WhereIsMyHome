@@ -34,6 +34,8 @@ const props = defineProps({
   letter-spacing: 1px;
   word-break: keep-all;
 
+  transition: all 150ms ease;
+
   cursor: pointer;
   outline: none;
   user-select: none;
@@ -67,5 +69,11 @@ const props = defineProps({
   --bg: var(--button-secondary-bg);
   --bg-hover: var(--button-secondary-bg-hover);
   --color: var(--button-secondary-color);
+}
+
+.danger {
+  --bg: var(--button-danger-bg);
+  --bg-hover: var(--button-danger-bg-hover);
+  --color: var(--button-danger-color);
 }
 </style>

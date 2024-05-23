@@ -54,12 +54,9 @@ readPost(route.params.name === 'notice' ? 'boardNotice' : 'board', route.params.
             <div>
               {{ body.title }}
             </div>
-            <div
-              v-if="body.userId === user.userData.id"
-              :class="$style.delete"
-              @click="handleDelete"
-            >
-              삭제
+            <div v-if="body.userId === user.userData.id" :class="$style.buttonContainer">
+              <span>수정</span>
+              <span :class="$style.delete" @click="handleDelete">삭제</span>
             </div>
           </div>
           <div :class="$style.detail">
@@ -132,13 +129,6 @@ readPost(route.params.name === 'notice' ? 'boardNotice' : 'board', route.params.
   font-weight: 500;
 }
 
-.delete {
-  font-size: 1rem;
-  font-weight: 400;
-
-  cursor: pointer;
-}
-
 .detail {
   display: flex;
   justify-content: space-between;
@@ -185,5 +175,22 @@ readPost(route.params.name === 'notice' ? 'boardNotice' : 'board', route.params.
 .footerItem {
   display: flex;
   justify-content: center;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
+.buttonContainer > span {
+  cursor: pointer;
+}
+
+.delete {
+  color: var(--color-danger);
 }
 </style>

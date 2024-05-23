@@ -27,6 +27,7 @@ body {
   --color: #000;
   --color-light: #888;
   --color-primary: #165cff;
+  --color-danger: #ff0000;
 
   --intro-section-head-color: #3182f6;
   --intro-section-child-body-color: #6b7684;
@@ -47,6 +48,9 @@ body {
   --button-secondary-bg: #1c5ffd;
   --button-secondary-bg-hover: #0f50e9;
   --button-secondary-color: #fff;
+  --button-danger-bg: #de0000;
+  --button-danger-bg-hover: #f20505;
+  --button-danger-color: #fff;
 
   --checkbox-border: #a7a7a7;
   --checkbox-bg: #fff;
@@ -121,6 +125,7 @@ body.dark {
   --color: #fff;
   --color-light: #e9e9e9;
   --color-primary: #165cff;
+  --color-danger: #e20000;
 
   --intro-section-head-color: #3182f6;
   --intro-section-child-body-color: #adbdd2;
@@ -142,6 +147,9 @@ body.dark {
   --button-secondary-bg: #1c5ffd;
   --button-secondary-bg-hover: #0f50e9;
   --button-secondary-color: #fff;
+  --button-danger-bg: #de0000;
+  --button-danger-bg-hover: #f20505;
+  --button-danger-color: #fff;
 
   --checkbox-border: #4e4e4e;
   --checkbox-bg: #000;
