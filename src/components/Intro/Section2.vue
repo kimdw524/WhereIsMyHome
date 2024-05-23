@@ -109,7 +109,7 @@ onUnmounted(() => {
     <div :class="$style.container" ref="container">
       <div :class="$style.header">
         <div :class="$style.head">다양한 커뮤니티</div>
-        <div :class="$style.body">정보를 공유하고 얻을 수 있어요.</div>
+        <div :class="$style.body">정보를 공유할 수 있어요.</div>
       </div>
 
       <div :class="$style.childContainer" v-for="item in items" :key="item.index">
