@@ -12,6 +12,7 @@ import Roadview from './Roadview.vue';
 import Debate from './Debate.vue';
 import Share from './Share.vue';
 
+const emit = defineEmits('position');
 const model = defineModel();
 const data = ref(null);
 const interest = ref(false);
@@ -81,6 +82,8 @@ onMounted(() => {
       data.value = result.data;
       share.value.text = `${data.value.house.houseName}`;
       interest.value = result.data.favorite;
+      console.log(result.data);
+      emit('position', { lat: result.data.house.lat, lng: result.data.house.lng });
     })
     .catch((error) => {
       console.error(error);

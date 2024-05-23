@@ -66,6 +66,7 @@ const share = ref({
     webUrl: location.href,
   },
 });
+let init = !!detail.value;
 
 const sortList = (value) => {
   switch (value.type) {
@@ -137,6 +138,13 @@ let isLoading = false,
   call = false;
 
 let map, clusterer;
+
+const handlePosition = ({ lat, lng }) => {
+  if (init) {
+    map.panTo(new kakao.maps.LatLng(lat, lng));
+    init = false;
+  }
+};
 
 const updateData = (result) => {
   data.value = result.data.slice(0, 500);
@@ -386,7 +394,7 @@ onMounted(() => {
           <HouseList :items="data" :map="map" @detail="handleDetail" />
         </div>
         <div v-if="detail" :class="$style.houseDetail">
-          <HouseDetail v-model="detail" :key="detail" />
+          <HouseDetail v-model="detail" :key="detail" @position="handlePosition" />
           <div :class="$style.close" @click="detail = 0">
             <svg
               stroke="currentColor"
