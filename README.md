@@ -1,29 +1,10 @@
-# WhereIsMyHome
-
-This template should help get you started developing with Vue 3 in Vite.
-
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+![메인 (홈)](https://github.com/kimdw524/WhereIsMyHome/assets/38282677/72886885-4733-4a35-ba05-725be707cc5a)
+![마이페이지 (1)](https://github.com/kimdw524/WhereIsMyHome/assets/38282677/bacfd1f7-3e89-4b19-b216-886e190e867c)
+![부동산 매물 거래내역](https://github.com/kimdw524/WhereIsMyHome/assets/38282677/8bba4329-61fb-44de-b1fa-c5f05dac9ad8)
+![부동산 매물 상세정보](https://github.com/kimdw524/WhereIsMyHome/assets/38282677/ed01db8e-820d-4784-8b02-f9d7fa43afcb)
+![부동산 매물 토론실 (글 있음)](https://github.com/kimdw524/WhereIsMyHome/assets/38282677/7be82766-f11a-4d1d-aa37-1f434f2d9af6)
+![지도 검색 조건 필터](https://github.com/kimdw524/WhereIsMyHome/assets/38282677/fff71d2a-9886-46c4-b431-82362572a3d3)
+![통합검색](https://github.com/kimdw524/WhereIsMyHome/assets/38282677/2639213a-f0fa-4390-9de1-8872b4e5ea94)
+![로그인](https://github.com/kimdw524/WhereIsMyHome/assets/38282677/566ad165-1efc-4732-ba32-8400ed1d1796)
+![메인 (설명 움짤)](https://github.com/kimdw524/WhereIsMyHome/assets/38282677/7ab96a25-65a4-4d23-83ad-31951fac0f10)
+![다크테마](https://github.com/kimdw524/WhereIsMyHome/assets/38282677/ef973254-b235-4ce6-8ef9-579b531ffa11)
